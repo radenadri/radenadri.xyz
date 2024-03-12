@@ -1,0 +1,20 @@
+<layout title="BRANDNEWSPACE | Adriana Eka Prayudha" src="main.html">
+	<div class="tw-flex tw-flex-col tw-gap-4">
+		<h1 class="tw-text-neutral-900">Writings</h1>
+		<div class="tw-flex tw-flex-col tw-gap-2">
+			<ForEach collection="journals">
+				<div>
+					<a
+						class="tw-no-underline focus:tw-underline hover:tw-underline"
+						href="{journals.link}"
+					>
+						<h4 class="tw-text-neutral-900 tw-mb-0 tw-font-medium">
+							{journals.title}
+						</h4>
+					</a>
+					<p class="tw-mt-3 tw-text-neutral-500">{journals.read}</p>
+				</div>
+			</ForEach>
+		</div>
+	</div>
+</layout>
