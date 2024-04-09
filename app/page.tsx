@@ -9,7 +9,8 @@ export default function Page() {
       <p className="mb-4">
         {`My name is Adriana Eka Prayudha, 
         enthusiastic developer with a passion for creating engaging digital experiences.
-        Currently working as a flutter developer and also getting my feet wet with frontend development.`}
+        Currently working as a flutter developer, i came from web development especially laravel 
+        so i'm also having an interest with web development.`}
       </p>
       <div className="my-8">
         <BlogPosts />
