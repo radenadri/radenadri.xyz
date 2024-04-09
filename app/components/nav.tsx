@@ -29,7 +29,6 @@ export function Navbar() {
                             external
                         }]) => {
                             if (external) {
-                                console.log(path)
                                 return (
                                     <a
                                         target="_blank"
