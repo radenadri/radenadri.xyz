@@ -1,4 +1,4 @@
-import { BlogPosts } from 'app/components/posts'
+import { BlogPosts } from "app/components/posts";
 
 export default function Page() {
   return (
@@ -9,12 +9,11 @@ export default function Page() {
       <p className="mb-4">
         {`My name is Adriana Eka Prayudha, 
         enthusiastic developer with a passion for creating engaging digital experiences.
-        Currently working as a flutter developer, i came from web development especially laravel 
-        so i'm also having an interest with web development.`}
+        Currently working as a full stack developer specializing in web development and also doing mobile development with flutter.`}
       </p>
       <div className="my-8">
         <BlogPosts />
       </div>
     </section>
-  )
+  );
 }
