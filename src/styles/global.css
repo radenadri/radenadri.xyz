@@ -1,0 +1,30 @@
+@import "tailwindcss";
+
+:root {
+  --bg-color: #000000;
+  --text-color: #ffffff;
+  --accent-color: #666666;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+
+  @apply bg-(--bg-color) text-(--text-color) leading-[1.6] m-0 p-0;
+}
+
+a {
+  @apply no-underline text-(--text-color);
+}
+
+a:hover {
+  @apply underline;
+}
+
+.container {
+  @apply max-w-[800px] my-0 mx-auto py-0 px-4;
+}
+
+img {
+  @apply h-auto max-w-full;
+}

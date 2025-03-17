@@ -1,0 +1,45 @@
+---
+import SidebarLayout from './SidebarLayout.astro';
+
+const { frontmatter } = Astro.props;
+---
+
+<SidebarLayout title={frontmatter.title}>
+  <article class="post">
+    <h1>{frontmatter.title}</h1>
+    <div class="content">
+      <slot />
+    </div>
+  </article>
+</SidebarLayout>
+
+<style>
+  .post {
+    margin: 4rem 0;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .content {
+    margin-top: 2rem;
+  }
+
+  .content :global(h2) {
+    font-size: 1.8rem;
+    margin: 2rem 0 1rem;
+  }
+
+  .content :global(p) {
+    margin: 1rem 0;
+  }
+
+  .content :global(pre) {
+    background: #111;
+    padding: 1rem;
+    border-radius: 4px;
+    overflow-x: auto;
+  }
+</style>

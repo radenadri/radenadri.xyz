@@ -1,0 +1,33 @@
+{
+  "profile": {
+    "name": "Adrian",
+    "avatar": "/avatar.png",
+    "bio": [
+      {
+        "icon": "\uD83D\uDE0A",
+        "text": "Available for work"
+      },
+      {
+        "icon": "🌏",
+        "text": "Bandung, ID"
+      }
+    ],
+    "socials": [
+      {
+        "name": "GitHub",
+        "icon": "📱",
+        "url": "https://github.com/radenadri"
+      },
+      {
+        "name": "LinkedIn",
+        "icon": "💼",
+        "url": "https://www.linkedin.com/in/radenadri/"
+      },
+      {
+        "name": "Download my CV",
+        "icon": "📄",
+        "url": "https://cv.radenadri.xyz"
+      }
+    ]
+  }
+}
