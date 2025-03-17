@@ -1,6 +1,4 @@
 # Astro t3ma Blog Template
-![pic](public/t3ma0.jpg)
-![pic](public/t3ma.jpg)
 
 ## Overview
 
