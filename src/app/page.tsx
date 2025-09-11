@@ -1,10 +1,12 @@
 import { Container, Main, Section, Prose } from '@/components/ds';
 import { AnimatedElement, AnimatedText } from '@/components/animated-element';
 import { BackToTop } from '@/components/back-to-top';
+import { ThemeToggle } from '@/components/theme-toggle';
 
 export default function Home() {
   return (
     <Main className="min-h-screen font-mono">
+      <ThemeToggle />
       <Section className="py-16 sm:py-24">
         <Container className="max-w-2xl">
           <Prose isSpaced>
@@ -43,6 +45,14 @@ export default function Home() {
                       className="text-muted-foreground hover:text-foreground transition-colors"
                     >
                       EMAIL
+                    </a>
+                    <a
+                      href="https://github.com/radenadri"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-muted-foreground hover:text-foreground transition-colors"
+                    >
+                      GITHUB
                     </a>
                     <a
                       href="https://linkedin.com/in/radenadri"

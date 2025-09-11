@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import { Layout } from '@/components/ds';
 import { SmoothScrollProvider } from '@/components/smooth-scroll-provider';
+import { ThemeProvider } from '@/components/theme-provider';
 import './globals.css';
 
 const geistSans = Geist({
@@ -57,7 +58,9 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <SmoothScrollProvider>{children}</SmoothScrollProvider>
+        <ThemeProvider defaultTheme="system" storageKey="portfolio-theme">
+          <SmoothScrollProvider>{children}</SmoothScrollProvider>
+        </ThemeProvider>
       </body>
     </Layout>
   );
