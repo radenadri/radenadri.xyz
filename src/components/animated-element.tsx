@@ -44,6 +44,7 @@ export function AnimatedElement({
         start: start,
         end: end,
         toggleActions: 'play none none reverse',
+        once: true,
       },
     });
 
@@ -73,7 +74,9 @@ export function AnimatedElement({
     }
 
     return () => {
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+      ScrollTrigger.getAll().forEach((trigger) => {
+        trigger.kill();
+      });
     };
   }, [animation, delay, duration, start, end]);
 
@@ -89,13 +92,17 @@ export function AnimatedText({
   children,
   className = '',
   delay = 0,
+  start = 'top 85%',
+  end = 'bottom 15%',
 }: {
   as?: keyof JSX.IntrinsicElements;
   children: React.ReactNode;
   className?: string;
   delay?: number;
+  start?: string;
+  end?: string;
 }) {
-  const textRef = useRef<HTMLElement>(null);
+  const textRef = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
     const element = textRef.current;
@@ -117,8 +124,10 @@ export function AnimatedText({
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: element,
-        start: 'top 85%',
+        start: start,
+        end: end,
         toggleActions: 'play none none reverse',
+        once: true,
       },
     });
 
@@ -133,16 +142,15 @@ export function AnimatedText({
     });
 
     return () => {
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+      ScrollTrigger.getAll().forEach((trigger) => {
+        trigger.kill();
+      });
     };
-  }, [delay]);
+  }, [delay, start, end]);
 
   return (
-    <Component
-      ref={textRef as unknown as any}
-      className={`relative overflow-hidden inline-block ${className}`}
-    >
-      {children}
+    <Component className={`relative overflow-hidden inline-block ${className}`}>
+      <span ref={textRef}>{children}</span>
     </Component>
   );
 }

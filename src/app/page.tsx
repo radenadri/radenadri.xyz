@@ -1,8 +1,10 @@
 import { Container, Main, Section, Prose } from '@/components/ds';
 import { AnimatedElement, AnimatedText } from '@/components/animated-element';
 import { BackToTop } from '@/components/back-to-top';
-import { ThemeToggle } from '@/components/theme-toggle';
 import experiments from '@/data/experiments';
+import { ThemeToggle } from '@/components/theme-toggle';
+import Image from 'next/image';
+import works from '@/data/works';
 
 export default function Home() {
   return (
@@ -68,22 +70,35 @@ export default function Home() {
             >
               Work
             </AnimatedText>
-            <AnimatedElement animation="stagger">
+            <AnimatedElement animation="stagger" delay={0.5}>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
-                {/* Card 1 */}
-                <a
-                  href="#"
-                  className="group block rounded-md border overflow-hidden shadow-sm hover:shadow-md transition-shadow"
-                >
-                  <div className="aspect-[3/4] bg-gradient-to-b from-muted to-background flex items-center justify-center">
-                    <AnimatedText
-                      as="span"
-                      className="text-xs tracking-widest text-foreground/70"
-                    >
-                      SMILING. MIND.
-                    </AnimatedText>
-                  </div>
-                </a>
+                {works.map((work) => (
+                  <a
+                    key={work.slug}
+                    href={`/work/${work.slug}`}
+                    className="group block rounded-md overflow-hidden"
+                  >
+                    <div className="flex flex-col gap-2">
+                      <div className="aspect-[3/4] relative">
+                        <Image
+                          src={work.coverImage}
+                          alt={work.title}
+                          unoptimized
+                          fill
+                          className="object-cover !m-0"
+                        />
+                      </div>
+                      <div className="flex flex-col gap-0">
+                        <AnimatedText
+                          as="h6"
+                          className="block text-lg font-semibold"
+                        >
+                          {work.title}
+                        </AnimatedText>
+                      </div>
+                    </div>
+                  </a>
+                ))}
               </div>
             </AnimatedElement>
 
@@ -144,7 +159,7 @@ export default function Home() {
               start="top bottom"
               end="bottom top"
             >
-              <div className="mt-32 pt-8 border-t text-center flex justify-between">
+              <div className="mt-32 pt-8 border-t text-center flex flex-col gap-2 sm:flex-row sm:justify-between">
                 <small>© 2025 / Adriana Eka Prayudha</small>
                 <AnimatedElement
                   animation="fadeIn"
