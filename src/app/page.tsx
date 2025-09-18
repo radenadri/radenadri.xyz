@@ -2,249 +2,158 @@ import { Container, Main, Section, Prose } from '@/components/ds';
 import { AnimatedElement, AnimatedText } from '@/components/animated-element';
 import { BackToTop } from '@/components/back-to-top';
 import { ThemeToggle } from '@/components/theme-toggle';
+import experiments from '@/data/experiments';
 
 export default function Home() {
   return (
     <Main className="min-h-screen font-mono">
       <ThemeToggle />
       <Section className="py-16 sm:py-24">
-        <Container className="max-w-2xl">
+        <Container className="max-w-6xl">
           <Prose isSpaced>
-            {/* Header */}
-            <AnimatedElement animation="fadeIn" duration={1.2}>
-              <div className="mb-16">
-                <AnimatedText className="text-2xl font-medium mb-2">
-                  Adriana Eka Prayudha
+            {/* Hero */}
+            <div className="mb-14">
+              <AnimatedElement animation="fadeIn" duration={1.1}>
+                <h1 className="text-4xl sm:text-5xl font-semibold leading-tight tracking-tight">
+                  <AnimatedText as="span" className="block">
+                    Adriana
+                  </AnimatedText>
+                  <br />
+                  <AnimatedText as="span" className="block">
+                    Eka Prayudha
+                  </AnimatedText>
+                </h1>
+              </AnimatedElement>
+              <AnimatedElement animation="fadeIn" delay={0.2}>
+                <AnimatedText
+                  as="p"
+                  className="block mt-4 max-w-xl text-base text-muted-foreground"
+                >
+                  Enthusiastic developer with a passion for creating engaging
+                  digital, love to creating a usable web applications to solve
+                  the business problems.
                 </AnimatedText>
-                <AnimatedElement animation="fadeIn" delay={0.3}>
-                  <p className="text-base text-muted-foreground">
-                    Frontend Developer based in Bandung, Indonesia
-                  </p>
-                </AnimatedElement>
-              </div>
-            </AnimatedElement>
-
-            {/* About */}
-            <AnimatedElement animation="slideUp" delay={0.2}>
-              <div className="mb-20">
-                <AnimatedText className="text-base leading-relaxed mb-6">
-                  Currently, I'm a Frontend Developer at Pentacode, building the
-                  future of online business frameworks for over 2 product
-                  designers at Pentacode. "Effective design is not a matter of
-                  taste but of understanding."
-                </AnimatedText>
-                <AnimatedText className="text-base leading-relaxed" delay={0.2}>
-                  I've received my Bachelor of Design from the University of
-                  Washington with a focus on Interaction Design.
-                </AnimatedText>
-
-                <AnimatedElement animation="stagger" delay={0.4}>
-                  <div className="flex gap-6 mt-8 text-sm">
-                    <a
-                      href="mailto:radenadriep@gmail.com"
-                      className="text-muted-foreground hover:text-foreground transition-colors"
-                    >
-                      EMAIL
-                    </a>
-                    <a
-                      href="https://github.com/radenadri"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-muted-foreground hover:text-foreground transition-colors"
-                    >
-                      GITHUB
-                    </a>
-                    <a
-                      href="https://linkedin.com/in/radenadri"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-muted-foreground hover:text-foreground transition-colors"
-                    >
-                      LINKEDIN
-                    </a>
-                  </div>
-                </AnimatedElement>
-              </div>
-            </AnimatedElement>
-
-            {/* Projects */}
-            <div className="space-y-20">
-              {/* Project 1 - Biofarma RME */}
-              <AnimatedElement animation="slideUp" delay={0.1}>
-                <div>
-                  <div className="mb-8">
-                    <div className="bg-muted/30 rounded-2xl p-8 flex items-center justify-center aspect-[4/5] max-w-sm mx-auto hover:scale-105 transition-transform duration-500 ease-out">
-                      <div className="bg-black rounded-[2.5rem] p-2 w-64 h-[520px] flex items-center justify-center">
-                        <div className="bg-white rounded-[2rem] w-full h-full flex items-center justify-center relative overflow-hidden">
-                          <div className="absolute top-6 left-1/2 transform -translate-x-1/2 w-20 h-6 bg-black rounded-full"></div>
-                          <div className="text-center p-8">
-                            <div className="text-2xl font-bold mb-4 text-gray-900">
-                              BIOFARMA
-                            </div>
-                            <div className="text-sm text-gray-600">
-                              Electronic Medical Records
-                            </div>
-                            <div className="mt-8 space-y-3">
-                              <div className="h-3 bg-gray-200 rounded"></div>
-                              <div className="h-3 bg-gray-200 rounded w-3/4"></div>
-                              <div className="h-3 bg-gray-200 rounded w-1/2"></div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div>
-                    <AnimatedText className="text-lg font-medium mb-2">
-                      2022 — 2024
-                    </AnimatedText>
-                    <AnimatedText
-                      className="text-base font-medium mb-3"
-                      delay={0.1}
-                    >
-                      Staff Product Designer at Biofarma
-                    </AnimatedText>
-                    <AnimatedText
-                      className="text-sm text-muted-foreground leading-relaxed"
-                      delay={0.2}
-                    >
-                      Worked on a handful of projects including a full redesign
-                      of the web platform for clinicians, and working closely
-                      with the product organization.
-                    </AnimatedText>
-                  </div>
-                </div>
               </AnimatedElement>
 
-              {/* Project 2 - POS Properti */}
-              <AnimatedElement animation="slideUp" delay={0.2}>
-                <div>
-                  <div className="mb-8">
-                    <div className="bg-muted/30 rounded-2xl p-8 flex items-center justify-center aspect-[4/5] max-w-sm mx-auto hover:scale-105 transition-transform duration-500 ease-out">
-                      <div className="bg-black rounded-[2.5rem] p-2 w-64 h-[520px] flex items-center justify-center">
-                        <div className="bg-white rounded-[2rem] w-full h-full flex items-center justify-center relative overflow-hidden">
-                          <div className="absolute top-6 left-1/2 transform -translate-x-1/2 w-20 h-6 bg-black rounded-full"></div>
-                          <div className="text-center p-8">
-                            <div className="text-xl font-bold mb-4 text-gray-900">
-                              POS PROPERTI
-                            </div>
-                            <div className="text-sm text-gray-600 mb-8">
-                              Property Management System
-                            </div>
-                            <div className="space-y-4">
-                              <div className="bg-blue-100 p-4 rounded-lg">
-                                <div className="text-xs text-blue-800">
-                                  Dashboard
-                                </div>
-                              </div>
-                              <div className="bg-green-100 p-4 rounded-lg">
-                                <div className="text-xs text-green-800">
-                                  Analytics
-                                </div>
-                              </div>
-                              <div className="bg-orange-100 p-4 rounded-lg">
-                                <div className="text-xs text-orange-800">
-                                  Reports
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div>
-                    <AnimatedText className="text-lg font-medium mb-2">
-                      2021 — 2022
-                    </AnimatedText>
-                    <AnimatedText
-                      className="text-base font-medium mb-3"
-                      delay={0.1}
-                    >
-                      Lead Product Designer at Properti
-                    </AnimatedText>
-                    <AnimatedText
-                      className="text-sm text-muted-foreground leading-relaxed"
-                      delay={0.2}
-                    >
-                      Designed experiences and created systems for a
-                      point-of-sale website builder. Launched on Product Hunt in
-                      March 2023.
-                    </AnimatedText>
-                  </div>
-                </div>
-              </AnimatedElement>
-
-              {/* Project 3 - StarBP */}
-              <AnimatedElement animation="slideUp" delay={0.3}>
-                <div>
-                  <div className="mb-8">
-                    <div className="bg-muted/30 rounded-2xl p-8 flex items-center justify-center aspect-[4/5] max-w-sm mx-auto hover:scale-105 transition-transform duration-500 ease-out">
-                      <div className="bg-black rounded-[2.5rem] p-2 w-64 h-[520px] flex items-center justify-center">
-                        <div className="bg-white rounded-[2rem] w-full h-full flex items-center justify-center relative overflow-hidden">
-                          <div className="absolute top-6 left-1/2 transform -translate-x-1/2 w-20 h-6 bg-black rounded-full"></div>
-                          <div className="p-8">
-                            <div className="text-xl font-bold mb-2 text-gray-900">
-                              STARBP
-                            </div>
-                            <div className="text-sm text-gray-600 mb-8">
-                              Business Process Management
-                            </div>
-                            <div className="space-y-3">
-                              <div className="flex items-center gap-3">
-                                <div className="w-8 h-8 bg-gray-200 rounded-full"></div>
-                                <div className="flex-1">
-                                  <div className="h-2 bg-gray-200 rounded mb-1"></div>
-                                  <div className="h-2 bg-gray-200 rounded w-2/3"></div>
-                                </div>
-                              </div>
-                              <div className="flex items-center gap-3">
-                                <div className="w-8 h-8 bg-blue-200 rounded-full"></div>
-                                <div className="flex-1">
-                                  <div className="h-2 bg-gray-200 rounded mb-1"></div>
-                                  <div className="h-2 bg-gray-200 rounded w-3/4"></div>
-                                </div>
-                              </div>
-                              <div className="flex items-center gap-3">
-                                <div className="w-8 h-8 bg-green-200 rounded-full"></div>
-                                <div className="flex-1">
-                                  <div className="h-2 bg-gray-200 rounded mb-1"></div>
-                                  <div className="h-2 bg-gray-200 rounded w-1/2"></div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div>
-                    <AnimatedText className="text-lg font-medium mb-2">
-                      2020 — 2021
-                    </AnimatedText>
-                    <AnimatedText
-                      className="text-base font-medium mb-3"
-                      delay={0.1}
-                    >
-                      Product Designer at StarBP
-                    </AnimatedText>
-                    <AnimatedText
-                      className="text-sm text-muted-foreground leading-relaxed"
-                      delay={0.2}
-                    >
-                      First product designer hire. Designed the foundations,
-                      interactions, and systems for the entire business process
-                      management platform.
-                    </AnimatedText>
-                  </div>
+              {/* Social icons */}
+              <AnimatedElement animation="stagger" delay={0.35}>
+                <div className="mt-6 flex items-center gap-4">
+                  <a href="mailto:radenadriep@gmail.com" aria-label="Email">
+                    EMAIL
+                  </a>
+                  <a
+                    href="https://github.com/radenadri"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="GitHub"
+                  >
+                    GITHUB
+                  </a>
+                  <a
+                    href="https://cv.radenadri.xyz"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Resume"
+                  >
+                    RESUME
+                  </a>
                 </div>
               </AnimatedElement>
             </div>
 
+            {/* Work */}
+            <AnimatedText
+              as="h2"
+              className="block mt-2 mb-6 text-xl font-semibold"
+            >
+              Work
+            </AnimatedText>
+            <AnimatedElement animation="stagger">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+                {/* Card 1 */}
+                <a
+                  href="#"
+                  className="group block rounded-md border overflow-hidden shadow-sm hover:shadow-md transition-shadow"
+                >
+                  <div className="aspect-[3/4] bg-gradient-to-b from-muted to-background flex items-center justify-center">
+                    <AnimatedText
+                      as="span"
+                      className="text-xs tracking-widest text-foreground/70"
+                    >
+                      SMILING. MIND.
+                    </AnimatedText>
+                  </div>
+                </a>
+              </div>
+            </AnimatedElement>
+
+            {/* Experiments */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+              <div>
+                <AnimatedText as="h2" className="block text-xl font-semibold">
+                  Experiments
+                </AnimatedText>
+              </div>
+              <div className="space-y-8">
+                {experiments.map((experiment) => (
+                  <div
+                    className="flex items-start gap-2"
+                    key={experiment.title}
+                  >
+                    <div>
+                      <AnimatedText as="span" className="mt-1">
+                        {experiment.icon}
+                      </AnimatedText>
+                    </div>
+                    <div>
+                      <AnimatedText
+                        as="p"
+                        className="block text-sm font-medium"
+                      >
+                        {experiment.title}
+                      </AnimatedText>
+                      <AnimatedText
+                        as="p"
+                        className="block text-sm text-muted-foreground"
+                      >
+                        {experiment.description}
+                      </AnimatedText>
+                      <AnimatedElement
+                        animation="fadeIn"
+                        delay={0.2}
+                        className="block text-sm text-muted-foreground"
+                      >
+                        <a
+                          href={experiment.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          Check it out
+                        </a>
+                      </AnimatedElement>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
             {/* Footer */}
-            <AnimatedElement animation="fadeIn" delay={0.5}>
-              <div className="mt-32 pt-8 border-t text-center">
-                <BackToTop />
+            <AnimatedElement
+              animation="fadeIn"
+              delay={0.2}
+              start="top bottom"
+              end="bottom top"
+            >
+              <div className="mt-32 pt-8 border-t text-center flex justify-between">
+                <small>© 2025 / Adriana Eka Prayudha</small>
+                <AnimatedElement
+                  animation="fadeIn"
+                  delay={0.2}
+                  start="top bottom"
+                  end="bottom top"
+                >
+                  <BackToTop />
+                </AnimatedElement>
               </div>
             </AnimatedElement>
           </Prose>

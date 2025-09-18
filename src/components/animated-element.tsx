@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { JSX, useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -12,6 +12,8 @@ interface AnimatedElementProps {
   animation?: 'fadeIn' | 'slideUp' | 'stagger';
   delay?: number;
   duration?: number;
+  start?: string;
+  end?: string;
 }
 
 export function AnimatedElement({
@@ -20,6 +22,8 @@ export function AnimatedElement({
   animation = 'fadeIn',
   delay = 0,
   duration = 1,
+  start = 'top 85%',
+  end = 'bottom 15%',
 }: AnimatedElementProps) {
   const elementRef = useRef<HTMLDivElement>(null);
 
@@ -37,8 +41,8 @@ export function AnimatedElement({
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: element,
-        start: 'top 85%',
-        end: 'bottom 15%',
+        start: start,
+        end: end,
         toggleActions: 'play none none reverse',
       },
     });
@@ -71,7 +75,7 @@ export function AnimatedElement({
     return () => {
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
     };
-  }, [animation, delay, duration]);
+  }, [animation, delay, duration, start, end]);
 
   return (
     <div ref={elementRef} className={className}>
@@ -81,15 +85,17 @@ export function AnimatedElement({
 }
 
 export function AnimatedText({
+  as: Component = 'span',
   children,
   className = '',
   delay = 0,
 }: {
+  as?: keyof JSX.IntrinsicElements;
   children: React.ReactNode;
   className?: string;
   delay?: number;
 }) {
-  const textRef = useRef<HTMLDivElement>(null);
+  const textRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const element = textRef.current;
@@ -132,11 +138,11 @@ export function AnimatedText({
   }, [delay]);
 
   return (
-    <div
-      ref={textRef}
+    <Component
+      ref={textRef as unknown as any}
       className={`relative overflow-hidden inline-block ${className}`}
     >
       {children}
-    </div>
+    </Component>
   );
 }

@@ -14,6 +14,7 @@ export function BackToTop({ className = '' }: BackToTopProps) {
 
   return (
     <button
+      type="button"
       onClick={scrollToTop}
       className={`text-sm text-muted-foreground cursor-pointer hover:text-foreground transition-colors ${className}`}
     >
