@@ -1,65 +1,80 @@
 export const metadata = {
-  title: 'Smiling Mind — Case Study',
-  description: 'A focused, minimal execution with an emphasis on typography and motion.',
+  title: 'POS Properti Payment Gateway — Case Study',
+  description: 'Creating payment gateway for internal use at POS Properti',
 };
 
 import { AnimatedElement, AnimatedText } from '@/components/animated-element';
+import Image from 'next/image';
 
-# Smiling Mind
+# POS Properti Payment Gateway
 
-A focused, minimal design exploration centered around typography, rhythm, and subtle motion.
+Creating payment gateway for internal use at POS Properti.
 
 ## Overview
 
-- Role: Frontend Developer
-- Stack: Next.js, TypeScript, Tailwind CSS, GSAP
+- Role: Fullstack Developer
+- Stack: Laravel, React, Node.js, PostgreSQL
 - Timeline: 2024
 
 ## Goals
 
-Create a serene visual identity using simple shapes, bold spacing, and gentle transitions to demonstrate layout discipline and component reusability.
+Build a centralized payment gateway portal for internal use at POS Properti, enabling all company transactions to be processed, reviewed, and integrated with third-party systems through a secure REST API.
+
+## Scope of Work
+
+This project was designed to serve as a **one-stop portal** for handling all company transactions under POS Properti.  
+The system integrates directly with a **local banking partner** to process payments, settlements, and transaction verification in real-time.
+
+Additionally, a **custom REST API** was developed to allow integration between the payment gateway and other internal company applications — ensuring a consistent and scalable financial workflow.
 
 ## Highlights
 
-- Built with Next.js App Router and React Server Components.
-- Typography system tuned for balance and reading comfort.
-- Motion choreography using GSAP for subtle, performance-friendly transitions.
+- Developed RESTful payment gateway services using **Laravel** and **Node.js**.
+- Built a **React-based dashboard** for transaction monitoring, reconciliation, and analytics.
+- Implemented **PostgreSQL** for structured financial data storage with optimized indexing for faster reporting.
+- Integrated **bank APIs** for automatic settlement and real-time transaction validation.
+- Focused on **security**, including token-based authentication and role-based access control.
 
 ## Stats
 
 <AnimatedElement animation="stagger">
   <div className="grid grid-cols-2 gap-6 my-4">
     <div className="rounded-md border p-4">
-      <AnimatedText as="span" className="block text-2xl font-semibold">+45%</AnimatedText>
-      <p className="text-sm text-muted-foreground">Faster perceived load with motion sequencing</p>
+      <AnimatedText as="span" className="block text-2xl font-semibold">+70%</AnimatedText>
+      <p className="text-sm text-muted-foreground">Improved internal transaction processing efficiency</p>
     </div>
     <div className="rounded-md border p-4">
-      <AnimatedText as="span" className="block text-2xl font-semibold">-30%</AnimatedText>
-      <p className="text-sm text-muted-foreground">Reduced visual noise by consolidating components</p>
+      <AnimatedText as="span" className="block text-2xl font-semibold">-40%</AnimatedText>
+      <p className="text-sm text-muted-foreground">Reduced manual reconciliation tasks</p>
     </div>
   </div>
   <div className="grid grid-cols-2 gap-6">
     <div className="rounded-md border p-4">
-      <AnimatedText as="span" className="block text-2xl font-semibold">+3x</AnimatedText>
-      <p className="text-sm text-muted-foreground">Reusable UI building blocks</p>
+      <AnimatedText as="span" className="block text-2xl font-semibold">Rp.+7B</AnimatedText>
+      <p className="text-sm text-muted-foreground">Total amount of transaction that successfully processed</p>
     </div>
     <div className="rounded-md border p-4">
-      <AnimatedText as="span" className="block text-2xl font-semibold">A11y</AnimatedText>
-      <p className="text-sm text-muted-foreground">Improved contrast and focus states</p>
+      <AnimatedText as="span" className="block text-2xl font-semibold">99.9%</AnimatedText>
+      <p className="text-sm text-muted-foreground">System uptime through containerized deployment</p>
     </div>
   </div>
 </AnimatedElement>
 
 ## Screens
 
-> Replace with real screenshots when available.
-
-![Preview](/next.svg)
+<div className="flex flex-col gap-4">
+  <AnimatedElement animation="stagger">
+    <Image className="w-full" width={1000} height={1000} src="/viz/pospro-1.png" alt="Pospro preview 1" />
+    <Image className="w-full" width={1000} height={1000} src="/viz/pospro-2.png" alt="Pospro preview 2" />
+  </AnimatedElement>
+</div>
 
 ## Learnings
 
-- Reinforced the value of constraint: fewer styles, higher cohesion.
-- Animations should guide—not distract—user attention.
+- Building financial systems requires **strict consistency and security discipline** across all layers.
+- Designing REST APIs with **clear versioning** and **idempotent operations** prevents integration errors.
+- Centralized systems simplify auditing and reporting when multiple company services depend on the same financial core.
+- Collaborating with external banking APIs emphasizes the importance of **clear documentation** and **sandbox testing** before production rollout.
 
 ---
 

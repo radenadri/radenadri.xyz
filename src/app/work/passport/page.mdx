@@ -1,65 +1,92 @@
 export const metadata = {
-  title: 'Smiling Mind — Case Study',
-  description: 'A focused, minimal execution with an emphasis on typography and motion.',
+  title: 'Passport — Case Study',
+  description: 'Modern attendance solution to make employee attendance easy and secure.',
 };
 
 import { AnimatedElement, AnimatedText } from '@/components/animated-element';
+import Image from 'next/image';
 
-# Smiling Mind
+# Passport - HRIS
 
-A focused, minimal design exploration centered around typography, rhythm, and subtle motion.
+Modern attendance solution for employees and HR teams. Applied in my previous company, Pentacode.
 
 ## Overview
 
 - Role: Frontend Developer
-- Stack: Next.js, TypeScript, Tailwind CSS, GSAP
-- Timeline: 2024
+- Stack: Flutter, Firebase 
+- Timeline: 2024  
 
 ## Goals
 
-Create a serene visual identity using simple shapes, bold spacing, and gentle transitions to demonstrate layout discipline and component reusability.
+Create a secure and efficient **attendance management system** that simplifies daily employee check-ins and check-outs while maintaining data accuracy through biometric and geolocation verification.  
+
+The product aims to streamline HR operations by centralizing attendance, leave requests, and overtime approvals into a single mobile and web platform.
+
+## Scope of Work
+
+**Passport** is a mobile app that designed to increase employee attendance efficiency and ensure workplace security that applied in my previous company, Pentacode.  
+It supports multiple verification methods (fingerprint, facial recognition, and GPS location) for flexible yet secure check-in/out.  
+
+The system also provides HR with powerful tools to monitor attendance patterns, approve leave, and manage overtime seamlessly.  
+
+As part of the development, I was responsible for:  
+- Building **mobile app** using Flutter.  
+- Integrating **REST API** with Laravel backend.
+- Implementing **JWT Authentication** for secure user management.
+- Implementing **Firebase Cloud Messaging** for push notifications.
 
 ## Highlights
 
-- Built with Next.js App Router and React Server Components.
-- Typography system tuned for balance and reading comfort.
-- Motion choreography using GSAP for subtle, performance-friendly transitions.
+- **Authentication** with JWT.  
+- **Biometric Attendance** with fingerprint/face recognition.  
+- **GPS Attendance** with GPS location verification.  
+- **Attendance Reports** with detailed daily, weekly, and monthly insights.  
+- **Leave Approval System** with built-in role-based permissions for HR and managers.  
+- **Overtime Management** that integrates directly with payroll and approval workflows.  
 
 ## Stats
 
 <AnimatedElement animation="stagger">
   <div className="grid grid-cols-2 gap-6 my-4">
     <div className="rounded-md border p-4">
-      <AnimatedText as="span" className="block text-2xl font-semibold">+45%</AnimatedText>
-      <p className="text-sm text-muted-foreground">Faster perceived load with motion sequencing</p>
+      <AnimatedText as="span" className="block text-2xl font-semibold">-50%</AnimatedText>
+      <p className="text-sm text-muted-foreground">Reduced manual attendance corrections</p>
     </div>
     <div className="rounded-md border p-4">
-      <AnimatedText as="span" className="block text-2xl font-semibold">-30%</AnimatedText>
-      <p className="text-sm text-muted-foreground">Reduced visual noise by consolidating components</p>
+      <AnimatedText as="span" className="block text-2xl font-semibold">+60%</AnimatedText>
+      <p className="text-sm text-muted-foreground">Increase in HR processing efficiency</p>
     </div>
   </div>
   <div className="grid grid-cols-2 gap-6">
     <div className="rounded-md border p-4">
-      <AnimatedText as="span" className="block text-2xl font-semibold">+3x</AnimatedText>
-      <p className="text-sm text-muted-foreground">Reusable UI building blocks</p>
-    </div>
-    <div className="rounded-md border p-4">
-      <AnimatedText as="span" className="block text-2xl font-semibold">A11y</AnimatedText>
-      <p className="text-sm text-muted-foreground">Improved contrast and focus states</p>
+      <AnimatedText as="span" className="block text-2xl font-semibold">99.9%</AnimatedText>
+      <p className="text-sm text-muted-foreground">System uptime with AWS-managed infrastructure</p>
     </div>
   </div>
 </AnimatedElement>
 
 ## Screens
 
-> Replace with real screenshots when available.
+<div className="flex flex-col gap-4">
+  <AnimatedElement animation="stagger">
+    <Image className="w-full" width={1000} height={1000} src="/viz/passport-1.png" alt="Passport preview 1" />
+  </AnimatedElement>
+</div>
 
-![Preview](/next.svg)
+## Download Links
+
+(Since it's only used in my previous company, you won't be able to used it. But you can download it from Google Play and App Store)
+
+- [Android](https://play.google.com/store/apps/details?id=id.pentacode.portal&hl=en)
+- [iOS](https://apps.apple.com/id/app/passport/id6478735731)
 
 ## Learnings
 
-- Reinforced the value of constraint: fewer styles, higher cohesion.
-- Animations should guide—not distract—user attention.
+- Combining **biometric and GPS validation** enhances both accuracy and user trust.  
+- Centralized attendance and HR workflows drastically reduce administrative overhead.  
+- Scalability and availability must be prioritized early when dealing with time-sensitive data like attendance logs.  
+- Deployment with **Firebase Cloud Messaging** for push notifications.
+- Upload **APK** and **IPA** to Google Play and App Store.
 
 ---
 
