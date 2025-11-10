@@ -1,8 +1,10 @@
 'use client';
 
-import { JSX, useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
+import type { JSX } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { usePreloader } from './preloader-provider';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -26,10 +28,11 @@ export function AnimatedElement({
   end = 'bottom 15%',
 }: AnimatedElementProps) {
   const elementRef = useRef<HTMLDivElement>(null);
+  const { isLoading } = usePreloader();
 
   useEffect(() => {
     const element = elementRef.current;
-    if (!element) return;
+    if (!element || isLoading) return;
 
     // Set initial state
     gsap.set(element, {
@@ -78,7 +81,7 @@ export function AnimatedElement({
         trigger.kill();
       });
     };
-  }, [animation, delay, duration, start, end]);
+  }, [animation, delay, duration, start, end, isLoading]);
 
   return (
     <div ref={elementRef} className={className}>
@@ -103,10 +106,11 @@ export function AnimatedText({
   end?: string;
 }) {
   const textRef = useRef<HTMLSpanElement>(null);
+  const { isLoading } = usePreloader();
 
   useEffect(() => {
     const element = textRef.current;
-    if (!element) return;
+    if (!element || isLoading) return;
 
     // Split text into words for animation
     const text = element.textContent || '';
@@ -146,7 +150,7 @@ export function AnimatedText({
         trigger.kill();
       });
     };
-  }, [delay, start, end]);
+  }, [delay, start, end, isLoading]);
 
   return (
     <Component className={`relative overflow-hidden inline-block ${className}`}>

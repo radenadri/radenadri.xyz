@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from 'next/font/google';
 import { Layout } from '@/components/ds';
 import { SmoothScrollProvider } from '@/components/smooth-scroll-provider';
 import { ThemeProvider } from '@/components/theme-provider';
+import { PreloaderProvider } from '@/components/preloader-provider';
 import './globals.css';
 
 const geistSans = Geist({
@@ -55,11 +56,29 @@ export default function RootLayout({
 }>) {
   return (
     <Layout>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  var theme = localStorage.getItem('portfolio-theme');
+                  var systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+                  var appliedTheme = theme === 'system' || !theme ? systemTheme : theme;
+                  document.documentElement.classList.add(appliedTheme);
+                } catch (e) {}
+              })();
+            `,
+          }}
+        />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <ThemeProvider defaultTheme="system" storageKey="portfolio-theme">
-          <SmoothScrollProvider>{children}</SmoothScrollProvider>
+          <PreloaderProvider>
+            <SmoothScrollProvider>{children}</SmoothScrollProvider>
+          </PreloaderProvider>
         </ThemeProvider>
       </body>
     </Layout>

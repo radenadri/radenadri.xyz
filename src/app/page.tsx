@@ -23,7 +23,7 @@ export default function Home() {
                   height={250}
                   width={250}
                   alt="Avatar"
-                  className="!border-0 h-[100px] w-[100px] md:h-[250px] md:w-[250px]"
+                  className="!border-0 h-[100px] w-[100px] md:h-[250px] md:w-[250px] !rounded-full"
                 />
               </div>
               <div>
