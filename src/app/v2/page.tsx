@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useLayoutEffect, useRef } from 'react';
 import Image from 'next/image';
 import { Space_Mono, Syncopate } from 'next/font/google';
 import gsap from 'gsap';
@@ -21,9 +21,8 @@ const syncopate = Syncopate({
   variable: '--font-syncopate',
 });
 
-const HERO_COORDINATES = '48.8566° N, 2.3522° E';
-const PORTRAIT_IMAGE =
-  'https://images.unsplash.com/photo-1614726365723-49faaa509203?q=80&w=2070&auto=format&fit=crop';
+const HERO_COORDINATES = '6.9175° S, 107.6191° E';
+const PORTRAIT_IMAGE = '/me.jpeg';
 const GALLERY_IMAGE_A =
   'https://images.unsplash.com/photo-1462331940025-496dfbfc7564?q=80&w=2111&auto=format&fit=crop';
 const GALLERY_IMAGE_B =
@@ -34,7 +33,7 @@ export default function V2Page() {
   const cursorOutlineRef = useRef<HTMLDivElement>(null);
   const scrollWrapperRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     // 1. Initialize GSAP & ScrollTrigger
     gsap.registerPlugin(ScrollTrigger);
 
@@ -277,26 +276,26 @@ export default function V2Page() {
 
       <nav className="fixed top-0 w-full p-8 flex justify-between items-center z-40 mix-blend-difference">
         <div className="font-data text-sm text-[var(--space-red-shift)]">
-          <span>[ 001_INIT ]</span>
+          <span>[ 001_BRANDNEWSHVT ]</span>
         </div>
         <div className="font-data text-xs md:text-sm flex gap-6">
           <a
-            href="#orbit"
+            href="#home"
             className="hover:text-[var(--space-red-shift)] transition-colors"
           >
-            ORBIT
+            [ home ]
           </a>
           <a
-            href="#velocity"
+            href="#me"
             className="hover:text-[var(--space-red-shift)] transition-colors"
           >
-            VELOCITY
+            [ me ]
           </a>
           <a
             href="#contact"
             className="hover:text-[var(--space-red-shift)] transition-colors"
           >
-            CONTACT
+            [ contact ]
           </a>
         </div>
       </nav>
@@ -304,7 +303,7 @@ export default function V2Page() {
       <div id="smooth-wrapper" ref={scrollWrapperRef}>
         <div id="smooth-content" className="skew-content">
           <section
-            id="orbit"
+            id="home"
             className="h-screen w-full flex flex-col justify-center items-center relative overflow-hidden"
           >
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60vw] h-[60vw] bg-[var(--space-blue-shift)] blur-[120px] rounded-full opacity-20 animate-pulse" />
@@ -327,7 +326,7 @@ export default function V2Page() {
           </section>
 
           <section
-            id="velocity"
+            id="me"
             className="min-h-screen w-full py-24 px-6 md:px-20 grid grid-cols-1 md:grid-cols-12 gap-10 items-center"
           >
             <div className="md:col-span-5 relative">
@@ -335,10 +334,8 @@ export default function V2Page() {
                 <Image
                   src={PORTRAIT_IMAGE}
                   alt="Abstract Space"
-                  width={1200}
-                  height={1600}
-                  unoptimized
-                  className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700 scale-110 reveal-img"
+                  fill
+                  className="w-full h-full object-contain grayscale hover:grayscale-0 transition-all duration-700 scale-110 reveal-img"
                   data-speed="0.8"
                 />
               </div>
@@ -349,15 +346,15 @@ export default function V2Page() {
 
             <div className="md:col-span-7 flex flex-col justify-center">
               <h2 className="font-wide text-5xl md:text-7xl mb-8 leading-none uppercase">
-                Silence is <br />
+                Hi from <br />
                 <span className="text-[var(--space-blue-shift)] italic">
-                  deafening
+                  Adrian
                 </span>
               </h2>
               <p className="font-data text-lg text-[var(--space-gray-400)] max-w-md leading-relaxed">
-                In the vacuum, aesthetics are stripped to their raw coordinates.
-                We explore the intersection of brutalism and astrophysics. No
-                noise. Just signal.
+                Frontend Developer based in Bandung, Indonesia. Trying to find a
+                balance between functionality and aesthetics. Always learning
+                and exploring new technologies.
               </p>
               <div className="mt-12 h-[1px] w-full bg-[var(--space-gray-800)] relative overflow-hidden">
                 <div className="absolute top-0 left-0 h-full w-1/3 bg-[var(--space-red-shift)] loading-bar" />
@@ -365,7 +362,7 @@ export default function V2Page() {
             </div>
           </section>
 
-          <section className="py-20 overflow-hidden bg-[var(--space-white)] text-[var(--space-void)]">
+          <section className="py-20 overflow-hidden bg-[var(--space-star-white)] text-[var(--space-void)]">
             <div className="flex whitespace-nowrap">
               <div className="marquee-content font-wide text-[10vw] font-bold uppercase tracking-tighter">
                 Event Horizon — Singularity — Gravity Well — Red Shift —
@@ -431,20 +428,35 @@ export default function V2Page() {
             <div className="flex justify-between items-start z-10 font-data text-sm border-b border-black pb-4 w-full">
               <div>
                 <p>EST. 2025</p>
-                <p>SECTOR 7G</p>
+                <p>radenadri.xyz</p>
               </div>
-              <div className="text-right">
-                <p>SOCIAL_LINK_01</p>
-                <p>SOCIAL_LINK_02</p>
+              <div className="text-right flex flex-col">
+                <a
+                  href="https://github.com/radenadri"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  GITHUB
+                </a>
+                <a
+                  href="https://cv.radenadri.xyz"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  RESUME
+                </a>
               </div>
             </div>
 
             <div className="z-10">
-              <h2 className="font-wide text-[14vw] leading-[0.8] tracking-tighter font-bold uppercase hover:italic transition-all duration-300 cursor-pointer">
-                Start
+              <a
+                href="mailto:radenadri@gmail.com"
+                className="font-wide text-[14vw] leading-[0.8] tracking-tighter font-bold uppercase hover:italic transition-all duration-300 cursor-pointer"
+              >
+                Hit
                 <br />
-                Mission
-              </h2>
+                Me Up
+              </a>
             </div>
           </section>
         </div>
