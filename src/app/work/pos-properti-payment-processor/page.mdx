@@ -16,8 +16,7 @@ import Image from 'next/image';
       POS Properti Payment Processor
     </h1>
     <p className="mt-6 max-w-3xl font-data text-base text-white/80">
-      Designing a mission-control interface that processes, reconciles, and reports every internal
-      transaction at POS Properti while syncing with banking partners in real time.
+      Build a centralized payment processor portal for internal use at POS Properti, enabling all company transactions to be processed, reviewed, and integrated with third-party systems through a secure REST API.
     </p>
     <div className="mt-8 grid gap-4 text-xs sm:grid-cols-3">
       <div className="rounded-2xl border border-white/10 p-4">
@@ -41,13 +40,11 @@ import Image from 'next/image';
         [ mission brief ]
       </p>
       <p>
-        Build a centralized payment processor for POS Properti that receives every internal transaction,
-        reconciles with a local banking partner, and exposes a hardened API for dozens of internal
-        services.
+        This project was designed to serve as a one-stop portal for handling all company transactions under POS Properti.
+        The system integrates directly with a local banking partner to process payments, settlements, and transaction verification in real-time.
       </p>
       <p>
-        The system needed to operate like ground control: consistent telemetry, absolute security, and a
-        single source of truth for finance, operations, and c-level reporting.
+        Additionally, a custom REST API was developed to allow integration between the payment gateway and other internal company applications — ensuring a consistent and scalable financial workflow.
       </p>
     </div>
 
@@ -56,10 +53,9 @@ import Image from 'next/image';
         [ flight plan ]
       </p>
       <ul className="list-disc space-y-3 pl-5">
-        <li>Design multi-tenant REST APIs for settlements, refunds, and reconciliation.</li>
-        <li>Create a React control room with live banking telemetry.</li>
-        <li>Implement RBAC + token auth to pass banking audits.</li>
-        <li>Containerize services to guarantee 99.9% uptime.</li>
+        <li>Developed RESTful payment processor services using Laravel and Node.js.</li>
+        <li>Built a React-based dashboard for transaction monitoring, reconciliation, and analytics.</li>
+        <li>Implemented PostgreSQL for structured financial data storage with optimized indexing for faster reporting.</li>
       </ul>
     </div>
   </div>
@@ -72,19 +68,9 @@ import Image from 'next/image';
         detail: 'Improvement in handling internal transactions',
       },
       {
-        label: 'Manual reconciliation',
-        value: '-40%',
-        detail: 'Time saved across finance squads',
-      },
-      {
         label: 'Processed volume',
         value: 'Rp 7B+',
         detail: 'Transactions cleared in first quarter roll-out',
-      },
-      {
-        label: 'System uptime',
-        value: '99.9%',
-        detail: 'Maintained through container orchestration',
       }].map((stat) => (
         <div key={stat.label} className="rounded-3xl border border-white/10 bg-white/5 p-6">
           <AnimatedText as="p" className="font-data text-xs uppercase tracking-[0.3em] text-white/60">
@@ -123,24 +109,12 @@ import Image from 'next/image';
 
   <div className="grid gap-8 lg:grid-cols-2">
     <div className="rounded-3xl border border-white/10 bg-white/5 p-8">
-      <p className="font-data text-xs tracking-[0.5em] text-[var(--space-blue-shift)] uppercase">
-        [ technical highlights ]
-      </p>
-      <ul className="mt-4 space-y-3">
-        <li>Dual-service architecture: Laravel handles settlements, Node.js manages webhooks.</li>
-        <li>Event sourcing for audit trails; every movement is reconstructable.</li>
-        <li>Adaptive rate limiting to match the partner bank’s constraints.</li>
-        <li>Custom React visualizations to expose suspicious payment patterns.</li>
-      </ul>
-    </div>
-    <div className="rounded-3xl border border-white/10 bg-white/5 p-8">
       <p className="font-data text-xs tracking-[0.5em] text-[var(--space-red-shift)] uppercase">
         [ learnings ]
       </p>
       <ul className="mt-4 space-y-3">
-        <li>Versioned APIs + contract tests kept 6 internal teams aligned.</li>
-        <li>Pairing with banking partners early removes weeks of sandbox guesswork.</li>
-        <li>When money moves, observability is a feature—not an upgrade.</li>
+        <li>Designing REST APIs with clear versioning prevents integration errors.</li>
+        <li>Centralized systems simplify auditing and reporting when multiple company services depend on the same financial core.</li>
       </ul>
     </div>
   </div>
