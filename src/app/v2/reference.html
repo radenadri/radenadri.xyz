@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SPACEY | Editorial Void</title>
+
+  <!-- Fonts: Syncopate for wide headers, Space Mono for data -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syncopate:wght@400;700&display=swap"
+    rel="stylesheet">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- GSAP & Lenis -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.15/dist/lenis.min.js"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'void': '#030303',
+            'star-white': '#F0F0F0',
+            'red-shift': '#FF2A00',
+            'blue-shift': '#0044FF',
+            'nebula': '#1A1A1A'
+          },
+          fontFamily: {
+            'wide': ['Syncopate', 'sans-serif'],
+            'mono': ['Space Mono', 'monospace'],
+          },
+          backgroundImage: {
+            'noise': "url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22 opacity=%220.05%22/%3E%3C/svg%3E')",
+          },
+          cursor: {
+            'none': 'none',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Hide scrollbar but keep functionality */
+    ::-webkit-scrollbar {
+      width: 0px;
+      background: transparent;
+    }
+
+    body {
+      background-color: #030303;
+      color: #F0F0F0;
+      overflow-x: hidden;
+      cursor: none;
+      /* Custom cursor handling */
+    }
+
+    /* The Custom Cursor */
+    .cursor-dot {
+      width: 20px;
+      height: 20px;
+      background-color: #FF2A00;
+      position: fixed;
+      top: 0;
+      left: 0;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      mix-blend-mode: difference;
+      transition: transform 0.1s ease;
+    }
+
+    .cursor-outline {
+      width: 60px;
+      height: 60px;
+      border: 1px solid #F0F0F0;
+      position: fixed;
+      top: 0;
+      left: 0;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9998;
+      transition: transform 0.2s ease, width 0.3s, height 0.3s;
+      transform: translate(-50%, -50%);
+    }
+
+    /* Typography Styling */
+    .outline-text {
+      -webkit-text-stroke: 1px rgba(240, 240, 240, 0.3);
+      color: transparent;
+      transition: all 0.5s ease;
+    }
+
+    .outline-text:hover {
+      -webkit-text-stroke: 1px #FF2A00;
+      color: #FF2A00;
+    }
+
+    /* Image Reveal Mask */
+    .reveal-img {
+      clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0 100%);
+      transition: clip-path 1.2s cubic-bezier(0.19, 1, 0.22, 1);
+    }
+
+    .reveal-img.active {
+      clip-path: polygon(0 100%, 100% 100%, 100% 0, 0 0);
+    }
+
+    /* Smooth skew effect class */
+    .skew-content {
+      will-change: transform;
+    }
+  </style>
+</head>
+
+<body class="relative">
+
+  <!-- Noise Texture Overlay -->
+  <div class="fixed inset-0 w-full h-full bg-noise pointer-events-none z-50 opacity-50 mix-blend-overlay"></div>
+
+  <!-- Custom Cursor -->
+  <div class="cursor-dot hidden md:block" id="cursor-dot"></div>
+  <div class="cursor-outline hidden md:block" id="cursor-outline"></div>
+
+  <!-- Navigation -->
+  <nav class="fixed top-0 w-full p-8 flex justify-between items-center z-40 mix-blend-difference">
+    <div class="font-mono text-sm tracking-widest text-red-shift">[ 001_INIT ]</div>
+    <div class="font-mono text-xs md:text-sm flex gap-6">
+      <a href="#" class="hover:text-red-shift transition-colors">ORBIT</a>
+      <a href="#" class="hover:text-red-shift transition-colors">VELOCITY</a>
+      <a href="#" class="hover:text-red-shift transition-colors">CONTACT</a>
+    </div>
+  </nav>
+
+  <!-- Main Wrapper for Smooth Scroll -->
+  <div id="smooth-wrapper">
+    <div id="smooth-content" class="skew-content">
+
+      <!-- HERO SECTION -->
+      <section class="h-screen w-full flex flex-col justify-center items-center relative overflow-hidden">
+        <!-- Background Gradient Orb -->
+        <div
+          class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60vw] h-[60vw] bg-blue-shift blur-[120px] rounded-full opacity-20 animate-pulse">
+        </div>
+
+        <div class="z-10 text-center mix-blend-difference flex flex-col items-center">
+          <h1
+            class="font-wide text-[12vw] leading-[0.85] font-bold tracking-tighter uppercase text-star-white hero-text-reveal overflow-hidden">
+            <div class="translate-y-full">SPACEY</div>
+          </h1>
+          <h1
+            class="font-wide text-[12vw] leading-[0.85] font-bold tracking-tighter uppercase outline-text hero-text-reveal overflow-hidden opacity-50">
+            <div class="translate-y-full">VOYAGER</div>
+          </h1>
+        </div>
+
+        <div class="absolute bottom-10 left-8 md:left-20 font-mono text-xs md:text-sm max-w-xs text-gray-400">
+          <p>COORDINATES: 48.8566° N, 2.3522° E</p>
+          <p class="mt-2 text-red-shift">SCROLL TO INITIATE DESCENT</p>
+        </div>
+      </section>
+
+      <!-- EDITORIAL SECTION 01 -->
+      <section class="min-h-screen w-full py-24 px-6 md:px-20 grid grid-cols-1 md:grid-cols-12 gap-10 items-center">
+        <div class="md:col-span-5 relative">
+          <div class="w-full h-[60vh] bg-nebula overflow-hidden relative">
+            <!-- Abstract Image -->
+            <img src="https://images.unsplash.com/photo-1614726365723-49faaa509203?q=80&w=2070&auto=format&fit=crop"
+              alt="Abstract Space"
+              class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700 scale-110 reveal-img"
+              data-speed="0.8">
+          </div>
+          <div class="absolute -bottom-10 -right-10 font-mono text-9xl text-red-shift opacity-20 select-none z-[-1]">01
+          </div>
+        </div>
+
+        <div class="md:col-span-7 flex flex-col justify-center">
+          <h2 class="font-wide text-5xl md:text-7xl mb-8 leading-none uppercase">
+            Silence is <br><span class="text-blue-shift italic">deafening</span>
+          </h2>
+          <p class="font-mono text-lg text-gray-400 max-w-md leading-relaxed">
+            In the vacuum, aesthetics are stripped to their raw coordinates. We explore the intersection of brutalism
+            and astrophysics. No noise. Just signal.
+          </p>
+          <div class="mt-12 h-[1px] w-full bg-gray-800 relative overflow-hidden">
+            <div class="absolute top-0 left-0 h-full w-1/3 bg-red-shift loading-bar"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- MARQUEE SECTION -->
+      <section class="py-20 overflow-hidden bg-white text-void">
+        <div class="marquee-container flex whitespace-nowrap">
+          <div class="marquee-content font-wide text-[10vw] font-bold uppercase tracking-tighter">
+            Event Horizon — Singularity — Gravity Well — Red Shift —
+          </div>
+          <div class="marquee-content font-wide text-[10vw] font-bold uppercase tracking-tighter" aria-hidden="true">
+            Event Horizon — Singularity — Gravity Well — Red Shift —
+          </div>
+        </div>
+      </section>
+
+      <!-- GALLERY GRID (Asymmetrical) -->
+      <section class="min-h-screen w-full py-32 px-4 md:px-10 bg-void text-star-white relative">
+        <div class="flex flex-col md:flex-row gap-20 items-start">
+
+          <!-- Item 1 -->
+          <div class="w-full md:w-1/3 mt-0 md:mt-20">
+            <div class="border-t border-gray-700 py-4 flex justify-between font-mono text-xs text-red-shift">
+              <span>FIG. A</span>
+              <span>[ NEBULA ]</span>
+            </div>
+            <div class="aspect-[3/4] overflow-hidden">
+              <img src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?q=80&w=2111&auto=format&fit=crop"
+                class="w-full h-full object-cover reveal-img hover:scale-110 transition-transform duration-700"
+                alt="Nebula">
+            </div>
+            <h3 class="font-wide text-3xl mt-4">Dark Matter</h3>
+          </div>
+
+          <!-- Item 2 -->
+          <div class="w-full md:w-5/12">
+            <div class="border-t border-gray-700 py-4 flex justify-between font-mono text-xs text-blue-shift">
+              <span>FIG. B</span>
+              <span>[ VOID ]</span>
+            </div>
+            <div class="aspect-square overflow-hidden">
+              <img src="https://images.unsplash.com/photo-1534447677768-be436bb09401?q=80&w=2094&auto=format&fit=crop"
+                class="w-full h-full object-cover reveal-img hover:scale-110 transition-transform duration-700"
+                alt="Void">
+            </div>
+            <h3 class="font-wide text-3xl mt-4">Entropy</h3>
+            <p class="font-mono text-sm text-gray-500 mt-2">Disorder increases with time. We curate the chaos.</p>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- BIG FOOTER -->
+      <section
+        class="h-[80vh] w-full bg-red-shift flex flex-col justify-between p-6 md:p-14 text-void relative overflow-hidden">
+        <div
+          class="absolute top-0 left-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10 mix-blend-multiply">
+        </div>
+
+        <div class="flex justify-between items-start z-10 font-mono text-sm border-b border-black pb-4">
+          <div>
+            <p>EST. 2025</p>
+            <p>SECTOR 7G</p>
+          </div>
+          <div class="text-right">
+            <p>SOCIAL_LINK_01</p>
+            <p>SOCIAL_LINK_02</p>
+          </div>
+        </div>
+
+        <div class="z-10">
+          <h2
+            class="font-wide text-[14vw] leading-[0.8] tracking-tighter font-bold uppercase hover:italic transition-all duration-300 cursor-pointer">
+            Start<br>Mission
+          </h2>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script>
+    // --- 1. Initialize Lenis (Smooth Scroll) ---
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      direction: 'vertical',
+      gestureDirection: 'vertical',
+      smooth: true,
+      mouseMultiplier: 1,
+      smoothTouch: false,
+      touchMultiplier: 2,
+    });
+
+    // --- 2. Velocity Skew Effect ---
+    let proxy = { skew: 0 },
+      skewSetter = gsap.quickSetter(".skew-content", "skewY", "deg"),
+      clamp = gsap.utils.clamp(-5, 5); // Don't skew too much
+
+    lenis.on('scroll', (e) => {
+      // Update scrolltrigger
+      ScrollTrigger.update();
+
+      // Calculate skew based on velocity
+      let skew = clamp(e.velocity / 300);
+
+      // If velocity is high, skew elements
+      if (Math.abs(skew) > 0.1) {
+        gsap.to(proxy, {
+          skew: skew,
+          duration: 0.8,
+          ease: "power3",
+          overwrite: true,
+          onUpdate: () => skewSetter(proxy.skew)
+        });
+      } else {
+        gsap.to(proxy, {
+          skew: 0,
+          duration: 0.8,
+          ease: "power3",
+          overwrite: true,
+          onUpdate: () => skewSetter(proxy.skew)
+        });
+      }
+    });
+
+    // GSAP Ticker for Lenis
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+
+
+    // --- 3. GSAP Animations ---
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Hero Reveal
+    const heroTl = gsap.timeline();
+    heroTl.to('.hero-text-reveal div', {
+      y: 0,
+      duration: 1.5,
+      stagger: 0.2,
+      ease: "power4.out",
+      delay: 0.2
+    });
+
+    // Image Reveal on Scroll
+    const revealImages = document.querySelectorAll('.reveal-img');
+    revealImages.forEach(img => {
+      ScrollTrigger.create({
+        trigger: img,
+        start: "top 80%",
+        onEnter: () => img.classList.add('active'),
+        once: true
+      });
+    });
+
+    // Parallax Effect for Images
+    document.querySelectorAll('[data-speed]').forEach(layer => {
+      const speed = layer.getAttribute('data-speed');
+      gsap.to(layer, {
+        y: (i, target) => -100 * speed,
+        ease: "none",
+        scrollTrigger: {
+          trigger: layer,
+          start: "top bottom",
+          end: "bottom top",
+          scrub: 0
+        }
+      });
+    });
+
+    // Marquee Animation
+    gsap.to(".marquee-content", {
+      xPercent: -100,
+      repeat: -1,
+      duration: 10,
+      ease: "linear"
+    });
+
+    // Loading Bar Animation
+    gsap.to(".loading-bar", {
+      width: "100%",
+      scrollTrigger: {
+        trigger: ".loading-bar",
+        start: "top 80%",
+        end: "bottom 20%",
+        scrub: 1
+      }
+    });
+
+    // --- 4. Custom Cursor Logic ---
+    const cursorDot = document.getElementById("cursor-dot");
+    const cursorOutline = document.getElementById("cursor-outline");
+
+    window.addEventListener("mousemove", function (e) {
+      const posX = e.clientX;
+      const posY = e.clientY;
+
+      // Dot follows instantly
+      cursorDot.style.left = `${posX}px`;
+      cursorDot.style.top = `${posY}px`;
+      // Outline follows with slight transform delay via CSS but we update position here for translate to work
+      cursorOutline.animate({
+        left: `${posX}px`,
+        top: `${posY}px`
+      }, { duration: 500, fill: "forwards" });
+    });
+
+    // Cursor hover effects
+    const links = document.querySelectorAll('a, button, .cursor-pointer');
+    links.forEach(link => {
+      link.addEventListener('mouseenter', () => {
+        cursorOutline.style.transform = 'translate(-50%, -50%) scale(1.5)';
+        cursorOutline.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
+        cursorDot.style.transform = 'translate(-50%, -50%) scale(0.5)';
+      });
+      link.addEventListener('mouseleave', () => {
+        cursorOutline.style.transform = 'translate(-50%, -50%) scale(1)';
+        cursorOutline.style.backgroundColor = 'transparent';
+        cursorDot.style.transform = 'translate(-50%, -50%) scale(1)';
+      });
+    });
+
+  </script>
+</body>
+
+</html>
