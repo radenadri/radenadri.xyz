@@ -1,6 +1,6 @@
 export const metadata = {
-  title: 'Passport — Case Study',
-  description: 'Modern attendance solution to make employee attendance easy and secure.',
+  title: 'POS Properti Payment Processor — Case Study',
+  description: 'Creating payment processor for internal use at POS Properti',
 };
 
 import { AnimatedElement, AnimatedText } from '@/components/animated-element';
@@ -10,23 +10,23 @@ import Image from 'next/image';
   <div className="relative overflow-hidden rounded-[2.5rem] border border-white/10 bg-gradient-to-br from-white/5 via-white/0 to-white/10 p-10">
     <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top,_rgba(255,255,255,0.15),_transparent_55%)]" />
     <p className="font-data text-xs tracking-[0.6em] text-[var(--space-red-shift)] uppercase">
-      [ CASE STUDY / 02 ]
+      [ CASE STUDY / 01 ]
     </p>
     <h1 className="mt-4 font-wide text-4xl sm:text-6xl uppercase leading-[1.05]">
-      Passport — HRIS
+      POS Properti Payment Processor
     </h1>
     <p className="mt-6 max-w-3xl font-data text-base text-white/80">
-      A biometric + GPS attendance system shipped at Pentacode to keep employees in sync with
-      HR, payroll, and compliance.
+      Designing a mission-control interface that processes, reconciles, and reports every internal
+      transaction at POS Properti while syncing with banking partners in real time.
     </p>
     <div className="mt-8 grid gap-4 text-xs sm:grid-cols-3">
       <div className="rounded-2xl border border-white/10 p-4">
         <p className="text-white/60">Role</p>
-        <p className="font-semibold">Frontend (Flutter) Developer</p>
+        <p className="font-semibold">Fullstack Engineer</p>
       </div>
       <div className="rounded-2xl border border-white/10 p-4">
         <p className="text-white/60">Stack</p>
-        <p className="font-semibold">Flutter · Firebase · Laravel APIs</p>
+        <p className="font-semibold">Laravel · React · Node.js · PostgreSQL</p>
       </div>
       <div className="rounded-2xl border border-white/10 p-4">
         <p className="text-white/60">Timeline</p>
@@ -41,12 +41,13 @@ import Image from 'next/image';
         [ mission brief ]
       </p>
       <p>
-        Replace the paper-and-spreadsheet attendance workflow with a trusted mobile companion that can
-        verify employees via biometrics, GPS fences, and real-time policy engines.
+        Build a centralized payment processor for POS Properti that receives every internal transaction,
+        reconciles with a local banking partner, and exposes a hardened API for dozens of internal
+        services.
       </p>
       <p>
-        Passport centralizes daily check-ins, leave approvals, overtime tracking, and HR dashboards so
-        every team works from the same data source.
+        The system needed to operate like ground control: consistent telemetry, absolute security, and a
+        single source of truth for finance, operations, and c-level reporting.
       </p>
     </div>
 
@@ -55,10 +56,10 @@ import Image from 'next/image';
         [ flight plan ]
       </p>
       <ul className="list-disc space-y-3 pl-5">
-        <li>Ship a Flutter app with fingerprint + face ID check-ins.</li>
-        <li>Integrate Laravel REST APIs and JWT auth for secure sessions.</li>
-        <li>Deliver push notifications through Firebase Cloud Messaging.</li>
-        <li>Expose attendance analytics for HR and managers in near real time.</li>
+        <li>Design multi-tenant REST APIs for settlements, refunds, and reconciliation.</li>
+        <li>Create a React control room with live banking telemetry.</li>
+        <li>Implement RBAC + token auth to pass banking audits.</li>
+        <li>Containerize services to guarantee 99.9% uptime.</li>
       </ul>
     </div>
   </div>
@@ -66,14 +67,24 @@ import Image from 'next/image';
   <AnimatedElement animation="stagger">
     <div className="grid gap-4 sm:grid-cols-2">
       {[{
-        label: 'Manual corrections',
-        value: '-50%',
-        detail: 'Less time spent fixing missed punches',
+        label: 'Processing efficiency',
+        value: '+70%',
+        detail: 'Improvement in handling internal transactions',
       },
       {
-        label: 'HR processing speed',
-        value: '+60%',
-        detail: 'Approvals + exports accelerated after launch',
+        label: 'Manual reconciliation',
+        value: '-40%',
+        detail: 'Time saved across finance squads',
+      },
+      {
+        label: 'Processed volume',
+        value: 'Rp 7B+',
+        detail: 'Transactions cleared in first quarter roll-out',
+      },
+      {
+        label: 'System uptime',
+        value: '99.9%',
+        detail: 'Maintained through container orchestration',
       }].map((stat) => (
         <div key={stat.label} className="rounded-3xl border border-white/10 bg-white/5 p-6">
           <AnimatedText as="p" className="font-data text-xs uppercase tracking-[0.3em] text-white/60">
@@ -97,8 +108,15 @@ import Image from 'next/image';
         className="rounded-[1.5rem] border border-white/10"
         width={1600}
         height={900}
-        src="/viz/passport-1.png"
-        alt="Passport attendance mobile screens"
+        src="/viz/pospro-1.png"
+        alt="Pos Properti dashboard overview"
+      />
+      <Image
+        className="rounded-[1.5rem] border border-white/10"
+        width={1600}
+        height={900}
+        src="/viz/pospro-2.png"
+        alt="Pos Properti balance view"
       />
     </AnimatedElement>
   </div>
@@ -106,13 +124,13 @@ import Image from 'next/image';
   <div className="grid gap-8 lg:grid-cols-2">
     <div className="rounded-3xl border border-white/10 bg-white/5 p-8">
       <p className="font-data text-xs tracking-[0.5em] text-[var(--space-blue-shift)] uppercase">
-        [ product highlights ]
+        [ technical highlights ]
       </p>
       <ul className="mt-4 space-y-3">
-        <li>Role-aware dashboards for HR, managers, and employees.</li>
-        <li>Attendance heatmaps + anomaly alerts baked into the app.</li>
-        <li>GPS geofencing + selfie verification to eliminate spoofing.</li>
-        <li>Overtime + leave flows that sync directly with payroll exports.</li>
+        <li>Dual-service architecture: Laravel handles settlements, Node.js manages webhooks.</li>
+        <li>Event sourcing for audit trails; every movement is reconstructable.</li>
+        <li>Adaptive rate limiting to match the partner bank’s constraints.</li>
+        <li>Custom React visualizations to expose suspicious payment patterns.</li>
       </ul>
     </div>
     <div className="rounded-3xl border border-white/10 bg-white/5 p-8">
@@ -120,40 +138,11 @@ import Image from 'next/image';
         [ learnings ]
       </p>
       <ul className="mt-4 space-y-3">
-        <li>Biometric + GPS validation builds trust only if fallbacks are thoughtful.</li>
-        <li>Attendance data is time-sensitive—observability and retries must be in v1.</li>
-        <li>Push infrastructure (FCM) becomes critical for approvals and reminders.</li>
-        <li>App store submission is part of the delivery timeline; plan for QA cycles.</li>
+        <li>Versioned APIs + contract tests kept 6 internal teams aligned.</li>
+        <li>Pairing with banking partners early removes weeks of sandbox guesswork.</li>
+        <li>When money moves, observability is a feature—not an upgrade.</li>
       </ul>
     </div>
-  </div>
-
-  <div className="rounded-3xl border border-white/10 bg-white/5 p-8">
-    <p className="font-data text-xs tracking-[0.5em] text-[var(--space-blue-shift)] uppercase">
-      [ deployment ]
-    </p>
-    <p className="mt-3 text-white/80">Available on both app stores for Pentacode employees:</p>
-    <div className="mt-4 flex flex-wrap gap-3 text-xs uppercase">
-      <a
-        className="rounded-full border border-white/20 px-4 py-2 font-data tracking-[0.3em] text-white/80"
-        href="https://play.google.com/store/apps/details?id=id.pentacode.portal&hl=en"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Android ↗
-      </a>
-      <a
-        className="rounded-full border border-white/20 px-4 py-2 font-data tracking-[0.3em] text-white/80"
-        href="https://apps.apple.com/id/app/passport/id6478735731"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        iOS ↗
-      </a>
-    </div>
-    <p className="mt-4 text-xs text-white/60">
-      *App access is restricted to Pentacode employees, but the listing remains public.
-    </p>
   </div>
 
   <AnimatedElement animation="fadeIn" className="flex justify-between items-center pt-10 border-t border-white/10">
