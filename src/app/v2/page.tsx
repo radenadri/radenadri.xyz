@@ -1,12 +1,13 @@
 'use client';
 
-import { useLayoutEffect, useRef } from 'react';
+import { useLayoutEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import { Space_Mono, Syncopate } from 'next/font/google';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Lenis from 'lenis';
 import { cn } from '@/lib/utils';
+import experiments from '@/data/experiments';
 
 // Configure fonts
 const spaceMono = Space_Mono({
@@ -23,6 +24,7 @@ const syncopate = Syncopate({
 
 const HERO_COORDINATES = '6.9175° S, 107.6191° E';
 const PORTRAIT_IMAGE = '/me.jpeg';
+const MARQUEE_SPEED_PX = 80; // pixels per second
 const GALLERY_IMAGE_A =
   'https://images.unsplash.com/photo-1462331940025-496dfbfc7564?q=80&w=2111&auto=format&fit=crop';
 const GALLERY_IMAGE_B =
@@ -32,6 +34,14 @@ export default function V2Page() {
   const cursorDotRef = useRef<HTMLDivElement>(null);
   const cursorOutlineRef = useRef<HTMLDivElement>(null);
   const scrollWrapperRef = useRef<HTMLDivElement>(null);
+  const marqueeTrackRef = useRef<HTMLDivElement>(null);
+  const marqueeTweenRef = useRef<gsap.core.Tween | null>(null);
+  const [hoveredExperiment, setHoveredExperiment] = useState<{
+    title: string;
+    description: string;
+    x: number;
+    y: number;
+  } | null>(null);
 
   useLayoutEffect(() => {
     // 1. Initialize GSAP & ScrollTrigger
@@ -120,13 +130,24 @@ export default function V2Page() {
       });
     });
 
-    // Marquee Animation
-    gsap.to('.marquee-content', {
-      xPercent: -100,
-      repeat: -1,
-      duration: 20,
-      ease: 'linear',
-    });
+    const marqueeTrack = marqueeTrackRef.current;
+    if (marqueeTrack) {
+      const totalWidth = marqueeTrack.scrollWidth;
+      const contentWidth = totalWidth / 2;
+      const distance = contentWidth;
+      const duration = distance / MARQUEE_SPEED_PX;
+      const wrapX = gsap.utils.wrap(-distance, 0);
+
+      marqueeTweenRef.current = gsap.to(marqueeTrack, {
+        x: `-=${distance}`,
+        duration: Math.max(duration, 10),
+        ease: 'linear',
+        repeat: -1,
+        modifiers: {
+          x: (value) => `${wrapX(parseFloat(value))}px`,
+        },
+      });
+    }
 
     // Loading Bar Animation
     gsap.to('.loading-bar', {
@@ -187,8 +208,41 @@ export default function V2Page() {
       ScrollTrigger.getAll().forEach((t) => {
         t.kill();
       });
+      marqueeTweenRef.current?.kill();
     };
   }, []);
+
+  const marqueeExperiments = [...experiments, ...experiments];
+
+  function handleExperimentEnter(
+    experiment: { title: string; description: string },
+    event: React.MouseEvent<HTMLAnchorElement>
+  ) {
+    marqueeTweenRef.current?.pause();
+    setHoveredExperiment({
+      title: experiment.title,
+      description: experiment.description,
+      x: event.clientX,
+      y: event.clientY,
+    });
+  }
+
+  function handleExperimentMove(event: React.MouseEvent<HTMLAnchorElement>) {
+    setHoveredExperiment((prev) =>
+      prev
+        ? {
+            ...prev,
+            x: event.clientX,
+            y: event.clientY,
+          }
+        : prev
+    );
+  }
+
+  function handleExperimentLeave() {
+    marqueeTweenRef.current?.resume();
+    setHoveredExperiment(null);
+  }
 
   return (
     <div
@@ -362,18 +416,51 @@ export default function V2Page() {
             </div>
           </section>
 
-          <section className="py-20 overflow-hidden bg-[var(--space-star-white)] text-[var(--space-void)]">
-            <div className="flex whitespace-nowrap">
-              <div className="marquee-content font-wide text-[10vw] font-bold uppercase tracking-tighter">
-                Event Horizon — Singularity — Gravity Well — Red Shift —
-              </div>
-              <div
-                // ...
-                aria-hidden="true"
-              >
-                Event Horizon — Singularity — Gravity Well — Red Shift —
-              </div>
+          <section className="relative py-20 overflow-hidden bg-[var(--space-star-white)] text-[var(--space-void)]">
+            <div
+              ref={marqueeTrackRef}
+              className="marquee-track flex whitespace-nowrap"
+            >
+              {marqueeExperiments.map((experiment, index) => (
+                <a
+                  key={`${experiment.title}-${index}`}
+                  href={experiment.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="marquee-item inline-flex items-center gap-3 font-wide text-[clamp(1.5rem,6vw,4.5rem)] font-bold uppercase tracking-tight py-4 hover:text-[var(--space-red-shift)] transition-colors"
+                  onMouseEnter={(event) =>
+                    handleExperimentEnter(experiment, event)
+                  }
+                  onMouseMove={handleExperimentMove}
+                  onMouseLeave={handleExperimentLeave}
+                >
+                  <span>{experiment.title}</span>
+                  <span
+                    className="mx-6 text-[var(--space-void)]"
+                    aria-hidden="true"
+                  >
+                    —
+                  </span>
+                </a>
+              ))}
             </div>
+
+            {hoveredExperiment ? (
+              <div
+                className="fixed z-50 max-w-xs rounded-lg border border-[var(--space-void)] bg-[var(--space-void)]/90 p-4 font-data text-sm text-[var(--space-star-white)] shadow-lg"
+                style={{
+                  left: hoveredExperiment.x + 16,
+                  top: hoveredExperiment.y + 16,
+                }}
+              >
+                <p className="font-bold text-[var(--space-red-shift)] uppercase text-xs tracking-widest">
+                  {hoveredExperiment.title}
+                </p>
+                <p className="mt-2 text-[var(--space-star-white)]/80">
+                  {hoveredExperiment.description}
+                </p>
+              </div>
+            ) : null}
           </section>
 
           <section className="min-h-screen w-full py-32 px-4 md:px-10 bg-[var(--space-void)] text-[var(--space-star-white)] relative">

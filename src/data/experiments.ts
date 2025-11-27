@@ -1,11 +1,11 @@
 export default [{
   icon: '🎵',
-  title: 'Next Music Player',
+  title: 'Music Player',
   description: 'Next Music Player is a music player that i build using Next.js and Tailwind CSS. It is a simple music player that i build for fun.',
   link: 'https://tracks.radenadri.xyz'
 }, {
   icon: '📸',
-  title: 'Simple Face Recognition using Deepface',
+  title: 'FRS',
   description: 'Last year my company are building their own HRIS app, and i attempt to create the web services for face recognition using Deepface. This services are used for face recognition when clock in through the apps in my offices.',
   link: 'https://github.com/radenadri/simple-frs'
 }, {
@@ -15,7 +15,7 @@ export default [{
   link: 'https://github.com/radenadri/Gemini-Chat'
 }, {
   icon: '🤖',
-  title: 'Star Wars Character Info',
+  title: 'SWAPI',
   description: 'Last two year i was learning about Flutter and i build this app to practice my Flutter skills. It is a simple app that show character info from Star Wars API.',
   link: 'https://github.com/radenadri/SWAPI-Flutter'
 }, {
