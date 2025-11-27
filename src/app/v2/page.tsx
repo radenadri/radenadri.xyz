@@ -417,6 +417,20 @@ export default function V2Page() {
           </section>
 
           <section className="relative py-20 overflow-hidden bg-[var(--space-star-white)] text-[var(--space-void)]">
+            <div className="px-4 md:px-10 flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-10">
+              <div>
+                <p className="font-data mb-2 text-xs tracking-[0.5em] text-[var(--space-red-shift)]">
+                  [ EXPERIMENT LOG ]
+                </p>
+                <h2 className="font-wide text-3xl md:text-5xl uppercase leading-tight">
+                  Creative Payload Stream
+                </h2>
+              </div>
+              <p className="font-data text-sm text-[var(--space-void)]/70 max-w-sm">
+                Tap into the link to see what i've been trying to create and
+                what i've been trying to learn.
+              </p>
+            </div>
             <div
               ref={marqueeTrackRef}
               className="marquee-track flex whitespace-nowrap"
