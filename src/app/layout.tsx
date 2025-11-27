@@ -3,6 +3,7 @@ import { Layout } from '@/components/ds';
 import { SmoothScrollProvider } from '@/components/smooth-scroll-provider';
 import { ThemeProvider } from '@/components/theme-provider';
 import { PreloaderProvider } from '@/components/preloader-provider';
+import { BackToTop } from '@/components/back-to-top';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -47,7 +48,10 @@ export default function RootLayout({
       <body className="antialiased">
         <ThemeProvider defaultTheme="system" storageKey="portfolio-theme">
           <PreloaderProvider>
-            <SmoothScrollProvider>{children}</SmoothScrollProvider>
+            <SmoothScrollProvider>
+              {children}
+              <BackToTop className="fixed bottom-6 right-6 z-50 shadow-[0_0_30px_rgba(255,42,0,0.25)]" />
+            </SmoothScrollProvider>
           </PreloaderProvider>
         </ThemeProvider>
       </body>

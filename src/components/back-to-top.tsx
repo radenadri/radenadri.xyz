@@ -16,9 +16,12 @@ export function BackToTop({ className = '' }: BackToTopProps) {
     <button
       type="button"
       onClick={scrollToTop}
-      className={`text-sm text-muted-foreground cursor-pointer hover:text-foreground transition-colors ${className}`}
+      className={`group inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-5 py-2 text-xs uppercase tracking-[0.5em] text-white/70 transition-all hover:border-[var(--space-red-shift)] hover:text-[var(--space-red-shift)] ${className}`}
     >
-      BACK TO TOP
+      <span className="text-[var(--space-red-shift)] transition-transform group-hover:-translate-y-1">
+        ↑
+      </span>
+      Back to top
     </button>
   );
 }
