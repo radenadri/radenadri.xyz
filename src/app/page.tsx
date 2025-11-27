@@ -31,8 +31,6 @@ const MARQUEE_SPEED_PX = 80; // pixels per second
 const curatedWorks = works.slice(0, 2);
 
 export default function V2Page() {
-  const cursorDotRef = useRef<HTMLDivElement>(null);
-  const cursorOutlineRef = useRef<HTMLDivElement>(null);
   const scrollWrapperRef = useRef<HTMLDivElement>(null);
   const marqueeTrackRef = useRef<HTMLDivElement>(null);
   const marqueeTweenRef = useRef<gsap.core.Tween | null>(null);
@@ -160,51 +158,8 @@ export default function V2Page() {
       },
     });
 
-    // 4. Custom Cursor Logic
-    const cursorDot = cursorDotRef.current;
-    const cursorOutline = cursorOutlineRef.current;
-
-    const moveCursor = (e: MouseEvent) => {
-      if (!cursorDot || !cursorOutline) return;
-      const posX = e.clientX;
-      const posY = e.clientY;
-
-      cursorDot.style.left = `${posX}px`;
-      cursorDot.style.top = `${posY}px`;
-
-      cursorOutline.animate(
-        {
-          left: `${posX}px`,
-          top: `${posY}px`,
-        },
-        { duration: 500, fill: 'forwards' }
-      );
-    };
-
-    window.addEventListener('mousemove', moveCursor);
-
-    // Cursor hover effects
-    const links = document.querySelectorAll('a, button, .cursor-pointer');
-    links.forEach((link) => {
-      link.addEventListener('mouseenter', () => {
-        if (cursorOutline && cursorDot) {
-          cursorOutline.style.transform = 'translate(-50%, -50%) scale(1.5)';
-          cursorOutline.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
-          cursorDot.style.transform = 'translate(-50%, -50%) scale(0.5)';
-        }
-      });
-      link.addEventListener('mouseleave', () => {
-        if (cursorOutline && cursorDot) {
-          cursorOutline.style.transform = 'translate(-50%, -50%) scale(1)';
-          cursorOutline.style.backgroundColor = 'transparent';
-          cursorDot.style.transform = 'translate(-50%, -50%) scale(1)';
-        }
-      });
-    });
-
     return () => {
       lenis.destroy();
-      window.removeEventListener('mousemove', moveCursor);
       ScrollTrigger.getAll().forEach((t) => {
         t.kill();
       });
@@ -249,40 +204,13 @@ export default function V2Page() {
       className={cn(
         spaceMono.variable,
         syncopate.variable,
-        'bg-[var(--space-void)] text-[var(--space-star-white)] min-h-screen cursor-none overflow-x-hidden relative selection:bg-[var(--space-red-shift)] selection:text-white'
+        'bg-[var(--space-void)] text-[var(--space-star-white)] min-h-screen overflow-x-hidden relative selection:bg-[var(--space-red-shift)] selection:text-white'
       )}
     >
       <style jsx global>{`
         ::-webkit-scrollbar {
           width: 0;
           background: transparent;
-        }
-
-        .cursor-dot {
-          width: 20px;
-          height: 20px;
-          background-color: var(--space-red-shift);
-          position: fixed;
-          top: 0;
-          left: 0;
-          border-radius: 50%;
-          pointer-events: none;
-          z-index: 9999;
-          mix-blend-mode: difference;
-          transform: translate(-50%, -50%);
-        }
-
-        .cursor-outline {
-          width: 60px;
-          height: 60px;
-          border: 1px solid var(--space-star-white);
-          position: fixed;
-          top: 0;
-          left: 0;
-          border-radius: 50%;
-          pointer-events: none;
-          z-index: 9998;
-          transform: translate(-50%, -50%);
         }
 
         .outline-text {
@@ -324,9 +252,6 @@ export default function V2Page() {
           backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E")`,
         }}
       />
-
-      <div ref={cursorDotRef} className="cursor-dot hidden md:block" />
-      <div ref={cursorOutlineRef} className="cursor-outline hidden md:block" />
 
       <nav className="fixed top-0 w-full px-4 py-4 md:px-8 md:py-6 z-40">
         <div className="mx-auto max-w-5xl rounded-3xl border border-white/10 bg-[var(--space-void)]/80 px-5 py-3 text-[var(--space-star-white)] shadow-[0_15px_60px_rgba(0,0,0,0.35)] backdrop-blur">
