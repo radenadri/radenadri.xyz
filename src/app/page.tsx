@@ -10,6 +10,7 @@ import Lenis from 'lenis';
 import { cn } from '@/lib/utils';
 import experiments from '@/data/experiments';
 import works from '@/data/works';
+import experiences from '@/data/experiences';
 
 // Configure fonts
 const spaceMono = Space_Mono({
@@ -413,6 +414,53 @@ export default function V2Page() {
               <div className="mt-12 h-[1px] w-full bg-[var(--space-gray-800)] relative overflow-hidden">
                 <div className="absolute top-0 left-0 h-full w-1/3 bg-[var(--space-red-shift)] loading-bar" />
               </div>
+            </div>
+          </section>
+
+          <section className="py-24 px-4 md:px-10 bg-[var(--space-void)] text-[var(--space-star-white)] relative">
+            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6 mb-12">
+              <div>
+                <p className="font-data mb-2 text-xs tracking-[0.5em] text-[var(--space-blue-shift)]">
+                  [ EXPERIENCE LOG ]
+                </p>
+                <h2 className="font-wide text-3xl md:text-5xl uppercase leading-tight">
+                  What i've been doing
+                </h2>
+              </div>
+            </div>
+
+            <div className="grid gap-6">
+              {experiences.map((experience, index) => (
+                <div
+                  key={`${experience.company}-${experience.position}`}
+                  className="rounded-3xl border border-white/10 bg-white/5 p-6 md:p-8"
+                >
+                  <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
+                    <div>
+                      <p className="font-data text-xs tracking-[0.5em] text-[var(--space-red-shift)]">
+                        {index < 9 ? `0${index + 1}` : index + 1}
+                      </p>
+                      <h3 className="font-wide text-2xl md:text-3xl uppercase">
+                        {experience.company}
+                      </h3>
+                      <p className="font-data text-sm text-white/70">
+                        {experience.position} — {experience.location}
+                      </p>
+                    </div>
+                    <div className="font-data text-xs text-white/60 uppercase tracking-[0.3em]">
+                      {experience.duration}
+                    </div>
+                  </div>
+                  <div className="mt-6 grid gap-2 text-sm text-white/80">
+                    {experience.jobDescription.map((item) => (
+                      <p key={item} className="flex items-start gap-2">
+                        <span className="text-[var(--space-red-shift)]">▸</span>
+                        <span>{item}</span>
+                      </p>
+                    ))}
+                  </div>
+                </div>
+              ))}
             </div>
           </section>
 
