@@ -2,12 +2,14 @@
 
 import { useLayoutEffect, useRef, useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { Space_Mono, Syncopate } from 'next/font/google';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Lenis from 'lenis';
 import { cn } from '@/lib/utils';
 import experiments from '@/data/experiments';
+import works from '@/data/works';
 
 // Configure fonts
 const spaceMono = Space_Mono({
@@ -25,10 +27,7 @@ const syncopate = Syncopate({
 const HERO_COORDINATES = '6.9175° S, 107.6191° E';
 const PORTRAIT_IMAGE = '/me.jpeg';
 const MARQUEE_SPEED_PX = 80; // pixels per second
-const GALLERY_IMAGE_A =
-  'https://images.unsplash.com/photo-1462331940025-496dfbfc7564?q=80&w=2111&auto=format&fit=crop';
-const GALLERY_IMAGE_B =
-  'https://images.unsplash.com/photo-1534447677768-be436bb09401?q=80&w=2094&auto=format&fit=crop';
+const curatedWorks = works.slice(0, 2);
 
 export default function V2Page() {
   const cursorDotRef = useRef<HTMLDivElement>(null);
@@ -384,12 +383,14 @@ export default function V2Page() {
             className="min-h-screen w-full py-24 px-6 md:px-20 grid grid-cols-1 md:grid-cols-12 gap-10 items-center"
           >
             <div className="md:col-span-5 relative">
-              <div className="w-full h-[60vh] bg-[var(--space-nebula)] overflow-hidden relative">
+              <div className="w-full h-[60vh] overflow-hidden relative">
                 <Image
                   src={PORTRAIT_IMAGE}
                   alt="Abstract Space"
-                  fill
-                  className="w-full h-full object-contain grayscale hover:grayscale-0 transition-all duration-700 scale-110 reveal-img"
+                  width={1200}
+                  height={1600}
+                  unoptimized
+                  className="w-full h-full object-contain grayscale hover:grayscale-0 transition-all duration-700 reveal-img"
                   data-speed="0.8"
                 />
               </div>
@@ -478,45 +479,72 @@ export default function V2Page() {
           </section>
 
           <section className="min-h-screen w-full py-32 px-4 md:px-10 bg-[var(--space-void)] text-[var(--space-star-white)] relative">
-            <div className="flex flex-col md:flex-row gap-20 items-start">
-              <div className="w-full md:w-1/3 mt-0 md:mt-20">
-                <div className="border-t border-gray-700 py-4 flex justify-between font-data text-xs text-[var(--space-red-shift)]">
-                  <span>FIG. A</span>
-                  <span>[ NEBULA ]</span>
-                </div>
-                <div className="aspect-[3/4] overflow-hidden">
-                  <Image
-                    src={GALLERY_IMAGE_A}
-                    alt="Nebula"
-                    width={1200}
-                    height={1600}
-                    unoptimized
-                    className="w-full h-full object-cover reveal-img hover:scale-110 transition-transform duration-700"
-                  />
-                </div>
-                <h3 className="font-wide text-3xl mt-4">Dark Matter</h3>
-              </div>
-
-              <div className="w-full md:w-5/12">
-                <div className="border-t border-gray-700 py-4 flex justify-between font-data text-xs text-[var(--space-blue-shift)]">
-                  <span>FIG. B</span>
-                  <span>[ VOID ]</span>
-                </div>
-                <div className="aspect-square overflow-hidden">
-                  <Image
-                    src={GALLERY_IMAGE_B}
-                    alt="Void"
-                    width={1200}
-                    height={1200}
-                    unoptimized
-                    className="w-full h-full object-cover reveal-img hover:scale-110 transition-transform duration-700"
-                  />
-                </div>
-                <h3 className="font-wide text-3xl mt-4">Entropy</h3>
-                <p className="font-data text-sm text-gray-500 mt-2">
-                  Disorder increases with time. We curate the chaos.
+            <div className="px-2 md:px-0 mb-16 flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+              <div>
+                <p className="font-data mb-2 text-xs tracking-[0.5em] text-[var(--space-red-shift)]">
+                  [ CURATED WORKS ]
                 </p>
+                <h2 className="font-wide text-3xl md:text-5xl uppercase leading-tight">
+                  Selected from the archive
+                </h2>
               </div>
+              <p className="font-data text-sm text-[var(--space-star-white)]/80 max-w-md">
+                Things I've done, things I've seen, things I've created.
+              </p>
+            </div>
+            <div className="flex flex-col md:flex-row gap-20 items-start">
+              {curatedWorks[0] ? (
+                <Link
+                  href={`/work/${curatedWorks[0].slug}`}
+                  className="group w-full md:w-1/3 mt-0 md:mt-20"
+                >
+                  <div className="border-t border-gray-700 py-4 flex justify-between font-data text-xs text-[var(--space-red-shift)]">
+                    <span>FIG. A</span>
+                    <span>[ {curatedWorks[0].title.toUpperCase()} ]</span>
+                  </div>
+                  <div className="aspect-[3/4] overflow-hidden">
+                    <Image
+                      src={curatedWorks[0].coverImage}
+                      alt={curatedWorks[0].title}
+                      width={1200}
+                      height={1600}
+                      unoptimized
+                      className="w-full h-full object-cover reveal-img transition-transform duration-700 grayscale group-hover:grayscale-0"
+                    />
+                  </div>
+                  <h3 className="font-wide text-3xl mt-4 group-hover:text-[var(--space-red-shift)] transition-colors">
+                    {curatedWorks[0].title}
+                  </h3>
+                </Link>
+              ) : null}
+
+              {curatedWorks[1] ? (
+                <Link
+                  href={`/work/${curatedWorks[1].slug}`}
+                  className="group w-full md:w-5/12"
+                >
+                  <div className="border-t border-gray-700 py-4 flex justify-between font-data text-xs text-[var(--space-blue-shift)]">
+                    <span>FIG. B</span>
+                    <span>[ {curatedWorks[1].title.toUpperCase()} ]</span>
+                  </div>
+                  <div className="aspect-square overflow-hidden">
+                    <Image
+                      src={curatedWorks[1].coverImage}
+                      alt={curatedWorks[1].title}
+                      width={1200}
+                      height={1200}
+                      unoptimized
+                      className="w-full h-full object-cover reveal-img transition-transform duration-700 grayscale group-hover:grayscale-0"
+                    />
+                  </div>
+                  <h3 className="font-wide text-3xl mt-4 group-hover:text-[var(--space-blue-shift)] transition-colors">
+                    {curatedWorks[1].title}
+                  </h3>
+                  <p className="font-data text-sm text-gray-500 mt-2 line-clamp-2">
+                    {curatedWorks[1].subtitle ?? 'Case study available.'}
+                  </p>
+                </Link>
+              ) : null}
             </div>
           </section>
 
