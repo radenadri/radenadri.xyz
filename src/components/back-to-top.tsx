@@ -21,7 +21,6 @@ export function BackToTop({ className = '' }: BackToTopProps) {
       <span className="text-[var(--space-red-shift)] transition-transform group-hover:-translate-y-1">
         ↑
       </span>
-      Back to top
     </button>
   );
 }

@@ -327,29 +327,28 @@ export default function V2Page() {
       <div ref={cursorDotRef} className="cursor-dot hidden md:block" />
       <div ref={cursorOutlineRef} className="cursor-outline hidden md:block" />
 
-      <nav className="fixed top-0 w-full p-8 flex justify-between items-center z-40 mix-blend-difference">
-        <div className="font-data text-sm text-[var(--space-red-shift)]">
-          <span>[ 001_BRANDNEWSHVT ]</span>
-        </div>
-        <div className="font-data text-xs md:text-sm flex gap-6">
-          <a
-            href="#home"
-            className="hover:text-[var(--space-red-shift)] transition-colors"
-          >
-            [ home ]
-          </a>
-          <a
-            href="#me"
-            className="hover:text-[var(--space-red-shift)] transition-colors"
-          >
-            [ me ]
-          </a>
-          <a
-            href="#contact"
-            className="hover:text-[var(--space-red-shift)] transition-colors"
-          >
-            [ contact ]
-          </a>
+      <nav className="fixed top-0 w-full px-4 py-4 md:px-8 md:py-6 z-40">
+        <div className="mx-auto max-w-5xl rounded-3xl border border-white/10 bg-[var(--space-void)]/80 px-5 py-3 text-[var(--space-star-white)] shadow-[0_15px_60px_rgba(0,0,0,0.35)] backdrop-blur">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <div className="font-data text-[0.6rem] tracking-[0.4em] text-[var(--space-red-shift)]">
+              [ 001_BRANDNEWSHVT ]
+            </div>
+            <div className="font-data text-[0.65rem] sm:text-xs flex w-full items-center justify-between uppercase tracking-[0.4em] sm:w-auto sm:justify-end sm:gap-6">
+              {[
+                { href: '#home', label: 'home' },
+                { href: '#me', label: 'me' },
+                { href: '#contact', label: 'contact' },
+              ].map((item) => (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  className="rounded-full px-3 py-1 transition-colors hover:text-[var(--space-red-shift)]"
+                >
+                  {item.label}
+                </a>
+              ))}
+            </div>
+          </div>
         </div>
       </nav>
 
