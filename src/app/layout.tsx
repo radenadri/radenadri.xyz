@@ -1,10 +1,23 @@
 import type { Metadata } from 'next';
+import { Space_Mono, Syncopate } from 'next/font/google';
 import { Layout } from '@/components/ds';
 import { SmoothScrollProvider } from '@/components/smooth-scroll-provider';
 import { ThemeProvider } from '@/components/theme-provider';
 import { PreloaderProvider } from '@/components/preloader-provider';
 import { BackToTop } from '@/components/back-to-top';
 import './globals.css';
+
+const spaceMono = Space_Mono({
+  subsets: ['latin'],
+  weight: ['400', '700'],
+  variable: '--font-space-mono',
+});
+
+const syncopate = Syncopate({
+  subsets: ['latin'],
+  weight: ['400', '700'],
+  variable: '--font-syncopate',
+});
 
 export const metadata: Metadata = {
   title: 'Adriana Eka Prayudha - Frontend Developer',
@@ -44,7 +57,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <Layout>
+    <Layout className={`${spaceMono.variable} ${syncopate.variable}`}>
       <body className="antialiased">
         <ThemeProvider defaultTheme="system" storageKey="portfolio-theme">
           <PreloaderProvider>

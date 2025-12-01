@@ -1,6 +1,7 @@
 'use client';
 
-import { createContext, useContext, useState, useEffect } from 'react';
+import { createContext, useContext, useState, useEffect, useRef } from 'react';
+import { usePathname } from 'next/navigation';
 import { Preloader } from './preloader';
 
 interface PreloaderContextValue {
@@ -14,6 +15,18 @@ const PreloaderContext = createContext<PreloaderContextValue | undefined>(
 export function PreloaderProvider({ children }: { children: React.ReactNode }) {
   const [isLoading, setIsLoading] = useState(true);
   const [showPreloader, setShowPreloader] = useState(true);
+  const pathname = usePathname();
+  const isFirstLoadRef = useRef(true);
+
+  useEffect(() => {
+    if (isFirstLoadRef.current) {
+      isFirstLoadRef.current = false;
+      return;
+    }
+
+    setIsLoading(true);
+    setShowPreloader(true);
+  }, [pathname]);
 
   // useEffect(() => {
   //   // Check if preloader has been shown in this session
@@ -27,7 +40,6 @@ export function PreloaderProvider({ children }: { children: React.ReactNode }) {
 
   const handlePreloaderComplete = () => {
     setIsLoading(false);
-    sessionStorage.setItem('preloader-shown', 'true');
     // Small delay before removing from DOM
     setTimeout(() => {
       setShowPreloader(false);

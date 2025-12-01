@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -11,13 +12,22 @@ export default function WorkLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="min-h-screen bg-[var(--space-void)] text-[var(--space-star-white)] px-5 py-16 sm:px-10 lg:px-20">
-      <div className="mx-auto flex max-w-5xl flex-col gap-10">
-        <div className="flex items-center justify-between text-xs uppercase tracking-[0.6em] text-[var(--space-red-shift)]">
-          <span>[ WORK ARCHIVE ]</span>
-        </div>
-        <div className="rounded-3xl border border-white/10 bg-white/5 p-6 sm:p-10 backdrop-blur">
-          {children}
+    <div className="relative min-h-screen bg-[var(--space-void)] text-[var(--space-star-white)]">
+      <div className="pointer-events-none fixed inset-0 bg-[radial-gradient(circle_at_top,_rgba(255,255,255,0.08),_transparent_60%)]" />
+      <div className="relative z-10 mx-auto w-full max-w-5xl px-4 py-16 sm:px-10 lg:px-12">
+        <div className="flex flex-col gap-8">
+          <div className="flex flex-col gap-3 text-xs uppercase tracking-[0.6em] text-[var(--space-red-shift)]">
+            <span>[ WORK ARCHIVE ]</span>
+            <Link
+              href="/"
+              className="font-data text-[0.6rem] text-white/50 hover:text-white/80"
+            >
+              ← Back to orbit
+            </Link>
+          </div>
+          <div className="rounded-[2.5rem] border border-white/10 bg-white/5 p-6 sm:p-10 shadow-[0_20px_80px_rgba(0,0,0,0.45)] backdrop-blur-xl">
+            {children}
+          </div>
         </div>
       </div>
     </div>
