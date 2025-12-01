@@ -25,7 +25,7 @@ export default function WorkLayout({
               ← Back to orbit
             </Link>
           </div>
-          <div className="rounded-[2.5rem] border border-white/10 bg-white/5 p-6 sm:p-10 shadow-[0_20px_80px_rgba(0,0,0,0.45)] backdrop-blur-xl">
+          <div className="rounded-[2.5rem] shadow-[0_20px_80px_rgba(0,0,0,0.45)] backdrop-blur-xl">
             {children}
           </div>
         </div>
