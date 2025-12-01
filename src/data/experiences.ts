@@ -6,7 +6,7 @@ export default [{
   duration: 'August 2022 - September 2025',
   jobDescription: [
     'Build and develop responsive web interfaces using Laravel, React, and Next.js, including features for e-commerce, HR, inventory, and payment dashboards.',
-    'Write clean, structured, and maintainable code using modern practices, leveraging Python for automation or additional processing needs.',
+    'Write clean, structured, and maintainable code using modern practices.',
     'Collaborate with backend developers for API integration, feature enhancements, and ensuring performance and cross-device compatibility.',
     'Use Git for version control, debugging, and ensuring an optimal user experience through responsive design and frontend optimization.',
   ],
