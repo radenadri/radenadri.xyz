@@ -1,6 +1,6 @@
 'use client';
 
-import { useLayoutEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Space_Mono, Syncopate } from 'next/font/google';
@@ -11,6 +11,7 @@ import { cn } from '@/lib/utils';
 import experiments from '@/data/experiments';
 import works from '@/data/works';
 import experiences from '@/data/experiences';
+import { useGSAP } from '@gsap/react';
 
 // Configure fonts
 const spaceMono = Space_Mono({
@@ -30,8 +31,8 @@ const PORTRAIT_IMAGE = '/me.jpeg';
 const MARQUEE_SPEED_PX = 80; // pixels per second
 const curatedWorks = works.slice(0, 2);
 
-export default function V2Page() {
-  const scrollWrapperRef = useRef<HTMLDivElement>(null);
+export default function Home() {
+  const pageRef = useRef<HTMLDivElement>(null);
   const marqueeTrackRef = useRef<HTMLDivElement>(null);
   const marqueeTweenRef = useRef<gsap.core.Tween | null>(null);
   const [hoveredExperiment, setHoveredExperiment] = useState<{
@@ -41,131 +42,127 @@ export default function V2Page() {
     y: number;
   } | null>(null);
 
-  useLayoutEffect(() => {
-    // 1. Initialize GSAP & ScrollTrigger
-    gsap.registerPlugin(ScrollTrigger);
+  useGSAP(
+    (context) => {
+      gsap.registerPlugin(ScrollTrigger);
+      const scope = context.scope || pageRef.current;
+      const q = gsap.utils.selector(scope);
 
-    // 2. Initialize Lenis (Smooth Scroll)
-    const lenis = new Lenis({
-      duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      orientation: 'vertical',
-      gestureOrientation: 'vertical',
-      smoothWheel: true,
-      wheelMultiplier: 1,
-      touchMultiplier: 2,
-    });
+      const lenis = new Lenis({
+        duration: 1.2,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        orientation: 'vertical',
+        gestureOrientation: 'vertical',
+        smoothWheel: true,
+        wheelMultiplier: 1,
+        touchMultiplier: 2,
+      });
 
-    // Velocity Skew Effect
-    const proxy = { skew: 0 };
-    const skewSetter = gsap.quickSetter('.skew-content', 'skewY', 'deg');
-    const clamp = gsap.utils.clamp(-5, 5);
+      const proxy = { skew: 0 };
+      const skewTarget = scope?.querySelector('.skew-content');
+      const skewSetter = skewTarget
+        ? gsap.quickSetter(skewTarget, 'skewY', 'deg')
+        : (_value: number) => {};
+      const clamp = gsap.utils.clamp(-5, 5);
 
-    lenis.on('scroll', (e: { velocity: number }) => {
-      ScrollTrigger.update();
-      const skew = clamp(e.velocity / 300);
-      if (Math.abs(skew) > 0.1) {
+      const handleScroll = (e: { velocity: number }) => {
+        ScrollTrigger.update();
+        const skew = clamp(e.velocity / 300);
         gsap.to(proxy, {
-          skew: skew,
+          skew: Math.abs(skew) > 0.1 ? skew : 0,
           duration: 0.8,
           ease: 'power3',
           overwrite: true,
           onUpdate: () => skewSetter(proxy.skew),
         });
-      } else {
-        gsap.to(proxy, {
-          skew: 0,
-          duration: 0.8,
-          ease: 'power3',
-          overwrite: true,
-          onUpdate: () => skewSetter(proxy.skew),
+      };
+
+      lenis.on('scroll', handleScroll);
+
+      let rafId = 0;
+      const raf = (time: number) => {
+        lenis.raf(time);
+        rafId = requestAnimationFrame(raf);
+      };
+      rafId = requestAnimationFrame(raf);
+
+      const heroLines = q('.hero-text-reveal > div');
+      if (heroLines.length) {
+        gsap.timeline().to(heroLines, {
+          y: 0,
+          duration: 1.5,
+          stagger: 0.2,
+          ease: 'power4.out',
+          delay: 0.2,
         });
       }
-    });
 
-    function raf(time: number) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
-    requestAnimationFrame(raf);
-
-    // 3. GSAP Animations
-
-    // Hero Reveal
-    const heroTl = gsap.timeline();
-    heroTl.to('.hero-text-reveal > div', {
-      y: 0,
-      duration: 1.5,
-      stagger: 0.2,
-      ease: 'power4.out',
-      delay: 0.2,
-    });
-
-    // Image Reveal on Scroll
-    const revealImages = document.querySelectorAll('.reveal-img');
-    revealImages.forEach((img) => {
-      ScrollTrigger.create({
-        trigger: img,
-        start: 'top 80%',
-        onEnter: () => img.classList.add('active'),
-        once: true,
+      q('.reveal-img').forEach((img) => {
+        ScrollTrigger.create({
+          trigger: img,
+          start: 'top 80%',
+          onEnter: () => img.classList.add('active'),
+          once: true,
+        });
       });
-    });
 
-    // Parallax Effect
-    const parallaxLayers = document.querySelectorAll('[data-speed]');
-    parallaxLayers.forEach((layer) => {
-      const speed = Number(layer.getAttribute('data-speed'));
-      gsap.to(layer, {
-        y: (_i, _target) => -100 * speed,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: layer,
-          start: 'top bottom',
-          end: 'bottom top',
-          scrub: 0,
-        },
+      q('[data-speed]').forEach((layer) => {
+        const speed = Number(layer.getAttribute('data-speed'));
+        gsap.to(layer, {
+          y: (_i, _target) => -100 * speed,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: layer,
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: 0,
+          },
+        });
       });
-    });
 
-    const marqueeTrack = marqueeTrackRef.current;
-    if (marqueeTrack) {
-      const totalWidth = marqueeTrack.scrollWidth;
-      const contentWidth = totalWidth / 2;
-      const distance = contentWidth;
-      const duration = distance / MARQUEE_SPEED_PX;
-      const wrapX = gsap.utils.wrap(-distance, 0);
+      const marqueeTrack = marqueeTrackRef.current;
+      if (marqueeTrack) {
+        const totalWidth = marqueeTrack.scrollWidth;
+        const contentWidth = totalWidth / 2;
+        const distance = contentWidth;
+        const duration = distance / MARQUEE_SPEED_PX;
+        const wrapX = gsap.utils.wrap(-distance, 0);
 
-      marqueeTweenRef.current = gsap.to(marqueeTrack, {
-        x: `-=${distance}`,
-        duration: Math.max(duration, 10),
-        ease: 'linear',
-        repeat: -1,
-        modifiers: {
-          x: (value) => `${wrapX(parseFloat(value))}px`,
-        },
-      });
-    }
+        marqueeTweenRef.current = gsap.to(marqueeTrack, {
+          x: `-=${distance}`,
+          duration: Math.max(duration, 10),
+          ease: 'linear',
+          repeat: -1,
+          modifiers: {
+            x: (value) => `${wrapX(parseFloat(value))}px`,
+          },
+        });
+      }
 
-    // Loading Bar Animation
-    gsap.to('.loading-bar', {
-      width: '100%',
-      scrollTrigger: {
-        trigger: '.loading-bar',
-        start: 'top 80%',
-        end: 'bottom 20%',
-        scrub: 1,
-      },
-    });
+      const loadingBars = q('.loading-bar');
+      if (loadingBars.length) {
+        gsap.to(loadingBars, {
+          width: '100%',
+          scrollTrigger: {
+            trigger: loadingBars,
+            start: 'top 80%',
+            end: 'bottom 20%',
+            scrub: 1,
+          },
+        });
+      }
 
-    return () => {
-      lenis.destroy();
-      ScrollTrigger.getAll().forEach((t) => {
-        t.kill();
-      });
-      marqueeTweenRef.current?.kill();
-    };
-  }, []);
+      return () => {
+        lenis.destroy();
+        cancelAnimationFrame(rafId);
+        ScrollTrigger.getAll().forEach((t) => {
+          t.kill();
+        });
+        marqueeTweenRef.current?.kill();
+      };
+    },
+    { scope: pageRef }
+  );
 
   const marqueeExperiments = [...experiments, ...experiments];
 
@@ -201,51 +198,13 @@ export default function V2Page() {
 
   return (
     <div
+      ref={pageRef}
       className={cn(
         spaceMono.variable,
         syncopate.variable,
         'bg-[var(--space-void)] text-[var(--space-star-white)] min-h-screen overflow-x-hidden relative selection:bg-[var(--space-red-shift)] selection:text-white'
       )}
     >
-      <style jsx global>{`
-        ::-webkit-scrollbar {
-          width: 0;
-          background: transparent;
-        }
-
-        .outline-text {
-          -webkit-text-stroke: 1px rgba(240, 240, 240, 0.3);
-          color: transparent;
-          transition: all 0.5s ease;
-        }
-
-        .outline-text:hover {
-          -webkit-text-stroke: 1px var(--space-red-shift);
-          color: var(--space-red-shift);
-        }
-
-        .reveal-img {
-          clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0 100%);
-          transition: clip-path 1.2s cubic-bezier(0.19, 1, 0.22, 1);
-        }
-
-        .reveal-img.active {
-          clip-path: polygon(0 100%, 100% 100%, 100% 0, 0 0);
-        }
-
-        .skew-content {
-          will-change: transform;
-        }
-
-        .font-wide {
-          font-family: var(--font-syncopate), 'Syncopate', sans-serif;
-        }
-
-        .font-data {
-          font-family: var(--font-space-mono), 'Space Mono', monospace;
-        }
-      `}</style>
-
       <div
         className="fixed inset-0 w-full h-full pointer-events-none z-50 opacity-50 mix-blend-overlay"
         style={{
@@ -278,7 +237,7 @@ export default function V2Page() {
         </div>
       </nav>
 
-      <div id="smooth-wrapper" ref={scrollWrapperRef}>
+      <div id="smooth-wrapper">
         <div id="smooth-content" className="skew-content">
           <section
             id="home"

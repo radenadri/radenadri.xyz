@@ -63,7 +63,11 @@ export default function RootLayout({
           <PreloaderProvider>
             <SmoothScrollProvider>
               {children}
-              <BackToTop className="fixed bottom-6 right-6 z-50 shadow-[0_0_30px_rgba(255,42,0,0.25)]" />
+              <div className="fixed bottom-6 right-6 availability-pill font-data text-[0.6rem] uppercase tracking-[0.5em] text-[var(--space-star-white)]">
+                <span className="availability-beacon" aria-hidden="true" />
+                <span className="hidden xs:inline">available for work</span>
+                <span className="xs:hidden">available for work</span>
+              </div>
             </SmoothScrollProvider>
           </PreloaderProvider>
         </ThemeProvider>

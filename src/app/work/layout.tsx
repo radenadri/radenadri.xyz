@@ -14,21 +14,23 @@ export default function WorkLayout({
   return (
     <div className="relative min-h-screen bg-[var(--space-void)] text-[var(--space-star-white)]">
       <div className="pointer-events-none fixed inset-0 bg-[radial-gradient(circle_at_top,_rgba(255,255,255,0.08),_transparent_60%)]" />
-      <div className="relative z-10 mx-auto w-full max-w-5xl px-4 py-16 sm:px-10 lg:px-12">
-        <div className="flex flex-col gap-8">
-          <div className="flex flex-col gap-3 text-xs uppercase tracking-[0.6em] text-[var(--space-red-shift)]">
-            <span>[ WORK ARCHIVE ]</span>
+      <div className="relative z-10 flex min-h-screen flex-col">
+        <header className="w-full border-b border-white/5 bg-black/20 backdrop-blur">
+          <div className="mx-auto flex w-full max-w-5xl flex-col gap-2 px-4 py-8 sm:px-10">
+            <p className="text-xs uppercase tracking-[0.6em] text-[var(--space-red-shift)]">
+              [ WORK ARCHIVE ]
+            </p>
             <Link
               href="/"
-              className="font-data text-[0.6rem] text-white/50 hover:text-white/80"
+              className="font-data text-[0.6rem] text-white/60 hover:text-white/90"
             >
-              ← Back to orbit
+              ← Back to home
             </Link>
           </div>
-          <div className="rounded-[2.5rem] shadow-[0_20px_80px_rgba(0,0,0,0.45)] backdrop-blur-xl">
-            {children}
-          </div>
-        </div>
+        </header>
+        <main className="mx-auto w-full max-w-4xl grow px-4 py-12 sm:px-8 lg:px-0">
+          <article className="flex flex-col gap-12">{children}</article>
+        </main>
       </div>
     </div>
   );
