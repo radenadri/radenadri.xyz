@@ -58,15 +58,14 @@ export default function RootLayout({
 }>) {
   return (
     <Layout className={`${spaceMono.variable} ${syncopate.variable}`}>
-      <body className="antialiased">
+      <body className="antialiased overflow-x-hidden">
         <ThemeProvider defaultTheme="system" storageKey="portfolio-theme">
           <PreloaderProvider>
             <SmoothScrollProvider>
               {children}
-              <div className="fixed bottom-6 right-6 availability-pill font-data text-[0.6rem] uppercase tracking-[0.5em] text-[var(--space-star-white)]">
+              <div className="fixed bottom-6 right-6 availability-pill font-data text-[0.55rem] tracking-[0.25em] sm:text-[0.65rem] sm:tracking-[0.4em] uppercase text-[var(--space-star-white)] whitespace-nowrap overflow-hidden">
                 <span className="availability-beacon" aria-hidden="true" />
-                <span className="hidden xs:inline">available for work</span>
-                <span className="xs:hidden">available for work</span>
+                <span>available for work</span>
               </div>
             </SmoothScrollProvider>
           </PreloaderProvider>
