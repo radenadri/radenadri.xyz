@@ -17,15 +17,20 @@ export function PreloaderProvider({ children }: { children: React.ReactNode }) {
   const [showPreloader, setShowPreloader] = useState(true);
   const pathname = usePathname();
   const isFirstLoadRef = useRef(true);
+  const hasCompletedFirstLoad = useRef(false);
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: pathname triggers check on route change
   useEffect(() => {
-    if (isFirstLoadRef.current) {
-      isFirstLoadRef.current = false;
+    // Skip preloader for internal navigation after first load
+    if (hasCompletedFirstLoad.current) {
+      setIsLoading(false);
+      setShowPreloader(false);
       return;
     }
 
-    setIsLoading(true);
-    setShowPreloader(true);
+    if (isFirstLoadRef.current) {
+      isFirstLoadRef.current = false;
+    }
   }, [pathname]);
 
   // useEffect(() => {
@@ -40,6 +45,7 @@ export function PreloaderProvider({ children }: { children: React.ReactNode }) {
 
   const handlePreloaderComplete = () => {
     setIsLoading(false);
+    hasCompletedFirstLoad.current = true;
     // Small delay before removing from DOM
     setTimeout(() => {
       setShowPreloader(false);
@@ -50,9 +56,11 @@ export function PreloaderProvider({ children }: { children: React.ReactNode }) {
     <PreloaderContext.Provider value={{ isLoading }}>
       {showPreloader && <Preloader onComplete={handlePreloaderComplete} />}
       <div
+        className="w-full min-h-screen"
         style={{
           opacity: isLoading ? 0 : 1,
-          transition: 'opacity 0.5s ease-in-out',
+          visibility: isLoading ? 'hidden' : 'visible',
+          transition: 'opacity 0.5s ease-in-out, visibility 0.5s ease-in-out',
         }}
       >
         {children}

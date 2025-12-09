@@ -1,10 +1,8 @@
 import type { Metadata } from 'next';
 import { Space_Mono, Syncopate } from 'next/font/google';
 import { Layout } from '@/components/ds';
-import { SmoothScrollProvider } from '@/components/smooth-scroll-provider';
 import { ThemeProvider } from '@/components/theme-provider';
 import { PreloaderProvider } from '@/components/preloader-provider';
-import { BackToTop } from '@/components/back-to-top';
 import './globals.css';
 
 const spaceMono = Space_Mono({
@@ -61,13 +59,11 @@ export default function RootLayout({
       <body className="antialiased overflow-x-hidden">
         <ThemeProvider defaultTheme="system" storageKey="portfolio-theme">
           <PreloaderProvider>
-            <SmoothScrollProvider>
-              {children}
-              <div className="fixed bottom-6 right-6 availability-pill font-data text-[0.55rem] tracking-[0.25em] sm:text-[0.65rem] sm:tracking-[0.4em] uppercase text-[var(--space-star-white)] whitespace-nowrap overflow-hidden">
-                <span className="availability-beacon" aria-hidden="true" />
-                <span>available for work</span>
-              </div>
-            </SmoothScrollProvider>
+            {children}
+            <div className="fixed bottom-6 right-6 availability-pill font-data text-[0.55rem] tracking-[0.25em] sm:text-[0.65rem] sm:tracking-[0.4em] uppercase text-[var(--space-star-white)] whitespace-nowrap overflow-hidden">
+              <span className="availability-beacon" aria-hidden="true" />
+              <span>available for work</span>
+            </div>
           </PreloaderProvider>
         </ThemeProvider>
       </body>

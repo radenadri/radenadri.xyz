@@ -12,9 +12,12 @@ export default function WorkLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="relative min-h-screen bg-[var(--space-void)] text-[var(--space-star-white)]">
+    <div
+      className="relative min-h-screen w-full overflow-x-hidden bg-[var(--space-void)] text-[var(--space-star-white)]"
+      style={{ scrollBehavior: 'auto' }}
+    >
       <div className="pointer-events-none fixed inset-0 bg-[radial-gradient(circle_at_top,_rgba(255,255,255,0.08),_transparent_60%)]" />
-      <div className="relative z-10 flex min-h-screen flex-col">
+      <div className="relative z-10 flex min-h-screen w-full flex-col">
         <header className="w-full border-b border-white/5 bg-black/20 backdrop-blur">
           <div className="mx-auto flex w-full max-w-5xl flex-col gap-2 px-4 py-8 sm:px-10">
             <p className="text-xs uppercase tracking-[0.6em] text-[var(--space-red-shift)]">
@@ -29,7 +32,7 @@ export default function WorkLayout({
           </div>
         </header>
         <main className="mx-auto w-full max-w-4xl grow px-4 py-12 sm:px-8 lg:px-0">
-          <article className="flex flex-col gap-12">{children}</article>
+          <article className="flex w-full flex-col gap-12">{children}</article>
         </main>
       </div>
     </div>
