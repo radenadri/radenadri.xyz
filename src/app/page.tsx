@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Space_Mono, Syncopate } from 'next/font/google';
@@ -8,9 +8,9 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Lenis from 'lenis';
 import { cn } from '@/lib/utils';
-import experiments from '@/data/experiments';
 import works from '@/data/works';
 import experiences from '@/data/experiences';
+import techStack from '@/data/tech-stack';
 import { useGSAP } from '@gsap/react';
 
 // Configure fonts
@@ -29,18 +29,12 @@ const syncopate = Syncopate({
 const HERO_COORDINATES = '6.9175° S, 107.6191° E';
 const PORTRAIT_IMAGE = '/me.jpeg';
 const MARQUEE_SPEED_PX = 80; // pixels per second
-const curatedWorks = works.slice(0, 2);
 
 export default function Home() {
   const pageRef = useRef<HTMLDivElement>(null);
   const marqueeTrackRef = useRef<HTMLDivElement>(null);
   const marqueeTweenRef = useRef<gsap.core.Tween | null>(null);
-  const [hoveredExperiment, setHoveredExperiment] = useState<{
-    title: string;
-    description: string;
-    x: number;
-    y: number;
-  } | null>(null);
+  const marqueeTechStack = [...techStack, ...techStack];
 
   useGSAP(
     (context) => {
@@ -163,38 +157,6 @@ export default function Home() {
     },
     { scope: pageRef }
   );
-
-  const marqueeExperiments = [...experiments, ...experiments];
-
-  function handleExperimentEnter(
-    experiment: { title: string; description: string },
-    event: React.MouseEvent<HTMLAnchorElement>
-  ) {
-    marqueeTweenRef.current?.pause();
-    setHoveredExperiment({
-      title: experiment.title,
-      description: experiment.description,
-      x: event.clientX,
-      y: event.clientY,
-    });
-  }
-
-  function handleExperimentMove(event: React.MouseEvent<HTMLAnchorElement>) {
-    setHoveredExperiment((prev) =>
-      prev
-        ? {
-            ...prev,
-            x: event.clientX,
-            y: event.clientY,
-          }
-        : prev
-    );
-  }
-
-  function handleExperimentLeave() {
-    marqueeTweenRef.current?.resume();
-    setHoveredExperiment(null);
-  }
 
   return (
     <div
@@ -352,61 +314,45 @@ export default function Home() {
             <div className="px-4 md:px-10 flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-10">
               <div>
                 <p className="font-data mb-2 text-xs tracking-[0.5em] text-[var(--space-red-shift)]">
-                  [ EXPERIMENT LOG ]
+                  [ TECH STACK ]
                 </p>
                 <h2 className="font-wide text-3xl md:text-5xl uppercase leading-tight">
-                  Creative Payload Stream
+                  Tools I Use
                 </h2>
               </div>
               <p className="font-data text-sm text-[var(--space-void)]/70 max-w-sm">
-                Tap into the link to see what i've been trying to create and
-                what i've been trying to learn.
+                The technologies and frameworks I use to bring ideas to life.
               </p>
             </div>
             <div
               ref={marqueeTrackRef}
               className="marquee-track flex whitespace-nowrap"
             >
-              {marqueeExperiments.map((experiment, index) => (
-                <a
-                  key={`${experiment.title}-${index}`}
-                  href={experiment.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="marquee-item inline-flex items-center gap-3 font-wide text-[clamp(1.5rem,6vw,4.5rem)] font-bold uppercase tracking-tight py-4 hover:text-[var(--space-red-shift)] transition-colors"
-                  onMouseEnter={(event) =>
-                    handleExperimentEnter(experiment, event)
-                  }
-                  onMouseMove={handleExperimentMove}
-                  onMouseLeave={handleExperimentLeave}
+              {marqueeTechStack.map((tech, index) => (
+                <div
+                  key={`${tech.name}-${index}`}
+                  className="marquee-item inline-flex items-center gap-4 px-6 py-4"
                 >
-                  <span>{experiment.title}</span>
+                  <Image
+                    src={tech.icon}
+                    alt={tech.name}
+                    width={48}
+                    height={48}
+                    unoptimized
+                    className="w-10 h-10 md:w-12 md:h-12 object-contain"
+                  />
+                  <span className="font-wide text-[clamp(1.25rem,4vw,3rem)] font-bold uppercase tracking-tight">
+                    {tech.name}
+                  </span>
                   <span
-                    className="mx-6 text-[var(--space-void)]"
+                    className="mx-4 text-[var(--space-void)]/30"
                     aria-hidden="true"
                   >
-                    —
+                    •
                   </span>
-                </a>
+                </div>
               ))}
             </div>
-
-            {hoveredExperiment ? (
-              <div
-                className="fixed z-50 max-w-xs rounded-lg border border-[var(--space-void)] bg-[var(--space-void)]/90 p-4 font-data text-sm text-[var(--space-star-white)] shadow-lg"
-                style={{
-                  left: hoveredExperiment.x + 16,
-                  top: hoveredExperiment.y + 16,
-                }}
-              >
-                <p className="font-bold text-[var(--space-red-shift)] uppercase text-xs tracking-widest">
-                  {hoveredExperiment.title}
-                </p>
-                <p className="mt-2 text-[var(--space-star-white)]/80">
-                  {hoveredExperiment.description}
-                </p>
-              </div>
-            ) : null}
           </section>
 
           <section className="min-h-screen w-full py-32 px-4 md:px-10 bg-[var(--space-void)] text-[var(--space-star-white)] relative">
@@ -423,59 +369,54 @@ export default function Home() {
                 Things I've done, things I've seen, things I've created.
               </p>
             </div>
-            <div className="flex flex-col md:flex-row gap-20 items-start">
-              {curatedWorks[0] ? (
-                <Link
-                  href={`/work/${curatedWorks[0].slug}`}
-                  className="group w-full md:w-1/3 mt-0 md:mt-20"
-                >
-                  <div className="border-t border-gray-700 py-4 flex justify-between font-data text-xs text-[var(--space-red-shift)]">
-                    <span>FIG. A</span>
-                    <span>[ {curatedWorks[0].title.toUpperCase()} ]</span>
-                  </div>
-                  <div className="aspect-[3/4] overflow-hidden">
-                    <Image
-                      src={curatedWorks[0].coverImage}
-                      alt={curatedWorks[0].title}
-                      width={1200}
-                      height={1600}
-                      unoptimized
-                      className="w-full h-full object-cover reveal-img transition-transform duration-700 grayscale group-hover:grayscale-0"
-                    />
-                  </div>
-                  <h3 className="font-wide text-3xl mt-4 group-hover:text-[var(--space-red-shift)] transition-colors">
-                    {curatedWorks[0].title}
-                  </h3>
-                </Link>
-              ) : null}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 md:gap-12">
+              {works.map((work, index) => {
+                const isEven = index % 2 === 0;
+                const figLabel = String.fromCharCode(65 + index);
+                const accentColor = isEven
+                  ? 'var(--space-red-shift)'
+                  : 'var(--space-blue-shift)';
+                const aspectRatio = isEven ? 'aspect-[3/4]' : 'aspect-square';
 
-              {curatedWorks[1] ? (
-                <Link
-                  href={`/work/${curatedWorks[1].slug}`}
-                  className="group w-full md:w-5/12"
-                >
-                  <div className="border-t border-gray-700 py-4 flex justify-between font-data text-xs text-[var(--space-blue-shift)]">
-                    <span>FIG. B</span>
-                    <span>[ {curatedWorks[1].title.toUpperCase()} ]</span>
-                  </div>
-                  <div className="aspect-square overflow-hidden">
-                    <Image
-                      src={curatedWorks[1].coverImage}
-                      alt={curatedWorks[1].title}
-                      width={1200}
-                      height={1200}
-                      unoptimized
-                      className="w-full h-full object-cover reveal-img transition-transform duration-700 grayscale group-hover:grayscale-0"
-                    />
-                  </div>
-                  <h3 className="font-wide text-3xl mt-4 group-hover:text-[var(--space-blue-shift)] transition-colors">
-                    {curatedWorks[1].title}
-                  </h3>
-                  {/* <p className="font-data text-sm text-gray-500 mt-2 line-clamp-2">
-                    {curatedWorks[1].subtitle ?? 'Case study available.'}
-                  </p> */}
-                </Link>
-              ) : null}
+                return (
+                  <Link
+                    key={work.slug}
+                    href={`/work/${work.slug}`}
+                    className={cn(
+                      'group w-full',
+                      isEven ? 'md:mt-10' : 'md:mt-0'
+                    )}
+                  >
+                    <div
+                      className="border-t border-gray-700 py-4 flex justify-between font-data text-xs"
+                      style={{ color: accentColor }}
+                    >
+                      <span>FIG. {figLabel}</span>
+                      <span>[ {work.title.toUpperCase()} ]</span>
+                    </div>
+                    <div className={cn(aspectRatio, 'overflow-hidden')}>
+                      <Image
+                        src={work.coverImage}
+                        alt={work.title}
+                        width={1200}
+                        height={isEven ? 1600 : 1200}
+                        unoptimized
+                        className="w-full h-full object-cover reveal-img transition-transform duration-700 grayscale group-hover:grayscale-0"
+                      />
+                    </div>
+                    <h3
+                      className="font-wide text-2xl md:text-3xl mt-4 transition-colors"
+                      style={
+                        { '--hover-color': accentColor } as React.CSSProperties
+                      }
+                    >
+                      <span className="group-hover:text-[var(--hover-color)]">
+                        {work.title}
+                      </span>
+                    </h3>
+                  </Link>
+                );
+              })}
             </div>
           </section>
 
