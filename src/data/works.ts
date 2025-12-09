@@ -52,18 +52,4 @@ export default [
     slug: 'simple-frs',
     description: 'A simple face recognition system created last year to support daily activities for internal operations in the office.',
     coverImage: '/viz/frs-cover.png',
-  },
-  {
-    title: 'Flutter Gemini Chat',
-    slug: 'flutter-gemini-chat',
-    description: 'Gemini Chat is a simple app that i build using Flutter and Gemini API. It is a proof of concept about how talk with LLM using Flutter.',
-    coverImage: '/viz/flutter-gemini-cover.png',
-  },
-  {
-    title: 'SWAPI',
-    slug: 'swapi',
-    description: 'Last two year i was learning about Flutter and i build this app to practice my Flutter skills. It is a simple app that show character info from Star Wars API.',
-    coverImage: '/viz/swapi-cover.png',
-  },
-
-]
+  }]
