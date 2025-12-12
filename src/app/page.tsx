@@ -253,7 +253,7 @@ export default function Home() {
                 </span>
               </h2>
               <p className="font-data text-lg text-[var(--space-gray-400)] max-w-md leading-relaxed">
-                Frontend Developer based in Bandung, Indonesia. Trying to find a
+                Web Developer based in Bandung, Indonesia. Trying to find a
                 balance between functionality and aesthetics. Always learning
                 and exploring new technologies.
               </p>

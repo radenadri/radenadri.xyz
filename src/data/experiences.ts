@@ -1,6 +1,6 @@
 export default [{
   company: 'Self Employed',
-  position: 'Freelance Frontend Developer',
+  position: 'Freelance Web Developer',
   links: '#',
   location: 'Bandung, Indonesia',
   duration: 'September 2025 - Now',
@@ -12,7 +12,7 @@ export default [{
   ],
 }, {
   company: 'PT. Pentacode Digital',
-  position: 'Frontend Developer',
+  position: 'Web Developer',
   links: 'https://pentacode.id',
   location: 'Bandung, Indonesia',
   duration: 'August 2022 - September 2025',
