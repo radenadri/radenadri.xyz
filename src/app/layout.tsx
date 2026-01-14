@@ -60,10 +60,6 @@ export default function RootLayout({
         <ThemeProvider defaultTheme="system" storageKey="portfolio-theme">
           <PreloaderProvider>
             {children}
-            <div className="fixed bottom-6 right-6 availability-pill font-data text-[0.55rem] tracking-[0.25em] sm:text-[0.65rem] sm:tracking-[0.4em] uppercase text-[var(--space-star-white)] whitespace-nowrap overflow-hidden">
-              <span className="availability-beacon" aria-hidden="true" />
-              <span>available for work</span>
-            </div>
           </PreloaderProvider>
         </ThemeProvider>
       </body>

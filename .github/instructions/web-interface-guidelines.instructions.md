@@ -1,5 +1,5 @@
 ---
-trigger: always_on
+applyTo: '**'
 ---
 
 Concise rules for building accessible, fast, delightful UIs Use MUST/SHOULD/NEVER to guide decisions

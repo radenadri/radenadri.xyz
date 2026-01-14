@@ -1,5 +1,18 @@
 import Link from 'next/link';
 import type { Metadata } from 'next';
+import { Inter, Instrument_Serif } from 'next/font/google';
+import { cn } from '@/lib/utils';
+
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-inter',
+});
+
+const instrumentSerif = Instrument_Serif({
+  subsets: ['latin'],
+  weight: ['400'],
+  variable: '--font-instrument-serif',
+});
 
 export const metadata: Metadata = {
   title: 'Work — Adriana Eka Prayudha',
@@ -13,27 +26,53 @@ export default function WorkLayout({
 }) {
   return (
     <div
-      className="relative min-h-screen w-full overflow-x-hidden bg-[var(--space-void)] text-[var(--space-star-white)]"
-      style={{ scrollBehavior: 'auto' }}
+      className={cn(
+        inter.variable,
+        instrumentSerif.variable,
+        'font-body relative min-h-screen w-full overflow-x-hidden bg-[var(--cream)] text-[var(--text-primary)]'
+      )}
     >
-      <div className="pointer-events-none fixed inset-0 bg-[radial-gradient(circle_at_top,_rgba(255,255,255,0.08),_transparent_60%)]" />
+      {/* Subtle background pattern */}
+      <div className="pointer-events-none fixed inset-0 opacity-30">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_var(--green-light),_transparent_50%)]" />
+      </div>
+
       <div className="relative z-10 flex min-h-screen w-full flex-col">
-        <header className="w-full border-b border-white/5 bg-black/20 backdrop-blur">
-          <div className="mx-auto flex w-full max-w-5xl flex-col gap-2 px-4 py-8 sm:px-10">
-            <p className="text-xs uppercase tracking-[0.6em] text-[var(--space-red-shift)]">
-              [ WORK ARCHIVE ]
-            </p>
+        {/* Header */}
+        <header className="sticky top-0 w-full border-b border-[var(--border-light)] bg-[var(--cream)]/80 backdrop-blur-md z-50">
+          <div className="mx-auto flex w-full max-w-4xl items-center justify-between px-4 py-4 sm:px-8">
             <Link
               href="/"
-              className="font-data text-[0.6rem] text-white/60 hover:text-white/90"
+              className="flex items-center gap-2 text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"
             >
-              ← Back to home
+              <span>←</span>
+              <span>Back to home</span>
             </Link>
+            <span className="text-xs font-medium text-[var(--green-primary)] uppercase tracking-wider">
+              Case Study
+            </span>
           </div>
         </header>
+
+        {/* Main Content */}
         <main className="mx-auto w-full max-w-4xl grow px-4 py-12 sm:px-8 lg:px-0">
           <article className="flex w-full flex-col gap-12">{children}</article>
         </main>
+
+        {/* Footer */}
+        <footer className="border-t border-[var(--border-light)] py-8">
+          <div className="mx-auto max-w-4xl px-4 sm:px-8 flex items-center justify-between">
+            <Link
+              href="/#works"
+              className="text-sm text-[var(--text-secondary)] hover:text-[var(--green-primary)] transition-colors"
+            >
+              ← View all works
+            </Link>
+            <p className="text-xs text-[var(--text-muted)]">
+              radenadri.xyz
+            </p>
+          </div>
+        </footer>
       </div>
     </div>
   );
