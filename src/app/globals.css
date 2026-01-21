@@ -1,4 +1,5 @@
 @import 'tailwindcss';
+@import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -41,6 +42,28 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+  --animate-marquee: marquee var(--duration) infinite linear;
+  --animate-marquee-vertical: marquee-vertical var(--duration) linear infinite;
+
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+
+    to {
+      transform: translateX(calc(-100% - var(--gap)));
+    }
+  }
+
+  @keyframes marquee-vertical {
+    from {
+      transform: translateY(0);
+    }
+
+    to {
+      transform: translateY(calc(-100% - var(--gap)));
+    }
+  }
 }
 
 :root {
@@ -507,4 +530,94 @@
 
 .glow-hover:hover {
   box-shadow: 0 0 30px rgba(74, 124, 89, 0.4);
+}
+
+/* Work Experience Component Theming */
+.experience-themed {
+  --background: white;
+  --muted: var(--cream-dark);
+  --muted-foreground: var(--text-secondary);
+  --foreground: var(--text-primary);
+  --border: var(--border-light);
+  --info: var(--green-primary);
+}
+
+.experience-themed h3 {
+  color: var(--text-primary);
+}
+
+.experience-themed h4 {
+  color: var(--text-primary);
+}
+
+/* Prose/description styling - clean without background */
+.experience-themed [class*="prose"] {
+  font-family: var(--font-inter);
+  background: transparent !important;
+}
+
+.experience-themed [class*="prose"] ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.experience-themed [class*="prose"] li {
+  position: relative;
+  padding-left: 1rem;
+  margin-bottom: 0.5rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.experience-themed [class*="prose"] li::before {
+  content: "–";
+  position: absolute;
+  left: 0;
+  color: var(--green-primary);
+  font-weight: 500;
+}
+
+/* Skill tags in experience - subtle styling */
+.experience-themed span[class*="rounded-lg"][class*="border"] {
+  background: var(--cream-dark);
+  border-color: var(--border-light);
+  color: var(--text-secondary);
+  font-family: var(--font-inter);
+}
+
+.experience-themed span[class*="rounded-lg"][class*="border"]:hover {
+  background: var(--green-light);
+  color: var(--green-dark);
+  border-color: transparent;
+}
+
+/* Current employer ping animation */
+.experience-themed [class*="animate-ping"] {
+  background: var(--green-primary);
+}
+
+.experience-themed [class*="bg-info"] {
+  background: var(--green-primary);
+}
+
+/* Collapsible icon container - subtle */
+.experience-themed [class*="bg-muted"][class*="rounded-lg"] {
+  background: var(--cream-dark);
+  color: var(--text-secondary);
+}
+
+/* Remove green from prose background */
+.experience-themed [class*="bg-muted/50"] {
+  background: transparent;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
 }

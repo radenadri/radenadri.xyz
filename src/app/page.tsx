@@ -4,11 +4,16 @@ import { useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Inter, Instrument_Serif } from 'next/font/google';
+import { Home as HomeIcon, Briefcase, FolderOpen, Mail, FileText } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import works from '@/data/works';
 import experiences from '@/data/experiences';
 import techStack from '@/data/tech-stack';
 import { AnimatedElement, AnimatedText } from '@/components/animated-element';
+import { StackBento, StackBentoCard } from '@/components/stack-bento';
+import { WorkExperience, type ExperienceItemType } from '@/components/ui/work-experience';
+import { Marquee } from '@/components/ui/marquee';
+import { Dock, DockIcon } from '@/components/ui/dock';
 
 // Configure fonts
 const inter = Inter({
@@ -69,7 +74,7 @@ export default function Home() {
           {/* Logo/Avatar */}
           <AnimatedElement animation="fadeIn" duration={0.8}>
             <div className="mb-8 flex justify-center">
-              <div className="relative animate-float-slow">
+              <div className="relative">
                 <div className="aspect-square rounded-full overflow-hidden border-2 border-[var(--border-light)] glow-hover w-20 h-20">
                   <Image
                     src={PORTRAIT_IMAGE}
@@ -118,6 +123,65 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Tech Stack Marquee - Powered By */}
+      <section className="py-12 overflow-hidden container max-w-3xl mx-auto bg-[var(--cream)]">
+        <AnimatedElement animation="fadeIn" duration={0.8}>
+          <div className="text-center mb-8">
+            <p className="text-sm font-medium tracking-wider text-[var(--text-muted)] uppercase">
+              Tools i use to build my projects
+            </p>
+          </div>
+        </AnimatedElement>
+
+        <div className="relative">
+          {/* Gradient Overlays */}
+          <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-24 bg-gradient-to-r from-[var(--cream)] to-transparent" />
+          <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-24 bg-gradient-to-l from-[var(--cream)] to-transparent" />
+
+          {/* First Row - Forward */}
+          <Marquee className="[--duration:30s] mb-4" pauseOnHover>
+            {techStack.map((tech) => (
+              <div
+                key={tech.name}
+                className="flex items-center gap-3 px-5 py-3 rounded-full bg-white border border-[var(--border-light)] shadow-sm hover:shadow-md hover:border-[var(--green-primary)]/30 transition-all duration-300 group"
+              >
+                <Image
+                  src={tech.icon}
+                  alt={tech.name}
+                  width={24}
+                  height={24}
+                  className="w-6 h-6 object-contain group-hover:scale-110 transition-transform"
+                />
+                <span className="text-sm font-medium text-[var(--text-primary)] whitespace-nowrap">
+                  {tech.name}
+                </span>
+              </div>
+            ))}
+          </Marquee>
+
+          {/* Second Row - Reverse */}
+          <Marquee className="[--duration:35s]" pauseOnHover reverse>
+            {[...techStack].reverse().map((tech) => (
+              <div
+                key={`${tech.name}-reverse`}
+                className="flex items-center gap-3 px-5 py-3 rounded-full bg-[var(--cream-dark)] border border-[var(--border-light)] hover:bg-white hover:shadow-md hover:border-[var(--green-primary)]/30 transition-all duration-300 group"
+              >
+                <Image
+                  src={tech.icon}
+                  alt={tech.name}
+                  width={24}
+                  height={24}
+                  className="w-6 h-6 object-contain grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all"
+                />
+                <span className="text-sm font-medium text-[var(--text-secondary)] group-hover:text-[var(--text-primary)] whitespace-nowrap transition-colors">
+                  {tech.name}
+                </span>
+              </div>
+            ))}
+          </Marquee>
+        </div>
+      </section>
+
       {/* Features/About Section */}
       <section id="features" className="py-24 px-4 md:px-8">
         <div className="mx-auto max-w-6xl">
@@ -126,42 +190,44 @@ export default function Home() {
             <div className="text-center mb-16">
               <h2 className="font-heading text-4xl md:text-5xl mb-4">My Stack</h2>
               <p className="text-[var(--text-secondary)] max-w-xl mx-auto">
-                The tools I use to bring ideas to life
+                The tools I use to bring ideas to reality
               </p>
             </div>
           </AnimatedElement>
 
-          {/* Bento Grid Layout */}
-          <AnimatedElement animation="stagger" duration={0.8}>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {/* Magic Bento Grid Layout */}
+          <AnimatedElement animation="fadeIn" duration={0.8} delay={0.2}>
+            <StackBento enableSpotlight enableBorderGlow>
               {/* Main Card - Fullstack */}
-              <div className="md:col-span-2 p-8 rounded-2xl border border-[var(--border-light)] bg-white relative overflow-hidden group hover-spring">
-                <div className="absolute top-0 right-0 w-32 h-32 bg-[var(--green-light)] rounded-full blur-3xl opacity-50 group-hover:opacity-70 transition-opacity animate-blob" />
-                <span className="inline-block px-3 py-1 text-xs font-medium bg-[var(--green-light)] text-[var(--green-dark)] rounded-full mb-4">
+              <StackBentoCard
+                colSpan={2}
+                className="p-8 rounded-2xl border border-[var(--border-light)] bg-white group hover:shadow-lg transition-all duration-300"
+              >
+                <div className="absolute top-0 right-0 w-32 h-32 bg-[var(--green-light)] rounded-full blur-3xl opacity-40 group-hover:opacity-60 transition-opacity animate-blob" />
+                <span className="inline-block px-3 py-1 text-xs font-medium bg-[var(--green-light)] text-[var(--green-dark)] rounded-full mb-4 relative z-10">
                   Primary Stack
                 </span>
-                <h3 className="font-heading text-3xl md:text-4xl mb-3">
-                  Laravel + React
+                <h3 className="font-heading text-3xl md:text-4xl mb-3 relative z-10">
+                  Laravel
                 </h3>
-                <p className="text-[var(--text-secondary)] mb-6 max-w-md">
-                  Building fullstack applications with Laravel backend and React frontend, connected seamlessly with <span className="highlight">Inertia.js</span> for a modern SPA experience.
+                <p className="text-[var(--text-secondary)] mb-6 max-w-md relative z-10">
+                  Building fullstack applications with Laravel backend and React frontend, connected seamlessly with Inertia.js for a modern SPA experience. And also familiar with TALL stack for rapid development.
                 </p>
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-2 relative z-10">
                   <span className="badge badge-green">Laravel</span>
                   <span className="badge badge-green">React</span>
                   <span className="badge badge-green">Inertia.js</span>
-                  <span className="badge badge-green">Next.js</span>
+                  <span className="badge badge-green">Tailwind CSS</span>
+                  <span className="badge badge-green">Alpine.js</span>
+                  <span className="badge badge-green">Livewire</span>
                   <span className="badge badge-green">Bun</span>
                   <span className="badge badge-green">TypeScript</span>
                 </div>
-              </div>
+              </StackBentoCard>
 
               {/* CMS Card */}
-              <div className="p-6 rounded-2xl border border-[var(--border-light)] bg-[var(--cream-dark)] flex flex-col justify-between group hover:bg-white transition-colors hover-spring">
+              <StackBentoCard className="p-6 rounded-2xl border border-[var(--border-light)] bg-[var(--cream-dark)] flex flex-col justify-between group hover:bg-white transition-all duration-300 hover:shadow-lg">
                 <div>
-                  <div className="w-12 h-12 rounded-xl bg-[var(--yellow-highlight)] flex items-center justify-center mb-4 text-2xl animate-float-delay">
-                    ⚡
-                  </div>
                   <h3 className="font-heading text-2xl mb-2">CMS & Headless CMS</h3>
                   <p className="text-sm text-[var(--text-secondary)]">
                     WordPress and Payload for flexible content management.
@@ -171,10 +237,10 @@ export default function Home() {
                   <span className="badge badge-outline text-xs">WordPress</span>
                   <span className="badge badge-outline text-xs">Payload</span>
                 </div>
-              </div>
+              </StackBentoCard>
 
               {/* Mobile Development Card */}
-              <div className="p-6 rounded-2xl border border-[var(--border-light)] bg-[var(--cream-dark)] flex flex-col justify-between group hover:bg-white transition-colors hover-spring">
+              <StackBentoCard className="p-6 rounded-2xl border border-[var(--border-light)] bg-[var(--cream-dark)] flex flex-col justify-between group hover:bg-white transition-all duration-300 hover:shadow-lg">
                 <div>
                   <h3 className="font-heading text-2xl mb-2">Mobile Development</h3>
                   <p className="text-sm text-[var(--text-secondary)]">
@@ -185,10 +251,10 @@ export default function Home() {
                   <span className="badge badge-outline text-xs">React Native</span>
                   <span className="badge badge-outline text-xs">Flutter</span>
                 </div>
-              </div>
+              </StackBentoCard>
 
               {/* Other Tools - Wide Card */}
-              <div className="md:col-span-2 p-6 rounded-2xl border border-[var(--border-light)] bg-white hover-spring">
+              <StackBentoCard colSpan={2} className="p-6 rounded-2xl border border-[var(--border-light)] bg-white group hover:shadow-lg transition-all duration-300">
                 <div className="flex flex-col md:flex-row md:items-center gap-6">
                   <div className="flex-1">
                     <h3 className="font-heading text-xl mb-2">Other Tools</h3>
@@ -204,15 +270,15 @@ export default function Home() {
                     <span className="badge badge-green">Sentry</span>
                   </div>
                 </div>
-              </div>
-            </div>
+              </StackBentoCard>
+            </StackBento>
           </AnimatedElement>
         </div>
       </section>
 
       {/* Use Cases/Works Section */}
       <section id="works" className="py-24 px-4 md:px-8 bg-[var(--cream-dark)]">
-        <div className="mx-auto max-w-6xl">
+        <div className="mx-auto max-w-4xl">
           {/* Section Header */}
           <AnimatedElement animation="slideUp" duration={0.8}>
             <div className="text-center mb-16">
@@ -223,54 +289,100 @@ export default function Home() {
             </div>
           </AnimatedElement>
 
-          {/* Simple Grid Layout */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {works.map((work, index) => (
-              <AnimatedElement
-                key={work.slug}
-                animation="slideUp"
-                delay={index * 0.1}
-                duration={0.8}
-              >
-                <Link
-                  href={`/work/${work.slug}`}
-                  className="group block"
-                >
-                  {/* Image Container */}
-                  <div className="aspect-[3/4] rounded-2xl overflow-hidden bg-white border border-[var(--border-light)] mb-4 hover-spring">
-                    <Image
-                      src={work.coverImage}
-                      alt={work.title}
-                      width={600}
-                      height={450}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-                  </div>
+          {/* Clients Section */}
+          <AnimatedElement animation="slideUp" delay={0.1} duration={0.8}>
+            <div className="mb-12">
+              <p className="text-sm text-[var(--text-muted)] mb-4">Clients</p>
+              <div className="rounded-2xl border border-[var(--border-light)] bg-white overflow-hidden divide-y divide-[var(--border-light)]">
+                <div className="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-[var(--border-light)]">
+                  {works
+                    .filter((work) => work.type === 'clients')
+                    .map((work, index, arr) => (
+                      <Link
+                        key={work.slug}
+                        href={`/work/${work.slug}`}
+                        className={cn(
+                          'flex items-center gap-3 px-5 py-4 hover:bg-[var(--cream-dark)] transition-colors group',
+                          index % 2 === 1 && index === arr.length - 1 && arr.length % 2 === 0 ? '' : '',
+                          index >= 2 ? 'md:border-t md:border-[var(--border-light)]' : ''
+                        )}
+                      >
+                        <svg
+                          className="w-4 h-4 text-[var(--text-muted)] group-hover:text-[var(--green-primary)] transition-colors flex-shrink-0"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                          strokeWidth={2}
+                        >
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M7 17L17 7M17 7H7M17 7V17" />
+                        </svg>
+                        <span className="font-heading text-lg group-hover:text-[var(--green-primary)] transition-colors">
+                          {work.title}
+                        </span>
+                      </Link>
+                    ))}
+                </div>
+              </div>
+            </div>
+          </AnimatedElement>
 
-                  {/* Content */}
-                  <div className="flex items-start justify-between gap-3">
-                    <div>
-                      <h3 className="font-heading text-xl mb-1 group-hover:text-[var(--green-primary)] transition-colors underline-reveal">
-                        {work.title}
-                      </h3>
-                      <p className="text-sm text-[var(--text-secondary)] line-clamp-2">
-                        {work.description}
-                      </p>
-                    </div>
-                  </div>
-                </Link>
-              </AnimatedElement>
-            ))}
-          </div>
+          {/* Side Projects Section */}
+          <AnimatedElement animation="slideUp" delay={0.2} duration={0.8}>
+            <div>
+              <p className="text-sm text-[var(--text-muted)] mb-4">Side Projects</p>
+              <div className="rounded-2xl border border-[var(--border-light)] bg-white overflow-hidden">
+                <div className="grid grid-cols-1 md:grid-cols-2">
+                  {works
+                    .filter((work) => work.type === 'projects')
+                    .map((work, index, arr) => (
+                      <Link
+                        key={work.slug}
+                        href={`/work/${work.slug}`}
+                        className={cn(
+                          'flex items-center justify-between gap-3 px-5 py-4 hover:bg-[var(--cream-dark)] transition-colors group',
+                          'border-b border-[var(--border-light)] md:border-b-0',
+                          index % 2 === 0 ? 'md:border-r md:border-[var(--border-light)]' : '',
+                          index >= 2 ? 'md:border-t md:border-[var(--border-light)]' : '',
+                          index === arr.length - 1 ? 'border-b-0' : ''
+                        )}
+                      >
+                        <div className="flex items-center gap-3">
+                          <svg
+                            className="w-4 h-4 text-[var(--text-muted)] group-hover:text-[var(--green-primary)] transition-colors flex-shrink-0"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            strokeWidth={2}
+                          >
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M7 17L17 7M17 7H7M17 7V17" />
+                          </svg>
+                          <span className="font-heading text-lg group-hover:text-[var(--green-primary)] transition-colors">
+                            {work.title}
+                          </span>
+                        </div>
+                        {/* GitHub Icon */}
+                        <svg
+                          className="w-5 h-5 text-[var(--text-muted)] group-hover:text-[var(--green-primary)] transition-colors flex-shrink-0"
+                          fill="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                        </svg>
+                      </Link>
+                    ))}
+                </div>
+              </div>
+            </div>
+          </AnimatedElement>
         </div>
       </section>
 
       {/* Experience Section */}
-      <section id="experience" className="py-24 px-4 md:px-8">
-        <div className="mx-auto max-w-4xl">
+      <section id="experience" className="py-24 px-4 md:px-8 bg-[var(--cream)]">
+        <div className="mx-auto max-w-3xl">
           {/* Section Header */}
           <AnimatedElement animation="slideUp" duration={0.8}>
-            <div className="text-center mb-16">
+            <div className="text-center mb-12">
               <h2 className="font-heading text-4xl md:text-5xl mb-4">Experience</h2>
               <p className="text-[var(--text-secondary)] max-w-xl mx-auto">
                 My professional journey so far
@@ -278,102 +390,30 @@ export default function Home() {
             </div>
           </AnimatedElement>
 
-          {/* Timeline */}
-          <div className="relative">
-            {/* Timeline Line */}
-            <div className="absolute left-0 md:left-1/2 top-0 bottom-0 w-px bg-[var(--border-light)] md:-translate-x-1/2" />
-
-            {experiences.map((experience, index) => (
-              <AnimatedElement
-                key={`${experience.company}-${experience.position}`}
-                animation="slideUp"
-                delay={index * 0.2}
-                duration={0.8}
-              >
-                <div
-                  className={cn(
-                    'relative mb-12 last:mb-0',
-                    'md:w-1/2',
-                    index % 2 === 0 ? 'md:pr-12 md:ml-0' : 'md:pl-12 md:ml-auto'
-                  )}
-                >
-                  {/* Timeline Dot */}
-                  <div className={cn(
-                    'absolute top-0 w-4 h-4 rounded-full border-4 border-[var(--cream)] z-10',
-                    index === 0 ? 'bg-[var(--green-primary)] animate-gentle-pulse' : 'bg-[var(--border-medium)]',
-                    'left-0 -translate-x-1/2',
-                    'md:left-auto',
-                    index % 2 === 0 ? 'md:right-0 md:translate-x-1/2' : 'md:left-0 md:-translate-x-1/2'
-                  )} />
-
-                  {/* Card */}
-                  <div className="ml-6 md:ml-0 p-6 rounded-2xl border border-[var(--border-light)] bg-white hover:shadow-lg transition-shadow hover-spring">
-                    {/* Duration Badge */}
-                    <span className="inline-block px-3 py-1 text-xs font-medium bg-[var(--cream-dark)] text-[var(--text-secondary)] rounded-full mb-4">
-                      {experience.duration}
-                    </span>
-
-                    {/* Company & Position */}
-                    <h3 className="font-heading text-2xl mb-1">
-                      {experience.company}
-                    </h3>
-                    <p className="text-sm text-[var(--green-primary)] font-medium mb-4">
-                      {experience.position} · {experience.location}
-                    </p>
-
-                    {/* Job Description */}
-                    <ul className="space-y-2">
-                      {experience.jobDescription.slice(0, 3).map((item, i) => (
-                        <li
-                          key={i}
-                          className="flex items-start gap-2 text-sm text-[var(--text-secondary)]"
-                        >
-                          <span className="text-[var(--green-primary)] mt-0.5">•</span>
-                          <span>{item}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-              </AnimatedElement>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Tech Stack Section */}
-      <section className="py-24 px-4 md:px-8 bg-[var(--cream-dark)]">
-        <div className="mx-auto max-w-6xl">
-          {/* Section Header */}
-          <AnimatedElement animation="slideUp" duration={0.8}>
-            <div className="text-center mb-16">
-              <h2 className="font-heading text-4xl md:text-5xl mb-4">Tech Stack</h2>
-              <p className="text-[var(--text-secondary)] max-w-xl mx-auto">
-                Technologies and tools I work with
-              </p>
-            </div>
-          </AnimatedElement>
-
-          {/* Tech Grid */}
-          <AnimatedElement animation="stagger" duration={0.6}>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
-              {techStack.map((tech, index) => (
-                <div
-                  key={tech.name}
-                  className="flex flex-col items-center gap-3 p-5 rounded-xl bg-white border border-[var(--border-light)] card-hover hover-spring glow-hover"
-                >
-                  <Image
-                    src={tech.icon}
-                    alt={tech.name}
-                    width={48}
-                    height={48}
-                    className="w-12 h-12 object-contain transition-transform duration-300 group-hover:scale-110"
-                  />
-                  <span className="text-sm text-[var(--text-primary)] font-medium text-center">
-                    {tech.name}
-                  </span>
-                </div>
-              ))}
+          {/* Work Experience Component */}
+          <AnimatedElement animation="fadeIn" duration={0.8} delay={0.2}>
+            <div className="rounded-2xl border border-[var(--border-light)] bg-white overflow-hidden">
+              <WorkExperience
+                className="experience-themed"
+                experiences={experiences.map((exp, index): ExperienceItemType => ({
+                  id: `exp-${index}`,
+                  companyName: exp.company,
+                  companyLogo: exp.links !== '#' ? `https://www.google.com/s2/favicons?domain=${new URL(exp.links).hostname}&sz=64` : undefined,
+                  isCurrentEmployer: index === 0,
+                  positions: [{
+                    id: `pos-${index}`,
+                    title: exp.position,
+                    employmentPeriod: exp.duration,
+                    employmentType: 'Full-time',
+                    description: exp.jobDescription.map(item => `- ${item}`).join('\n'),
+                    icon: 'code',
+                    skills: index === 0
+                      ? ['Laravel', 'React', 'TypeScript', 'PostgreSQL']
+                      : ['Laravel', 'React', 'WordPress', 'MySQL', 'Git', 'REST API'],
+                    isExpanded: index === 0,
+                  }],
+                }))}
+              />
             </div>
           </AnimatedElement>
         </div>
@@ -420,7 +460,7 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="py-18 px-4 md:px-8">
+      <footer className="mt-18 px-4 md:px-8 mb-20 md:pb-8">
         <AnimatedElement animation="fadeIn" duration={0.8}>
           <div className="mx-auto max-w-6xl">
             {/* Bottom Footer */}
@@ -435,6 +475,48 @@ export default function Home() {
           </div>
         </AnimatedElement>
       </footer>
+
+      {/* Mobile Dock Navigation */}
+      <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 md:hidden">
+        <Dock
+          iconSize={40}
+          iconMagnification={56}
+          iconDistance={100}
+          direction="bottom"
+          className="h-14 gap-3 rounded-2xl border-[var(--border-light)] bg-white/90 backdrop-blur-lg shadow-lg shadow-black/5"
+        >
+          <DockIcon className="bg-transparent hover:bg-[var(--green-light)]">
+            <a href="#home" className="flex items-center justify-center w-full h-full">
+              <HomeIcon className="w-5 h-5 text-[var(--text-secondary)]" />
+            </a>
+          </DockIcon>
+          <DockIcon className="bg-transparent hover:bg-[var(--green-light)]">
+            <a href="#works" className="flex items-center justify-center w-full h-full">
+              <FolderOpen className="w-5 h-5 text-[var(--text-secondary)]" />
+            </a>
+          </DockIcon>
+          <DockIcon className="bg-transparent hover:bg-[var(--green-light)]">
+            <a href="#experience" className="flex items-center justify-center w-full h-full">
+              <Briefcase className="w-5 h-5 text-[var(--text-secondary)]" />
+            </a>
+          </DockIcon>
+          <DockIcon className="bg-transparent hover:bg-[var(--green-light)]">
+            <a
+              href="https://cv.radenadri.xyz"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center w-full h-full"
+            >
+              <FileText className="w-5 h-5 text-[var(--text-secondary)]" />
+            </a>
+          </DockIcon>
+          <DockIcon className="bg-transparent hover:bg-[var(--green-light)]">
+            <a href="#contact" className="flex items-center justify-center w-full h-full">
+              <Mail className="w-5 h-5 text-[var(--text-secondary)]" />
+            </a>
+          </DockIcon>
+        </Dock>
+      </div>
     </div>
   );
 }
