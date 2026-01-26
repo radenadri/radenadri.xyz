@@ -31,6 +31,7 @@ const PORTRAIT_IMAGE = '/avatar.png';
 
 export default function Home() {
   const pageRef = useRef<HTMLDivElement>(null);
+  const clients = works.filter((w) => w.type === 'clients');
 
   return (
     <div
@@ -294,33 +295,38 @@ export default function Home() {
             <div className="mb-12">
               <p className="text-sm text-[var(--text-muted)] mb-4">Clients</p>
               <div className="rounded-2xl border border-[var(--border-light)] bg-white overflow-hidden divide-y divide-[var(--border-light)]">
-                <div className="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-[var(--border-light)]">
-                  {works
-                    .filter((work) => work.type === 'clients')
-                    .map((work, index, arr) => (
-                      <Link
-                        key={work.slug}
-                        href={`/work/${work.slug}`}
-                        className={cn(
-                          'flex items-center gap-3 px-5 py-4 hover:bg-[var(--cream-dark)] transition-colors group',
-                          index % 2 === 1 && index === arr.length - 1 && arr.length % 2 === 0 ? '' : '',
-                          index >= 2 ? 'md:border-t md:border-[var(--border-light)]' : ''
-                        )}
+                <div
+                  className={cn(
+                    'grid',
+                    clients.length % 2 === 1 ? 'grid-cols-1' : 'grid-cols-1 md:grid-cols-2',
+                    'divide-y md:divide-x divide-[var(--border-light)]'
+                  )}
+                >
+                  {clients.map((work, index, arr) => (
+                    <Link
+                      key={work.slug}
+                      href={work.direct ? work.url : `/work/${work.slug}`}
+                      target={work.direct ? '_blank' : '_self'}
+                      className={cn(
+                        'flex items-center gap-3 px-5 py-4 hover:bg-[var(--cream-dark)] transition-colors group',
+                        index % 2 === 1 && index === arr.length - 1 && arr.length % 2 === 0 ? '' : '',
+                        // index >= 2 ? 'md:border-t md:border-[var(--border-light)]' : ''
+                      )}
+                    >
+                      <svg
+                        className="w-4 h-4 text-[var(--text-muted)] group-hover:text-[var(--green-primary)] transition-colors flex-shrink-0"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        strokeWidth={2}
                       >
-                        <svg
-                          className="w-4 h-4 text-[var(--text-muted)] group-hover:text-[var(--green-primary)] transition-colors flex-shrink-0"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                          strokeWidth={2}
-                        >
-                          <path strokeLinecap="round" strokeLinejoin="round" d="M7 17L17 7M17 7H7M17 7V17" />
-                        </svg>
-                        <span className="font-heading text-lg group-hover:text-[var(--green-primary)] transition-colors">
-                          {work.title}
-                        </span>
-                      </Link>
-                    ))}
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M7 17L17 7M17 7H7M17 7V17" />
+                      </svg>
+                      <span className="font-heading text-lg group-hover:text-[var(--green-primary)] transition-colors">
+                        {work.title}
+                      </span>
+                    </Link>
+                  ))}
                 </div>
               </div>
             </div>
@@ -337,7 +343,8 @@ export default function Home() {
                     .map((work, index, arr) => (
                       <Link
                         key={work.slug}
-                        href={`/work/${work.slug}`}
+                        href={work.direct ? work.url : `/work/${work.slug}`}
+                        target={work.direct ? '_blank' : '_self'}
                         className={cn(
                           'flex items-center justify-between gap-3 px-5 py-4 hover:bg-[var(--cream-dark)] transition-colors group',
                           'border-b border-[var(--border-light)] md:border-b-0',
