@@ -1,37 +1,37 @@
-'use client';
+"use client";
 
-import { useRef } from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
-import { Inter, Instrument_Serif } from 'next/font/google';
-import { Home as HomeIcon, Briefcase, FolderOpen, Mail, FileText } from 'lucide-react';
-import { cn } from '@/lib/utils';
-import works from '@/data/works';
-import experiences from '@/data/experiences';
-import techStack from '@/data/tech-stack';
-import { AnimatedElement, AnimatedText } from '@/components/animated-element';
-import { StackBento, StackBentoCard } from '@/components/stack-bento';
-import { WorkExperience, type ExperienceItemType } from '@/components/ui/work-experience';
-import { Marquee } from '@/components/ui/marquee';
-import { Dock, DockIcon } from '@/components/ui/dock';
+import { useRef } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { Inter, Instrument_Serif } from "next/font/google";
+import { Home as HomeIcon, Briefcase, FolderOpen, Mail, FileText } from "lucide-react";
+import { cn } from "@/lib/utils";
+import works from "@/data/works";
+import experiences from "@/data/experiences";
+import techStack from "@/data/tech-stack";
+import { AnimatedElement, AnimatedText } from "@/components/animated-element";
+import { StackBento, StackBentoCard } from "@/components/stack-bento";
+import { WorkExperience, type ExperienceItemType } from "@/components/ui/work-experience";
+import { Marquee } from "@/components/ui/marquee";
+import { Dock, DockIcon } from "@/components/ui/dock";
 
 // Configure fonts
 const inter = Inter({
-  subsets: ['latin'],
-  variable: '--font-inter',
+  subsets: ["latin"],
+  variable: "--font-inter",
 });
 
 const instrumentSerif = Instrument_Serif({
-  subsets: ['latin'],
-  weight: ['400'],
-  variable: '--font-instrument-serif',
+  subsets: ["latin"],
+  weight: ["400"],
+  variable: "--font-instrument-serif",
 });
 
-const PORTRAIT_IMAGE = '/avatar.png';
+const PORTRAIT_IMAGE = "/avatar.png";
 
 export default function Home() {
   const pageRef = useRef<HTMLDivElement>(null);
-  const clients = works.filter((w) => w.type === 'clients');
+  const clients = works.filter((w) => w.type === "clients");
 
   return (
     <div
@@ -39,7 +39,7 @@ export default function Home() {
       className={cn(
         inter.variable,
         instrumentSerif.variable,
-        'font-body bg-[var(--cream)] text-[var(--text-primary)] min-h-screen'
+        "font-body bg-[var(--cream)] text-[var(--text-primary)] min-h-screen",
       )}
     >
       {/* Navigation */}
@@ -69,7 +69,10 @@ export default function Home() {
       <section id="home" className="pt-32 pb-20 px-4 md:px-8 relative overflow-hidden">
         {/* Decorative Blobs */}
         <div className="absolute top-20 left-10 w-72 h-72 bg-[var(--green-light)] opacity-30 rounded-full blur-3xl animate-blob" />
-        <div className="absolute bottom-10 right-10 w-96 h-96 bg-[var(--yellow-highlight)] opacity-40 rounded-full blur-3xl animate-blob" style={{ animationDelay: '4s' }} />
+        <div
+          className="absolute bottom-10 right-10 w-96 h-96 bg-[var(--yellow-highlight)] opacity-40 rounded-full blur-3xl animate-blob"
+          style={{ animationDelay: "4s" }}
+        />
 
         <div className="mx-auto max-w-4xl text-center relative z-10">
           {/* Logo/Avatar */}
@@ -92,15 +95,17 @@ export default function Home() {
           {/* Main Heading */}
           <AnimatedElement animation="slideUp" delay={0.2} duration={1}>
             <h1 className="font-heading text-4xl md:text-6xl lg:text-7xl leading-tight mb-6">
-              Crafting <span className="italic animate-text-gradient">beautiful &amp; functional</span> digital experiences
+              Crafting{" "}
+              <span className="italic animate-text-gradient">beautiful &amp; functional</span>{" "}
+              digital experiences
             </h1>
           </AnimatedElement>
 
           {/* Subheading */}
           <AnimatedElement animation="slideUp" delay={0.4} duration={1}>
             <p className="text-lg md:text-xl text-[var(--text-secondary)] max-w-2xl mx-auto mb-8">
-              Based in Bandung, Indonesia. Building modern web and mobile applications with a focus on{' '}
-              <span className="highlight">functionality</span> and{' '}
+              Based in Bandung, Indonesia. Building modern web and mobile applications with a focus
+              on <span className="highlight">functionality</span> and{" "}
               <span className="highlight">aesthetics</span>.
             </p>
           </AnimatedElement>
@@ -208,11 +213,11 @@ export default function Home() {
                 <span className="inline-block px-3 py-1 text-xs font-medium bg-[var(--green-light)] text-[var(--green-dark)] rounded-full mb-4 relative z-10">
                   Primary Stack
                 </span>
-                <h3 className="font-heading text-3xl md:text-4xl mb-3 relative z-10">
-                  Laravel
-                </h3>
+                <h3 className="font-heading text-3xl md:text-4xl mb-3 relative z-10">Laravel</h3>
                 <p className="text-[var(--text-secondary)] mb-6 max-w-md relative z-10">
-                  Building fullstack applications with Laravel backend and React frontend, connected seamlessly with Inertia.js for a modern SPA experience. And also familiar with TALL stack for rapid development.
+                  Building fullstack applications with Laravel backend and React frontend, connected
+                  seamlessly with Inertia.js for a modern SPA experience. And also familiar with
+                  TALL stack for rapid development.
                 </p>
                 <div className="flex flex-wrap gap-2 relative z-10">
                   <span className="badge badge-green">Laravel</span>
@@ -250,12 +255,14 @@ export default function Home() {
                 </div>
                 <div className="flex flex-wrap gap-2 mt-4">
                   <span className="badge badge-outline text-xs">React Native</span>
-                  <span className="badge badge-outline text-xs">Flutter</span>
                 </div>
               </StackBentoCard>
 
               {/* Other Tools - Wide Card */}
-              <StackBentoCard colSpan={2} className="p-6 rounded-2xl border border-[var(--border-light)] bg-white group hover:shadow-lg transition-all duration-300">
+              <StackBentoCard
+                colSpan={2}
+                className="p-6 rounded-2xl border border-[var(--border-light)] bg-white group hover:shadow-lg transition-all duration-300"
+              >
                 <div className="flex flex-col md:flex-row md:items-center gap-6">
                   <div className="flex-1">
                     <h3 className="font-heading text-xl mb-2">Other Tools</h3>
@@ -297,19 +304,21 @@ export default function Home() {
               <div className="rounded-2xl border border-[var(--border-light)] bg-white overflow-hidden divide-y divide-[var(--border-light)]">
                 <div
                   className={cn(
-                    'grid',
-                    clients.length % 2 === 1 ? 'grid-cols-1' : 'grid-cols-1 md:grid-cols-2',
-                    'divide-y md:divide-x divide-[var(--border-light)]'
+                    "grid",
+                    clients.length % 2 === 1 ? "grid-cols-1" : "grid-cols-1 md:grid-cols-2",
+                    "divide-y md:divide-x divide-[var(--border-light)]",
                   )}
                 >
                   {clients.map((work, index, arr) => (
                     <Link
                       key={work.slug}
                       href={work.direct ? work.url : `/work/${work.slug}`}
-                      target={work.direct ? '_blank' : '_self'}
+                      target={work.direct ? "_blank" : "_self"}
                       className={cn(
-                        'flex items-center gap-3 px-5 py-4 hover:bg-[var(--cream-dark)] transition-colors group',
-                        index % 2 === 1 && index === arr.length - 1 && arr.length % 2 === 0 ? '' : '',
+                        "flex items-center gap-3 px-5 py-4 hover:bg-[var(--cream-dark)] transition-colors group",
+                        index % 2 === 1 && index === arr.length - 1 && arr.length % 2 === 0
+                          ? ""
+                          : "",
                         // index >= 2 ? 'md:border-t md:border-[var(--border-light)]' : ''
                       )}
                     >
@@ -320,7 +329,11 @@ export default function Home() {
                         stroke="currentColor"
                         strokeWidth={2}
                       >
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M7 17L17 7M17 7H7M17 7V17" />
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M7 17L17 7M17 7H7M17 7V17"
+                        />
                       </svg>
                       <span className="font-heading text-lg group-hover:text-[var(--green-primary)] transition-colors">
                         {work.title}
@@ -335,22 +348,22 @@ export default function Home() {
           {/* Side Projects Section */}
           <AnimatedElement animation="slideUp" delay={0.2} duration={0.8}>
             <div>
-              <p className="text-sm text-[var(--text-muted)] mb-4">Side Projects</p>
+              <p className="text-sm text-[var(--text-muted)] mb-4">Open Source</p>
               <div className="rounded-2xl border border-[var(--border-light)] bg-white overflow-hidden">
                 <div className="grid grid-cols-1 md:grid-cols-2">
                   {works
-                    .filter((work) => work.type === 'projects')
+                    .filter((work) => work.type === "projects")
                     .map((work, index, arr) => (
                       <Link
                         key={work.slug}
                         href={work.direct ? work.url : `/work/${work.slug}`}
-                        target={work.direct ? '_blank' : '_self'}
+                        target={work.direct ? "_blank" : "_self"}
                         className={cn(
-                          'flex items-center justify-between gap-3 px-5 py-4 hover:bg-[var(--cream-dark)] transition-colors group',
-                          'border-b border-[var(--border-light)] md:border-b-0',
-                          index % 2 === 0 ? 'md:border-r md:border-[var(--border-light)]' : '',
-                          index >= 2 ? 'md:border-t md:border-[var(--border-light)]' : '',
-                          index === arr.length - 1 ? 'border-b-0' : ''
+                          "flex items-center justify-between gap-3 px-5 py-4 hover:bg-[var(--cream-dark)] transition-colors group",
+                          "border-b border-[var(--border-light)] md:border-b-0",
+                          index % 2 === 0 ? "md:border-r md:border-[var(--border-light)]" : "",
+                          index >= 2 ? "md:border-t md:border-[var(--border-light)]" : "",
+                          index === arr.length - 1 ? "border-b-0" : "",
                         )}
                       >
                         <div className="flex items-center gap-3">
@@ -361,7 +374,11 @@ export default function Home() {
                             stroke="currentColor"
                             strokeWidth={2}
                           >
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M7 17L17 7M17 7H7M17 7V17" />
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M7 17L17 7M17 7H7M17 7V17"
+                            />
                           </svg>
                           <span className="font-heading text-lg group-hover:text-[var(--green-primary)] transition-colors">
                             {work.title}
@@ -402,24 +419,32 @@ export default function Home() {
             <div className="rounded-2xl border border-[var(--border-light)] bg-white overflow-hidden">
               <WorkExperience
                 className="experience-themed"
-                experiences={experiences.map((exp, index): ExperienceItemType => ({
-                  id: `exp-${index}`,
-                  companyName: exp.company,
-                  companyLogo: exp.links !== '#' ? `https://www.google.com/s2/favicons?domain=${new URL(exp.links).hostname}&sz=64` : undefined,
-                  isCurrentEmployer: index === 0,
-                  positions: [{
-                    id: `pos-${index}`,
-                    title: exp.position,
-                    employmentPeriod: exp.duration,
-                    employmentType: 'Full-time',
-                    description: exp.jobDescription.map(item => `- ${item}`).join('\n'),
-                    icon: 'code',
-                    skills: index === 0
-                      ? ['Laravel', 'React', 'TypeScript', 'PostgreSQL']
-                      : ['Laravel', 'React', 'WordPress', 'MySQL', 'Git', 'REST API'],
-                    isExpanded: index === 0,
-                  }],
-                }))}
+                experiences={experiences.map(
+                  (exp, index): ExperienceItemType => ({
+                    id: `exp-${index}`,
+                    companyName: exp.company,
+                    companyLogo:
+                      exp.links !== "#"
+                        ? `https://www.google.com/s2/favicons?domain=${new URL(exp.links).hostname}&sz=64`
+                        : undefined,
+                    isCurrentEmployer: index === 0,
+                    positions: [
+                      {
+                        id: `pos-${index}`,
+                        title: exp.position,
+                        employmentPeriod: exp.duration,
+                        employmentType: "Full-time",
+                        description: exp.jobDescription.map((item) => `- ${item}`).join("\n"),
+                        icon: "code",
+                        skills:
+                          index === 0
+                            ? ["Laravel", "React", "TypeScript", "PostgreSQL"]
+                            : ["Laravel", "React", "WordPress", "MySQL", "Git", "REST API"],
+                        isExpanded: index === 0,
+                      },
+                    ],
+                  }),
+                )}
               />
             </div>
           </AnimatedElement>
@@ -430,7 +455,10 @@ export default function Home() {
       <section id="contact" className="py-24 px-4 md:px-8 relative overflow-hidden">
         {/* Decorative Elements */}
         <div className="absolute top-1/2 left-1/4 w-64 h-64 bg-[var(--green-light)] opacity-20 rounded-full blur-3xl animate-blob" />
-        <div className="absolute top-1/2 right-1/4 w-48 h-48 bg-[var(--yellow-highlight)] opacity-30 rounded-full blur-3xl animate-blob" style={{ animationDelay: '6s' }} />
+        <div
+          className="absolute top-1/2 right-1/4 w-48 h-48 bg-[var(--yellow-highlight)] opacity-30 rounded-full blur-3xl animate-blob"
+          style={{ animationDelay: "6s" }}
+        />
 
         <div className="mx-auto max-w-4xl text-center relative z-10">
           <AnimatedElement animation="slideUp" duration={0.8}>
@@ -441,7 +469,8 @@ export default function Home() {
 
           <AnimatedElement animation="slideUp" delay={0.2} duration={0.8}>
             <p className="text-lg text-[var(--text-secondary)] mb-8 max-w-xl mx-auto">
-              Have a project in mind? I'd love to hear about it. Let's create something amazing together.
+              Have a project in mind? I'd love to hear about it. Let's create something amazing
+              together.
             </p>
           </AnimatedElement>
 
@@ -467,7 +496,7 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="mt-18 px-4 md:px-8 mb-20 md:pb-8">
+      <footer className="mt-18 px-4 md:px-8 mb-22 md:pb-8">
         <AnimatedElement animation="fadeIn" duration={0.8}>
           <div className="mx-auto max-w-6xl">
             {/* Bottom Footer */}
@@ -475,9 +504,7 @@ export default function Home() {
               <p className="text-sm text-[var(--text-muted)]">
                 © 2025 Adrian. All rights reserved.
               </p>
-              <p className="text-sm text-[var(--text-muted)] underline-reveal">
-                radenadri.xyz
-              </p>
+              <p className="text-sm text-[var(--text-muted)] underline-reveal">radenadri.xyz</p>
             </div>
           </div>
         </AnimatedElement>
