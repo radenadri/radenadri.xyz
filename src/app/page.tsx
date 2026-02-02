@@ -361,6 +361,7 @@ export default function Home() {
                 >
                   {works
                     .filter((work) => work.type === "projects")
+                    .sort((a, b) => a.title.localeCompare(b.title))
                     .map((work, index, arr) => (
                       <Link
                         key={work.slug}
