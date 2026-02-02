@@ -349,8 +349,16 @@ export default function Home() {
           <AnimatedElement animation="slideUp" delay={0.2} duration={0.8}>
             <div>
               <p className="text-sm text-[var(--text-muted)] mb-4">Open Source</p>
-              <div className="rounded-2xl border border-[var(--border-light)] bg-white overflow-hidden">
-                <div className="grid grid-cols-1 md:grid-cols-2">
+              <div className="rounded-2xl border border-[var(--border-light)] bg-white overflow-hidden divide-y divide-[var(--border-light)]">
+                <div
+                  className={cn(
+                    "grid",
+                    works.filter((work) => work.type === "projects").length % 2 === 1
+                      ? "grid-cols-1"
+                      : "grid-cols-1 md:grid-cols-2",
+                    "divide-y md:divide-x divide-[var(--border-light)]",
+                  )}
+                >
                   {works
                     .filter((work) => work.type === "projects")
                     .map((work, index, arr) => (
@@ -359,11 +367,11 @@ export default function Home() {
                         href={work.direct ? work.url : `/work/${work.slug}`}
                         target={work.direct ? "_blank" : "_self"}
                         className={cn(
-                          "flex items-center justify-between gap-3 px-5 py-4 hover:bg-[var(--cream-dark)] transition-colors group",
-                          "border-b border-[var(--border-light)] md:border-b-0",
-                          index % 2 === 0 ? "md:border-r md:border-[var(--border-light)]" : "",
-                          index >= 2 ? "md:border-t md:border-[var(--border-light)]" : "",
-                          index === arr.length - 1 ? "border-b-0" : "",
+                          "flex items-center gap-3 px-5 py-4 hover:bg-[var(--cream-dark)] transition-colors group",
+                          index % 2 === 1 && index === arr.length - 1 && arr.length % 2 === 0
+                            ? ""
+                            : "",
+                          // index >= 2 ? 'md:border-t md:border-[var(--border-light)]' : ''
                         )}
                       >
                         <div className="flex items-center gap-3">

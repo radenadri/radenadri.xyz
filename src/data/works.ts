@@ -77,4 +77,12 @@ export default [
     direct: true,
     url: "https://vizualgo.radenadri.xyz",
   },
+  {
+    title: "Focus WP Starter",
+    slug: "focus",
+    type: "projects",
+    description: "Headless WordPress starter created with Faust + Next.js",
+    direct: true,
+    url: "https://wp-starter.radenadri.xyz",
+  },
 ];
