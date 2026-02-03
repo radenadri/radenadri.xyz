@@ -272,7 +272,7 @@ export default function Home() {
                   </div>
                   <div className="flex flex-wrap gap-2">
                     <span className="badge badge-green">PostgreSQL</span>
-                    <span className="badge badge-green">MySQL</span>
+                    <span className="badge badge-green">SQLite</span>
                     <span className="badge badge-green">Redis</span>
                     <span className="badge badge-green">Git</span>
                     <span className="badge badge-green">Sentry</span>
@@ -448,7 +448,7 @@ export default function Home() {
                         skills:
                           index === 0
                             ? ["Laravel", "React", "TypeScript", "PostgreSQL"]
-                            : ["Laravel", "React", "WordPress", "MySQL", "Git", "REST API"],
+                            : ["Laravel", "React", "WordPress", "Git", "REST API"],
                         isExpanded: index === 0,
                       },
                     ],
