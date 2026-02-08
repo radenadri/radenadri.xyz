@@ -222,6 +222,7 @@ export default function Home() {
                 <div className="flex flex-wrap gap-2 relative z-10">
                   <span className="badge badge-green">Laravel</span>
                   <span className="badge badge-green">React</span>
+		  <span className="badge badge-green">Next.js</span>
                   <span className="badge badge-green">Inertia.js</span>
                   <span className="badge badge-green">Tailwind CSS</span>
                   <span className="badge badge-green">Alpine.js</span>
