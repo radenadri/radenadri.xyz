@@ -24,15 +24,15 @@ export default [
     direct: false,
     url: "",
   },
-  {
-    title: "Trackz",
-    slug: "music-player",
-    type: "projects",
-    description:
-      "Trackz is a music player that i build using Next.js and Tailwind CSS. It is a simple music player that i build for fun.",
-    direct: true,
-    url: "https://tracks.radenadri.xyz",
-  },
+  // {
+  //   title: "Trackz",
+  //   slug: "music-player",
+  //   type: "projects",
+  //   description:
+  //     "Trackz is a music player that i build using Next.js and Tailwind CSS. It is a simple music player that i build for fun.",
+  //   direct: true,
+  //   url: "https://tracks.radenadri.xyz",
+  // },
   {
     title: "FluxChat",
     slug: "fluxchat",
@@ -42,24 +42,24 @@ export default [
     direct: true,
     url: "https://github.com/BRANDNEWSHVT/fluxchat",
   },
-  {
-    title: "Minecraft Clone",
-    slug: "minecraft-clone",
-    type: "projects",
-    description:
-      "Last year, I built a Minecraft clone using React.js and Three.js. The reason i built it because it enhance my learning in React.js and Three.js.",
-    direct: true,
-    url: "https://minecraft-clone.radenadri.xyz",
-  },
-  {
-    title: "Pokedex",
-    slug: "pokedex",
-    type: "projects",
-    description:
-      "Playing around with Pokedex API to show all the pokemons including the filter capabilities. Built with React.js, Tailwind CSS, and PokeAPI.",
-    direct: true,
-    url: "https://pokedex.radenadri.xyz",
-  },
+  // {
+  //   title: "Minecraft Clone",
+  //   slug: "minecraft-clone",
+  //   type: "projects",
+  //   description:
+  //     "Last year, I built a Minecraft clone using React.js and Three.js. The reason i built it because it enhance my learning in React.js and Three.js.",
+  //   direct: true,
+  //   url: "https://minecraft-clone.radenadri.xyz",
+  // },
+  // {
+  //   title: "Pokedex",
+  //   slug: "pokedex",
+  //   type: "projects",
+  //   description:
+  //     "Playing around with Pokedex API to show all the pokemons including the filter capabilities. Built with React.js, Tailwind CSS, and PokeAPI.",
+  //   direct: true,
+  //   url: "https://pokedex.radenadri.xyz",
+  // },
   {
     title: "Whatsapp Link Generator",
     slug: "whatsapp-link-generator",
