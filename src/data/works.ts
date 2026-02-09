@@ -34,6 +34,15 @@ export default [
     url: "https://tracks.radenadri.xyz",
   },
   {
+    title: "FluxChat",
+    slug: "fluxchat",
+    type: "projects",
+    description:
+      "I tried to create my own chatbot using Laravel and PrismAI. The chatbot is able to answer questions and have a conversation with the user.",
+    direct: true,
+    url: "https://github.com/BRANDNEWSHVT/fluxchat",
+  },
+  {
     title: "Minecraft Clone",
     slug: "minecraft-clone",
     type: "projects",
@@ -50,15 +59,6 @@ export default [
       "Playing around with Pokedex API to show all the pokemons including the filter capabilities. Built with React.js, Tailwind CSS, and PokeAPI.",
     direct: true,
     url: "https://pokedex.radenadri.xyz",
-  },
-  {
-    title: "Void UI",
-    slug: "void-ui",
-    type: "projects",
-    description:
-      "Void UI is a UI library that i build using Base UI and Tailwind CSS. It is a simple UI library that i build for fun.",
-    direct: true,
-    url: "https://voidui.radenadri.xyz",
   },
   {
     title: "Whatsapp Link Generator",
@@ -78,10 +78,10 @@ export default [
     url: "https://vizualgo.radenadri.xyz",
   },
   {
-    title: "Focus WP Starter",
-    slug: "focus",
+    title: "Next WP Starter",
+    slug: "next-wp-starter",
     type: "projects",
-    description: "Headless WordPress starter created with Faust + Next.js",
+    description: "Headless WordPress starter template built with Next.js and Tailwind CSS.",
     direct: true,
     url: "https://wp-starter.radenadri.xyz",
   },
