@@ -14,6 +14,7 @@ import { StackBento, StackBentoCard } from "@/components/stack-bento";
 import { WorkExperience, type ExperienceItemType } from "@/components/ui/work-experience";
 import { Marquee } from "@/components/ui/marquee";
 import { Dock, DockIcon } from "@/components/ui/dock";
+import Clarity from "@microsoft/clarity";
 
 // Configure fonts
 const inter = Inter({
@@ -33,6 +34,10 @@ export default function Home() {
   const pageRef = useRef<HTMLDivElement>(null);
   const clients = works.filter((w) => w.type === "clients");
 
+  const trackVisit = (tag: string) => {
+    Clarity.event(tag);
+  };
+
   return (
     <div
       ref={pageRef}
@@ -49,6 +54,7 @@ export default function Home() {
           <div className="flex items-center gap-4">
             <a
               href="https://cv.radenadri.xyz"
+              onClick={() => trackVisit("resume_link_clicked")}
               target="_blank"
               rel="noopener noreferrer"
               className="text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] hidden sm:block"
@@ -57,6 +63,7 @@ export default function Home() {
             </a>
             <a
               href="mailto:radenadri@gmail.com"
+              onClick={() => trackVisit("mail_link_clicked")}
               className="text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] hidden sm:block"
             >
               Contact
@@ -222,7 +229,7 @@ export default function Home() {
                 <div className="flex flex-wrap gap-2 relative z-10">
                   <span className="badge badge-green">Laravel</span>
                   <span className="badge badge-green">React</span>
-		  <span className="badge badge-green">Next.js</span>
+                  <span className="badge badge-green">Next.js</span>
                   <span className="badge badge-green">Inertia.js</span>
                   <span className="badge badge-green">Tailwind CSS</span>
                   <span className="badge badge-green">Alpine.js</span>
