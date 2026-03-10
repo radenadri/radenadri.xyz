@@ -1,0 +1,15 @@
+{
+  "servers": {
+    "next-devtools": {
+      "args": ["-y", "next-devtools-mcp@latest"],
+      "command": "npx",
+      "disabled": false,
+    },
+    "shadcn": {
+      "args": ["shadcn@latest", "mcp"],
+      "command": "npx",
+      "disabled": false,
+    },
+  },
+  "inputs": [],
+}
