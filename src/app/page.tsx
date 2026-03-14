@@ -4,14 +4,23 @@ import { useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Inter, Instrument_Serif } from "next/font/google";
-import { Home as HomeIcon, Briefcase, FolderOpen, Mail, FileText } from "lucide-react";
+import {
+  Home as HomeIcon,
+  Briefcase,
+  FolderOpen,
+  Mail,
+  FileText,
+} from "lucide-react";
 import { cn } from "@/lib/utils";
 import works from "@/data/works";
 import experiences from "@/data/experiences";
 import techStack from "@/data/tech-stack";
 import { AnimatedElement, AnimatedText } from "@/components/animated-element";
 import { StackBento, StackBentoCard } from "@/components/stack-bento";
-import { WorkExperience, type ExperienceItemType } from "@/components/ui/work-experience";
+import {
+  WorkExperience,
+  type ExperienceItemType,
+} from "@/components/ui/work-experience";
 import { Marquee } from "@/components/ui/marquee";
 import { Dock, DockIcon } from "@/components/ui/dock";
 import Clarity from "@microsoft/clarity";
@@ -73,7 +82,10 @@ export default function Home() {
       </nav>
 
       {/* Hero Section */}
-      <section id="home" className="pt-32 pb-20 px-4 md:px-8 relative overflow-hidden">
+      <section
+        id="home"
+        className="pt-32 pb-20 px-4 md:px-8 relative overflow-hidden"
+      >
         {/* Decorative Blobs */}
         <div className="absolute top-20 left-10 w-72 h-72 bg-[var(--green-light)] opacity-30 rounded-full blur-3xl animate-blob" />
         <div
@@ -103,7 +115,9 @@ export default function Home() {
           <AnimatedElement animation="slideUp" delay={0.2} duration={1}>
             <h1 className="font-heading text-4xl md:text-6xl lg:text-7xl leading-tight mb-6">
               Crafting{" "}
-              <span className="italic animate-text-gradient">beautiful &amp; functional</span>{" "}
+              <span className="italic animate-text-gradient">
+                beautiful &amp; functional
+              </span>{" "}
               digital experiences
             </h1>
           </AnimatedElement>
@@ -111,8 +125,9 @@ export default function Home() {
           {/* Subheading */}
           <AnimatedElement animation="slideUp" delay={0.4} duration={1}>
             <p className="text-lg md:text-xl text-[var(--text-secondary)] max-w-2xl mx-auto mb-8">
-              Based in Bandung, Indonesia. Building modern web and mobile applications with a focus
-              on <span className="highlight">functionality</span> and{" "}
+              Based in Bandung, Indonesia. Building modern web and mobile
+              applications with a focus on{" "}
+              <span className="highlight">functionality</span> and{" "}
               <span className="highlight">aesthetics</span>.
             </p>
           </AnimatedElement>
@@ -120,7 +135,10 @@ export default function Home() {
           {/* CTA Buttons */}
           <AnimatedElement animation="slideUp" delay={0.6} duration={1}>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a href="#works" className="btn-primary magnetic-hover animate-gentle-pulse">
+              <a
+                href="#works"
+                className="btn-primary magnetic-hover animate-gentle-pulse"
+              >
                 View My Work
               </a>
               <a
@@ -201,7 +219,9 @@ export default function Home() {
           {/* Section Header */}
           <AnimatedElement animation="slideUp" duration={0.8}>
             <div className="text-center mb-16">
-              <h2 className="font-heading text-4xl md:text-5xl mb-4">My Stack</h2>
+              <h2 className="font-heading text-4xl md:text-5xl mb-4">
+                My Stack
+              </h2>
               <p className="text-[var(--text-secondary)] max-w-xl mx-auto">
                 The tools I use to bring ideas to reality
               </p>
@@ -220,16 +240,19 @@ export default function Home() {
                 <span className="inline-block px-3 py-1 text-xs font-medium bg-[var(--green-light)] text-[var(--green-dark)] rounded-full mb-4 relative z-10">
                   Primary Stack
                 </span>
-                <h3 className="font-heading text-3xl md:text-4xl mb-3 relative z-10">Laravel</h3>
+                <h3 className="font-heading text-3xl md:text-4xl mb-3 relative z-10">
+                  Fullstack
+                </h3>
                 <p className="text-[var(--text-secondary)] mb-6 max-w-md relative z-10">
-                  Building fullstack applications with Laravel backend and React frontend, connected
-                  seamlessly with Inertia.js for a modern SPA experience. And also familiar with
-                  TALL stack for rapid development.
+                  Building fullstack applications with latest technology.
+                  Focused on creating seamless user experiences and efficient
+                  server-side logic.
                 </p>
                 <div className="flex flex-wrap gap-2 relative z-10">
+                  <span className="badge badge-green">PHP</span>
                   <span className="badge badge-green">Laravel</span>
                   <span className="badge badge-green">React</span>
-                  <span className="badge badge-green">Next.js</span>
+                  <span className="badge badge-green">Vue</span>
                   <span className="badge badge-green">Inertia.js</span>
                   <span className="badge badge-green">Tailwind CSS</span>
                   <span className="badge badge-green">Alpine.js</span>
@@ -242,7 +265,9 @@ export default function Home() {
               {/* CMS Card */}
               <StackBentoCard className="p-6 rounded-2xl border border-[var(--border-light)] bg-[var(--cream-dark)] flex flex-col justify-between group hover:bg-white transition-all duration-300 hover:shadow-lg">
                 <div>
-                  <h3 className="font-heading text-2xl mb-2">CMS & Headless CMS</h3>
+                  <h3 className="font-heading text-2xl mb-2">
+                    CMS & Headless CMS
+                  </h3>
                   <p className="text-sm text-[var(--text-secondary)]">
                     WordPress and Payload for flexible content management.
                   </p>
@@ -256,13 +281,17 @@ export default function Home() {
               {/* Mobile Development Card */}
               <StackBentoCard className="p-6 rounded-2xl border border-[var(--border-light)] bg-[var(--cream-dark)] flex flex-col justify-between group hover:bg-white transition-all duration-300 hover:shadow-lg">
                 <div>
-                  <h3 className="font-heading text-2xl mb-2">Mobile Development</h3>
+                  <h3 className="font-heading text-2xl mb-2">
+                    Mobile Development
+                  </h3>
                   <p className="text-sm text-[var(--text-secondary)]">
                     Cross-platform mobile apps with native performance.
                   </p>
                 </div>
                 <div className="flex flex-wrap gap-2 mt-4">
-                  <span className="badge badge-outline text-xs">React Native</span>
+                  <span className="badge badge-outline text-xs">
+                    React Native
+                  </span>
                 </div>
               </StackBentoCard>
 
@@ -298,7 +327,9 @@ export default function Home() {
           {/* Section Header */}
           <AnimatedElement animation="slideUp" duration={0.8}>
             <div className="text-center mb-16">
-              <h2 className="font-heading text-4xl md:text-5xl mb-4">Selected Works</h2>
+              <h2 className="font-heading text-4xl md:text-5xl mb-4">
+                Selected Works
+              </h2>
               <p className="text-[var(--text-secondary)] max-w-xl mx-auto">
                 Things I've built, designed, and brought to life
               </p>
@@ -313,7 +344,9 @@ export default function Home() {
                 <div
                   className={cn(
                     "grid",
-                    clients.length % 2 === 1 ? "grid-cols-1" : "grid-cols-1 md:grid-cols-2",
+                    clients.length % 2 === 1
+                      ? "grid-cols-1"
+                      : "grid-cols-1 md:grid-cols-2",
                     "divide-y md:divide-x divide-[var(--border-light)]",
                   )}
                 >
@@ -324,7 +357,9 @@ export default function Home() {
                       target={work.direct ? "_blank" : "_self"}
                       className={cn(
                         "flex items-center gap-3 px-5 py-4 hover:bg-[var(--cream-dark)] transition-colors group",
-                        index % 2 === 1 && index === arr.length - 1 && arr.length % 2 === 0
+                        index % 2 === 1 &&
+                          index === arr.length - 1 &&
+                          arr.length % 2 === 0
                           ? ""
                           : "",
                         // index >= 2 ? 'md:border-t md:border-[var(--border-light)]' : ''
@@ -356,12 +391,16 @@ export default function Home() {
           {/* Side Projects Section */}
           <AnimatedElement animation="slideUp" delay={0.2} duration={0.8}>
             <div>
-              <p className="text-sm text-[var(--text-muted)] mb-4">Open Source</p>
+              <p className="text-sm text-[var(--text-muted)] mb-4">
+                Open Source
+              </p>
               <div className="rounded-2xl border border-[var(--border-light)] bg-white overflow-hidden divide-y divide-[var(--border-light)]">
                 <div
                   className={cn(
                     "grid",
-                    works.filter((work) => work.type === "projects").length % 2 === 1
+                    works.filter((work) => work.type === "projects").length %
+                      2 ===
+                      1
                       ? "grid-cols-1"
                       : "grid-cols-1 md:grid-cols-2",
                     "divide-y md:divide-x divide-[var(--border-light)]",
@@ -377,7 +416,9 @@ export default function Home() {
                         target={work.direct ? "_blank" : "_self"}
                         className={cn(
                           "flex items-center gap-3 px-5 py-4 hover:bg-[var(--cream-dark)] transition-colors group",
-                          index % 2 === 1 && index === arr.length - 1 && arr.length % 2 === 0
+                          index % 2 === 1 &&
+                            index === arr.length - 1 &&
+                            arr.length % 2 === 0
                             ? ""
                             : "",
                           // index >= 2 ? 'md:border-t md:border-[var(--border-light)]' : ''
@@ -424,7 +465,9 @@ export default function Home() {
           {/* Section Header */}
           <AnimatedElement animation="slideUp" duration={0.8}>
             <div className="text-center mb-12">
-              <h2 className="font-heading text-4xl md:text-5xl mb-4">Experience</h2>
+              <h2 className="font-heading text-4xl md:text-5xl mb-4">
+                Experience
+              </h2>
               <p className="text-[var(--text-secondary)] max-w-xl mx-auto">
                 My professional journey so far
               </p>
@@ -451,12 +494,20 @@ export default function Home() {
                         title: exp.position,
                         employmentPeriod: exp.duration,
                         employmentType: "Full-time",
-                        description: exp.jobDescription.map((item) => `- ${item}`).join("\n"),
+                        description: exp.jobDescription
+                          .map((item) => `- ${item}`)
+                          .join("\n"),
                         icon: "code",
                         skills:
                           index === 0
                             ? ["Laravel", "React", "TypeScript", "PostgreSQL"]
-                            : ["Laravel", "React", "WordPress", "Git", "REST API"],
+                            : [
+                                "Laravel",
+                                "React",
+                                "WordPress",
+                                "Git",
+                                "REST API",
+                              ],
                         isExpanded: index === 0,
                       },
                     ],
@@ -469,7 +520,10 @@ export default function Home() {
       </section>
 
       {/* CTA/Contact Section */}
-      <section id="contact" className="py-24 px-4 md:px-8 relative overflow-hidden">
+      <section
+        id="contact"
+        className="py-24 px-4 md:px-8 relative overflow-hidden"
+      >
         {/* Decorative Elements */}
         <div className="absolute top-1/2 left-1/4 w-64 h-64 bg-[var(--green-light)] opacity-20 rounded-full blur-3xl animate-blob" />
         <div
@@ -486,8 +540,8 @@ export default function Home() {
 
           <AnimatedElement animation="slideUp" delay={0.2} duration={0.8}>
             <p className="text-lg text-[var(--text-secondary)] mb-8 max-w-xl mx-auto">
-              Have a project in mind? I'd love to hear about it. Let's create something amazing
-              together.
+              Have a project in mind? I'd love to hear about it. Let's create
+              something amazing together.
             </p>
           </AnimatedElement>
 
@@ -521,7 +575,9 @@ export default function Home() {
               <p className="text-sm text-[var(--text-muted)]">
                 © 2025 Adrian. All rights reserved.
               </p>
-              <p className="text-sm text-[var(--text-muted)] underline-reveal">radenadri.xyz</p>
+              <p className="text-sm text-[var(--text-muted)] underline-reveal">
+                radenadri.xyz
+              </p>
             </div>
           </div>
         </AnimatedElement>
@@ -537,17 +593,26 @@ export default function Home() {
           className="h-14 gap-3 rounded-2xl border-[var(--border-light)] bg-white/90 backdrop-blur-lg shadow-lg shadow-black/5"
         >
           <DockIcon className="bg-transparent hover:bg-[var(--green-light)]">
-            <a href="#home" className="flex items-center justify-center w-full h-full">
+            <a
+              href="#home"
+              className="flex items-center justify-center w-full h-full"
+            >
               <HomeIcon className="w-5 h-5 text-[var(--text-secondary)]" />
             </a>
           </DockIcon>
           <DockIcon className="bg-transparent hover:bg-[var(--green-light)]">
-            <a href="#works" className="flex items-center justify-center w-full h-full">
+            <a
+              href="#works"
+              className="flex items-center justify-center w-full h-full"
+            >
               <FolderOpen className="w-5 h-5 text-[var(--text-secondary)]" />
             </a>
           </DockIcon>
           <DockIcon className="bg-transparent hover:bg-[var(--green-light)]">
-            <a href="#experience" className="flex items-center justify-center w-full h-full">
+            <a
+              href="#experience"
+              className="flex items-center justify-center w-full h-full"
+            >
               <Briefcase className="w-5 h-5 text-[var(--text-secondary)]" />
             </a>
           </DockIcon>
@@ -562,7 +627,10 @@ export default function Home() {
             </a>
           </DockIcon>
           <DockIcon className="bg-transparent hover:bg-[var(--green-light)]">
-            <a href="#contact" className="flex items-center justify-center w-full h-full">
+            <a
+              href="#contact"
+              className="flex items-center justify-center w-full h-full"
+            >
               <Mail className="w-5 h-5 text-[var(--text-secondary)]" />
             </a>
           </DockIcon>
