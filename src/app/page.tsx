@@ -241,12 +241,12 @@ export default function Home() {
                   Primary Stack
                 </span>
                 <h3 className="font-heading text-3xl md:text-4xl mb-3 relative z-10">
-                  Fullstack
+                  Laravel Development
                 </h3>
                 <p className="text-[var(--text-secondary)] mb-6 max-w-md relative z-10">
-                  Building fullstack applications with latest technology.
-                  Focused on creating seamless user experiences and efficient
-                  server-side logic.
+                  Building fullstack Laravel applications with latest
+                  technology. Focused on creating seamless user experiences and
+                  efficient server-side logic.
                 </p>
                 <div className="flex flex-wrap gap-2 relative z-10">
                   <span className="badge badge-green">PHP</span>
@@ -269,12 +269,14 @@ export default function Home() {
                     CMS & Headless CMS
                   </h3>
                   <p className="text-sm text-[var(--text-secondary)]">
-                    WordPress and Payload for flexible content management.
+                    WordPress for flexible content management.
                   </p>
                 </div>
                 <div className="flex flex-wrap gap-2 mt-4">
                   <span className="badge badge-outline text-xs">WordPress</span>
-                  <span className="badge badge-outline text-xs">Payload</span>
+                  <span className="badge badge-outline text-xs">
+                    FilamentPHP
+                  </span>
                 </div>
               </StackBentoCard>
 
@@ -292,6 +294,7 @@ export default function Home() {
                   <span className="badge badge-outline text-xs">
                     React Native
                   </span>
+                  <span className="badge badge-outline text-xs">Flutter</span>
                 </div>
               </StackBentoCard>
 
