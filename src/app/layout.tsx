@@ -21,11 +21,11 @@ const syncopate = Syncopate({
 });
 
 export const metadata: Metadata = {
-  title: "Adriana Eka Prayudha - Fullstack Engineer",
+  title: "Adriana Eka Prayudha - Fullstack Developer",
   description:
-    "Fullstack Engineer specializing in modern web and mobile technologies. Building usable, beautiful apps with clean code & minimal design.",
+    "Fullstack Developer specializing in modern web and mobile technologies. Building usable, beautiful apps with clean code & minimal design.",
   keywords: [
-    "Fullstack Engineer",
+    "Fullstack Developer",
     "Web Developer",
     "Mobile Developer",
     "PHP",
@@ -38,16 +38,17 @@ export const metadata: Metadata = {
   authors: [{ name: "Adriana Eka Prayudha" }],
   creator: "Adriana Eka Prayudha",
   openGraph: {
-    title: "Adriana Eka Prayudha - Fullstack Engineer",
+    title: "Adriana Eka Prayudha - Fullstack Developer",
     description:
-      "Fullstack Engineer specializing in modern web and mobile technologies. Building usable, beautiful web apps with clean code & minimal design.",
+      "Fullstack Developer specializing in modern web and mobile technologies. Building usable, beautiful web apps with clean code & minimal design.",
     type: "website",
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Adriana Eka Prayudha - Fullstack Engineer",
-    description: "Fullstack Engineer specializing in modern web and mobile technologies.",
+    title: "Adriana Eka Prayudha - Fullstack Developer",
+    description:
+      "Fullstack Developer specializing in modern web and mobile technologies.",
   },
   robots: {
     index: true,

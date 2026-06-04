@@ -4,23 +4,14 @@ import { useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Inter, Instrument_Serif } from "next/font/google";
-import {
-  Home as HomeIcon,
-  Briefcase,
-  FolderOpen,
-  Mail,
-  FileText,
-} from "lucide-react";
+import { Home as HomeIcon, Briefcase, FolderOpen, Mail, FileText } from "lucide-react";
 import { cn } from "@/lib/utils";
 import works from "@/data/works";
 import experiences from "@/data/experiences";
 import techStack from "@/data/tech-stack";
 import { AnimatedElement, AnimatedText } from "@/components/animated-element";
 import { StackBento, StackBentoCard } from "@/components/stack-bento";
-import {
-  WorkExperience,
-  type ExperienceItemType,
-} from "@/components/ui/work-experience";
+import { WorkExperience, type ExperienceItemType } from "@/components/ui/work-experience";
 import { Marquee } from "@/components/ui/marquee";
 import { Dock, DockIcon } from "@/components/ui/dock";
 import Clarity from "@microsoft/clarity";
@@ -82,10 +73,7 @@ export default function Home() {
       </nav>
 
       {/* Hero Section */}
-      <section
-        id="home"
-        className="pt-32 pb-20 px-4 md:px-8 relative overflow-hidden"
-      >
+      <section id="home" className="pt-32 pb-20 px-4 md:px-8 relative overflow-hidden">
         {/* Decorative Blobs */}
         <div className="absolute top-20 left-10 w-72 h-72 bg-[var(--green-light)] opacity-30 rounded-full blur-3xl animate-blob" />
         <div
@@ -125,9 +113,8 @@ export default function Home() {
           {/* Subheading */}
           <AnimatedElement animation="slideUp" delay={0.4} duration={1}>
             <p className="text-lg md:text-xl text-[var(--text-secondary)] max-w-2xl mx-auto mb-8">
-              Based in Bandung, Indonesia. Building modern web and mobile
-              applications with a focus on{" "}
-              <span className="highlight">functionality</span> and{" "}
+              Based in Bandung, Indonesia. Building modern web and mobile applications
+              with a focus on <span className="highlight">functionality</span> and{" "}
               <span className="highlight">aesthetics</span>.
             </p>
           </AnimatedElement>
@@ -140,14 +127,6 @@ export default function Home() {
                 className="btn-primary magnetic-hover animate-gentle-pulse"
               >
                 View My Work
-              </a>
-              <a
-                href="https://github.com/radenadri"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-secondary magnetic-hover"
-              >
-                GitHub Profile
               </a>
             </div>
           </AnimatedElement>
@@ -219,9 +198,7 @@ export default function Home() {
           {/* Section Header */}
           <AnimatedElement animation="slideUp" duration={0.8}>
             <div className="text-center mb-16">
-              <h2 className="font-heading text-4xl md:text-5xl mb-4">
-                My Stack
-              </h2>
+              <h2 className="font-heading text-4xl md:text-5xl mb-4">My Stack</h2>
               <p className="text-[var(--text-secondary)] max-w-xl mx-auto">
                 The tools I use to bring ideas to reality
               </p>
@@ -244,9 +221,8 @@ export default function Home() {
                   Laravel Development
                 </h3>
                 <p className="text-[var(--text-secondary)] mb-6 max-w-md relative z-10">
-                  Building fullstack Laravel applications with latest
-                  technology. Focused on creating seamless user experiences and
-                  efficient server-side logic.
+                  Building fullstack Laravel applications with latest technology. Focused
+                  on creating seamless user experiences and efficient server-side logic.
                 </p>
                 <div className="flex flex-wrap gap-2 relative z-10">
                   <span className="badge badge-green">PHP</span>
@@ -265,35 +241,27 @@ export default function Home() {
               {/* CMS Card */}
               <StackBentoCard className="p-6 rounded-2xl border border-[var(--border-light)] bg-[var(--cream-dark)] flex flex-col justify-between group hover:bg-white transition-all duration-300 hover:shadow-lg">
                 <div>
-                  <h3 className="font-heading text-2xl mb-2">
-                    CMS & Headless CMS
-                  </h3>
+                  <h3 className="font-heading text-2xl mb-2">CMS & Headless CMS</h3>
                   <p className="text-sm text-[var(--text-secondary)]">
                     WordPress for flexible content management.
                   </p>
                 </div>
                 <div className="flex flex-wrap gap-2 mt-4">
                   <span className="badge badge-outline text-xs">WordPress</span>
-                  <span className="badge badge-outline text-xs">
-                    FilamentPHP
-                  </span>
+                  <span className="badge badge-outline text-xs">FilamentPHP</span>
                 </div>
               </StackBentoCard>
 
               {/* Mobile Development Card */}
               <StackBentoCard className="p-6 rounded-2xl border border-[var(--border-light)] bg-[var(--cream-dark)] flex flex-col justify-between group hover:bg-white transition-all duration-300 hover:shadow-lg">
                 <div>
-                  <h3 className="font-heading text-2xl mb-2">
-                    Mobile Development
-                  </h3>
+                  <h3 className="font-heading text-2xl mb-2">Mobile Development</h3>
                   <p className="text-sm text-[var(--text-secondary)]">
                     Cross-platform mobile apps with native performance.
                   </p>
                 </div>
                 <div className="flex flex-wrap gap-2 mt-4">
-                  <span className="badge badge-outline text-xs">
-                    React Native
-                  </span>
+                  <span className="badge badge-outline text-xs">React Native</span>
                   <span className="badge badge-outline text-xs">Flutter</span>
                 </div>
               </StackBentoCard>
@@ -311,6 +279,8 @@ export default function Home() {
                     </p>
                   </div>
                   <div className="flex flex-wrap gap-2">
+                    <span className="badge badge-green">Claude Code</span>
+                    <span className="badge badge-green">n8n</span>
                     <span className="badge badge-green">PostgreSQL</span>
                     <span className="badge badge-green">SQLite</span>
                     <span className="badge badge-green">Redis</span>
@@ -330,9 +300,7 @@ export default function Home() {
           {/* Section Header */}
           <AnimatedElement animation="slideUp" duration={0.8}>
             <div className="text-center mb-16">
-              <h2 className="font-heading text-4xl md:text-5xl mb-4">
-                Selected Works
-              </h2>
+              <h2 className="font-heading text-4xl md:text-5xl mb-4">Selected Works</h2>
               <p className="text-[var(--text-secondary)] max-w-xl mx-auto">
                 Things I've built, designed, and brought to life
               </p>
@@ -394,16 +362,12 @@ export default function Home() {
           {/* Side Projects Section */}
           <AnimatedElement animation="slideUp" delay={0.2} duration={0.8}>
             <div>
-              <p className="text-sm text-[var(--text-muted)] mb-4">
-                Open Source
-              </p>
+              <p className="text-sm text-[var(--text-muted)] mb-4">Open Source</p>
               <div className="rounded-2xl border border-[var(--border-light)] bg-white overflow-hidden divide-y divide-[var(--border-light)]">
                 <div
                   className={cn(
                     "grid",
-                    works.filter((work) => work.type === "projects").length %
-                      2 ===
-                      1
+                    works.filter((work) => work.type === "projects").length % 2 === 1
                       ? "grid-cols-1"
                       : "grid-cols-1 md:grid-cols-2",
                     "divide-y md:divide-x divide-[var(--border-light)]",
@@ -456,6 +420,29 @@ export default function Home() {
                       </Link>
                     ))}
                 </div>
+                <a
+                  href="https://drive.google.com/file/d/1-1eIHSPg-kxl0oRBUJKmhhw3Nzv-hYat/view?usp=drive_link"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-3 px-5 py-4 hover:bg-[var(--cream-dark)] transition-colors group "
+                >
+                  <svg
+                    className="w-4 h-4 text-[var(--text-muted)] group-hover:text-[var(--green-primary)] transition-colors flex-shrink-0"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth={2}
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M7 17L17 7M17 7H7M17 7V17"
+                    />
+                  </svg>
+                  <span className="font-heading text-lg group-hover:text-[var(--green-primary)] transition-colors">
+                    See more work
+                  </span>
+                </a>
               </div>
             </div>
           </AnimatedElement>
@@ -468,9 +455,7 @@ export default function Home() {
           {/* Section Header */}
           <AnimatedElement animation="slideUp" duration={0.8}>
             <div className="text-center mb-12">
-              <h2 className="font-heading text-4xl md:text-5xl mb-4">
-                Experience
-              </h2>
+              <h2 className="font-heading text-4xl md:text-5xl mb-4">Experience</h2>
               <p className="text-[var(--text-secondary)] max-w-xl mx-auto">
                 My professional journey so far
               </p>
@@ -504,13 +489,7 @@ export default function Home() {
                         skills:
                           index === 0
                             ? ["Laravel", "React", "TypeScript", "PostgreSQL"]
-                            : [
-                                "Laravel",
-                                "React",
-                                "WordPress",
-                                "Git",
-                                "REST API",
-                              ],
+                            : ["Laravel", "React", "WordPress", "Git", "REST API"],
                         isExpanded: index === 0,
                       },
                     ],
@@ -523,10 +502,7 @@ export default function Home() {
       </section>
 
       {/* CTA/Contact Section */}
-      <section
-        id="contact"
-        className="py-24 px-4 md:px-8 relative overflow-hidden"
-      >
+      <section id="contact" className="py-24 px-4 md:px-8 relative overflow-hidden">
         {/* Decorative Elements */}
         <div className="absolute top-1/2 left-1/4 w-64 h-64 bg-[var(--green-light)] opacity-20 rounded-full blur-3xl animate-blob" />
         <div
@@ -543,8 +519,8 @@ export default function Home() {
 
           <AnimatedElement animation="slideUp" delay={0.2} duration={0.8}>
             <p className="text-lg text-[var(--text-secondary)] mb-8 max-w-xl mx-auto">
-              Have a project in mind? I'd love to hear about it. Let's create
-              something amazing together.
+              Have a project in mind? I'd love to hear about it. Let's create something
+              amazing together.
             </p>
           </AnimatedElement>
 
@@ -554,15 +530,15 @@ export default function Home() {
                 href="mailto:radenadri@gmail.com"
                 className="btn-primary text-lg px-8 py-4 magnetic-hover animate-gentle-pulse"
               >
-                Get in Touch
+                Get in touch
               </a>
               <a
-                href="https://github.com/radenadri"
+                href="https://pinkary.com/@radenadri"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-secondary text-lg px-8 py-4 magnetic-hover"
               >
-                View GitHub
+                More about me
               </a>
             </div>
           </AnimatedElement>
@@ -596,18 +572,12 @@ export default function Home() {
           className="h-14 gap-3 rounded-2xl border-[var(--border-light)] bg-white/90 backdrop-blur-lg shadow-lg shadow-black/5"
         >
           <DockIcon className="bg-transparent hover:bg-[var(--green-light)]">
-            <a
-              href="#home"
-              className="flex items-center justify-center w-full h-full"
-            >
+            <a href="#home" className="flex items-center justify-center w-full h-full">
               <HomeIcon className="w-5 h-5 text-[var(--text-secondary)]" />
             </a>
           </DockIcon>
           <DockIcon className="bg-transparent hover:bg-[var(--green-light)]">
-            <a
-              href="#works"
-              className="flex items-center justify-center w-full h-full"
-            >
+            <a href="#works" className="flex items-center justify-center w-full h-full">
               <FolderOpen className="w-5 h-5 text-[var(--text-secondary)]" />
             </a>
           </DockIcon>
@@ -630,10 +600,7 @@ export default function Home() {
             </a>
           </DockIcon>
           <DockIcon className="bg-transparent hover:bg-[var(--green-light)]">
-            <a
-              href="#contact"
-              className="flex items-center justify-center w-full h-full"
-            >
+            <a href="#contact" className="flex items-center justify-center w-full h-full">
               <Mail className="w-5 h-5 text-[var(--text-secondary)]" />
             </a>
           </DockIcon>
