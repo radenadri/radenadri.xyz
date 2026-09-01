@@ -1,20 +1,36 @@
 "use client";
 
-import { useRef } from "react";
+import Clarity from "@microsoft/clarity";
+import {
+  Briefcase,
+  FileText,
+  FolderOpen,
+  Home as HomeIcon,
+  Mail,
+} from "lucide-react";
+import dynamic from "next/dynamic";
+import { Instrument_Serif, Inter } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
-import { Inter, Instrument_Serif } from "next/font/google";
-import { Home as HomeIcon, Briefcase, FolderOpen, Mail, FileText } from "lucide-react";
-import { cn } from "@/lib/utils";
-import works from "@/data/works";
+import { useRef, useState } from "react";
+import { AnimatedElement } from "@/components/animated-element";
+import { loadOrPreloadPdf } from "@/components/flipbook/pdf-loader";
+import { StackBento, StackBentoCard } from "@/components/stack-bento";
+import { Dock, DockIcon } from "@/components/ui/dock";
+import { Marquee } from "@/components/ui/marquee";
+import {
+  type ExperienceItemType,
+  WorkExperience,
+} from "@/components/ui/work-experience";
 import experiences from "@/data/experiences";
 import techStack from "@/data/tech-stack";
-import { AnimatedElement, AnimatedText } from "@/components/animated-element";
-import { StackBento, StackBentoCard } from "@/components/stack-bento";
-import { WorkExperience, type ExperienceItemType } from "@/components/ui/work-experience";
-import { Marquee } from "@/components/ui/marquee";
-import { Dock, DockIcon } from "@/components/ui/dock";
-import Clarity from "@microsoft/clarity";
+import works from "@/data/works";
+import { cn } from "@/lib/utils";
+
+const FlipbookModal = dynamic(
+  () => import("@/components/flipbook/flipbook-modal"),
+  { ssr: false },
+);
 
 // Configure fonts
 const inter = Inter({
@@ -32,6 +48,7 @@ const PORTRAIT_IMAGE = "/avatar.png";
 
 export default function Home() {
   const pageRef = useRef<HTMLDivElement>(null);
+  const [isFlipbookOpen, setIsFlipbookOpen] = useState(false);
   const clients = works.filter((w) => w.type === "clients");
 
   const trackVisit = (tag: string) => {
@@ -73,7 +90,10 @@ export default function Home() {
       </nav>
 
       {/* Hero Section */}
-      <section id="home" className="pt-32 pb-20 px-4 md:px-8 relative overflow-hidden">
+      <section
+        id="home"
+        className="pt-32 pb-20 px-4 md:px-8 relative overflow-hidden"
+      >
         {/* Decorative Blobs */}
         <div className="absolute top-20 left-10 w-72 h-72 bg-[var(--green-light)] opacity-30 rounded-full blur-3xl animate-blob" />
         <div
@@ -113,8 +133,9 @@ export default function Home() {
           {/* Subheading */}
           <AnimatedElement animation="slideUp" delay={0.4} duration={1}>
             <p className="text-lg md:text-xl text-[var(--text-secondary)] max-w-2xl mx-auto mb-8">
-              Based in Bandung, Indonesia. Building modern web and mobile applications
-              with a focus on <span className="highlight">functionality</span> and{" "}
+              Based in Bandung, Indonesia. Building modern web and mobile
+              applications with a focus on{" "}
+              <span className="highlight">functionality</span> and{" "}
               <span className="highlight">aesthetics</span>.
             </p>
           </AnimatedElement>
@@ -198,7 +219,9 @@ export default function Home() {
           {/* Section Header */}
           <AnimatedElement animation="slideUp" duration={0.8}>
             <div className="text-center mb-16">
-              <h2 className="font-heading text-4xl md:text-5xl mb-4">My Stack</h2>
+              <h2 className="font-heading text-4xl md:text-5xl mb-4">
+                My Stack
+              </h2>
               <p className="text-[var(--text-secondary)] max-w-xl mx-auto">
                 The tools I use to bring ideas to reality
               </p>
@@ -218,17 +241,18 @@ export default function Home() {
                   Primary Stack
                 </span>
                 <h3 className="font-heading text-3xl md:text-4xl mb-3 relative z-10">
-                  Laravel Development
+                  Full Stack Development
                 </h3>
                 <p className="text-[var(--text-secondary)] mb-6 max-w-md relative z-10">
-                  Building fullstack Laravel applications with latest technology. Focused
-                  on creating seamless user experiences and efficient server-side logic.
+                  Building fullstack applications with latest technology.
+                  Focused on creating seamless user experiences and efficient
+                  server-side logic.
                 </p>
                 <div className="flex flex-wrap gap-2 relative z-10">
                   <span className="badge badge-green">PHP</span>
                   <span className="badge badge-green">Laravel</span>
                   <span className="badge badge-green">React</span>
-                  <span className="badge badge-green">Vue</span>
+                  <span className="badge badge-green">Next</span>
                   <span className="badge badge-green">Inertia.js</span>
                   <span className="badge badge-green">Tailwind CSS</span>
                   <span className="badge badge-green">Alpine.js</span>
@@ -241,27 +265,38 @@ export default function Home() {
               {/* CMS Card */}
               <StackBentoCard className="p-6 rounded-2xl border border-[var(--border-light)] bg-[var(--cream-dark)] flex flex-col justify-between group hover:bg-white transition-all duration-300 hover:shadow-lg">
                 <div>
-                  <h3 className="font-heading text-2xl mb-2">CMS & Headless CMS</h3>
+                  <h3 className="font-heading text-2xl mb-2">
+                    CMS & Headless CMS
+                  </h3>
                   <p className="text-sm text-[var(--text-secondary)]">
                     WordPress for flexible content management.
                   </p>
                 </div>
                 <div className="flex flex-wrap gap-2 mt-4">
                   <span className="badge badge-outline text-xs">WordPress</span>
-                  <span className="badge badge-outline text-xs">FilamentPHP</span>
+                  <span className="badge badge-outline text-xs">
+                    FilamentPHP
+                  </span>
+                  <span className="badge badge-outline text-xs">
+                    PayloadCMS
+                  </span>
                 </div>
               </StackBentoCard>
 
               {/* Mobile Development Card */}
               <StackBentoCard className="p-6 rounded-2xl border border-[var(--border-light)] bg-[var(--cream-dark)] flex flex-col justify-between group hover:bg-white transition-all duration-300 hover:shadow-lg">
                 <div>
-                  <h3 className="font-heading text-2xl mb-2">Mobile Development</h3>
+                  <h3 className="font-heading text-2xl mb-2">
+                    Mobile Development
+                  </h3>
                   <p className="text-sm text-[var(--text-secondary)]">
                     Cross-platform mobile apps with native performance.
                   </p>
                 </div>
                 <div className="flex flex-wrap gap-2 mt-4">
-                  <span className="badge badge-outline text-xs">React Native</span>
+                  <span className="badge badge-outline text-xs">
+                    React Native
+                  </span>
                   <span className="badge badge-outline text-xs">Flutter</span>
                 </div>
               </StackBentoCard>
@@ -300,7 +335,9 @@ export default function Home() {
           {/* Section Header */}
           <AnimatedElement animation="slideUp" duration={0.8}>
             <div className="text-center mb-16">
-              <h2 className="font-heading text-4xl md:text-5xl mb-4">Selected Works</h2>
+              <h2 className="font-heading text-4xl md:text-5xl mb-4">
+                Selected Works
+              </h2>
               <p className="text-[var(--text-secondary)] max-w-xl mx-auto">
                 Things I've built, designed, and brought to life
               </p>
@@ -310,7 +347,7 @@ export default function Home() {
           {/* Clients Section */}
           <AnimatedElement animation="slideUp" delay={0.1} duration={0.8}>
             <div className="mb-12">
-              <p className="text-sm text-[var(--text-muted)] mb-4">Clients</p>
+              <p className="text-sm text-[var(--text-muted)] mb-4">Live Work</p>
               <div className="rounded-2xl border border-[var(--border-light)] bg-white overflow-hidden divide-y divide-[var(--border-light)]">
                 <div
                   className={cn(
@@ -342,6 +379,7 @@ export default function Home() {
                         viewBox="0 0 24 24"
                         stroke="currentColor"
                         strokeWidth={2}
+                        aria-hidden="true"
                       >
                         <path
                           strokeLinecap="round"
@@ -354,95 +392,44 @@ export default function Home() {
                       </span>
                     </Link>
                   ))}
-                </div>
-              </div>
-            </div>
-          </AnimatedElement>
-
-          {/* Side Projects Section */}
-          <AnimatedElement animation="slideUp" delay={0.2} duration={0.8}>
-            <div>
-              <p className="text-sm text-[var(--text-muted)] mb-4">Open Source</p>
-              <div className="rounded-2xl border border-[var(--border-light)] bg-white overflow-hidden divide-y divide-[var(--border-light)]">
-                <div
-                  className={cn(
-                    "grid",
-                    works.filter((work) => work.type === "projects").length % 2 === 1
-                      ? "grid-cols-1"
-                      : "grid-cols-1 md:grid-cols-2",
-                    "divide-y md:divide-x divide-[var(--border-light)]",
-                  )}
-                >
-                  {works
-                    .filter((work) => work.type === "projects")
-                    .sort((a, b) => a.title.localeCompare(b.title))
-                    .map((work, index, arr) => (
-                      <Link
-                        key={work.slug}
-                        href={work.direct ? work.url : `/work/${work.slug}`}
-                        target={work.direct ? "_blank" : "_self"}
-                        className={cn(
-                          "flex items-center gap-3 px-5 py-4 hover:bg-[var(--cream-dark)] transition-colors group",
-                          index % 2 === 1 &&
-                            index === arr.length - 1 &&
-                            arr.length % 2 === 0
-                            ? ""
-                            : "",
-                          // index >= 2 ? 'md:border-t md:border-[var(--border-light)]' : ''
-                        )}
-                      >
-                        <div className="flex items-center gap-3">
-                          <svg
-                            className="w-4 h-4 text-[var(--text-muted)] group-hover:text-[var(--green-primary)] transition-colors flex-shrink-0"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                            strokeWidth={2}
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              d="M7 17L17 7M17 7H7M17 7V17"
-                            />
-                          </svg>
-                          <span className="font-heading text-lg group-hover:text-[var(--green-primary)] transition-colors">
-                            {work.title}
-                          </span>
-                        </div>
-                        {/* GitHub Icon */}
-                        <svg
-                          className="w-5 h-5 text-[var(--text-muted)] group-hover:text-[var(--green-primary)] transition-colors flex-shrink-0"
-                          fill="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
-                        </svg>
-                      </Link>
-                    ))}
-                </div>
-                <a
-                  href="https://drive.google.com/file/d/1-1eIHSPg-kxl0oRBUJKmhhw3Nzv-hYat/view?usp=drive_link"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-3 px-5 py-4 hover:bg-[var(--cream-dark)] transition-colors group "
-                >
-                  <svg
-                    className="w-4 h-4 text-[var(--text-muted)] group-hover:text-[var(--green-primary)] transition-colors flex-shrink-0"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    strokeWidth={2}
+                  <button
+                    type="button"
+                    onMouseEnter={() => {
+                      loadOrPreloadPdf("/portfolio.pdf").catch(() => {});
+                    }}
+                    onTouchStart={() => {
+                      loadOrPreloadPdf("/portfolio.pdf").catch(() => {});
+                    }}
+                    onClick={() => {
+                      trackVisit("see_more_work_clicked");
+                      setIsFlipbookOpen(true);
+                    }}
+                    className="w-full flex items-center justify-between px-5 py-4 hover:bg-[var(--cream-dark)] transition-colors group text-left cursor-pointer"
                   >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M7 17L17 7M17 7H7M17 7V17"
-                    />
-                  </svg>
-                  <span className="font-heading text-lg group-hover:text-[var(--green-primary)] transition-colors">
-                    See more work
-                  </span>
-                </a>
+                    <div className="flex items-center gap-3">
+                      <svg
+                        className="w-4 h-4 text-[var(--text-muted)] group-hover:text-[var(--green-primary)] transition-colors flex-shrink-0"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        strokeWidth={2}
+                        aria-hidden="true"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+                        />
+                      </svg>
+                      <span className="font-heading text-lg group-hover:text-[var(--green-primary)] transition-colors">
+                        See more work
+                      </span>
+                    </div>
+                    <span className="text-[11px] px-2.5 py-1 rounded-full bg-[var(--green-light)] text-[var(--green-dark)] font-medium transition-transform group-hover:scale-105">
+                      Interactive Flipbook
+                    </span>
+                  </button>
+                </div>
               </div>
             </div>
           </AnimatedElement>
@@ -455,7 +442,9 @@ export default function Home() {
           {/* Section Header */}
           <AnimatedElement animation="slideUp" duration={0.8}>
             <div className="text-center mb-12">
-              <h2 className="font-heading text-4xl md:text-5xl mb-4">Experience</h2>
+              <h2 className="font-heading text-4xl md:text-5xl mb-4">
+                Experience
+              </h2>
               <p className="text-[var(--text-secondary)] max-w-xl mx-auto">
                 My professional journey so far
               </p>
@@ -489,7 +478,13 @@ export default function Home() {
                         skills:
                           index === 0
                             ? ["Laravel", "React", "TypeScript", "PostgreSQL"]
-                            : ["Laravel", "React", "WordPress", "Git", "REST API"],
+                            : [
+                                "Laravel",
+                                "React",
+                                "WordPress",
+                                "Git",
+                                "REST API",
+                              ],
                         isExpanded: index === 0,
                       },
                     ],
@@ -502,7 +497,10 @@ export default function Home() {
       </section>
 
       {/* CTA/Contact Section */}
-      <section id="contact" className="py-24 px-4 md:px-8 relative overflow-hidden">
+      <section
+        id="contact"
+        className="py-24 px-4 md:px-8 relative overflow-hidden"
+      >
         {/* Decorative Elements */}
         <div className="absolute top-1/2 left-1/4 w-64 h-64 bg-[var(--green-light)] opacity-20 rounded-full blur-3xl animate-blob" />
         <div
@@ -519,8 +517,8 @@ export default function Home() {
 
           <AnimatedElement animation="slideUp" delay={0.2} duration={0.8}>
             <p className="text-lg text-[var(--text-secondary)] mb-8 max-w-xl mx-auto">
-              Have a project in mind? I'd love to hear about it. Let's create something
-              amazing together.
+              Have a project in mind? I'd love to hear about it. Let's create
+              something amazing together.
             </p>
           </AnimatedElement>
 
@@ -572,12 +570,18 @@ export default function Home() {
           className="h-14 gap-3 rounded-2xl border-[var(--border-light)] bg-white/90 backdrop-blur-lg shadow-lg shadow-black/5"
         >
           <DockIcon className="bg-transparent hover:bg-[var(--green-light)]">
-            <a href="#home" className="flex items-center justify-center w-full h-full">
+            <a
+              href="#home"
+              className="flex items-center justify-center w-full h-full"
+            >
               <HomeIcon className="w-5 h-5 text-[var(--text-secondary)]" />
             </a>
           </DockIcon>
           <DockIcon className="bg-transparent hover:bg-[var(--green-light)]">
-            <a href="#works" className="flex items-center justify-center w-full h-full">
+            <a
+              href="#works"
+              className="flex items-center justify-center w-full h-full"
+            >
               <FolderOpen className="w-5 h-5 text-[var(--text-secondary)]" />
             </a>
           </DockIcon>
@@ -600,12 +604,23 @@ export default function Home() {
             </a>
           </DockIcon>
           <DockIcon className="bg-transparent hover:bg-[var(--green-light)]">
-            <a href="#contact" className="flex items-center justify-center w-full h-full">
+            <a
+              href="#contact"
+              className="flex items-center justify-center w-full h-full"
+            >
               <Mail className="w-5 h-5 text-[var(--text-secondary)]" />
             </a>
           </DockIcon>
         </Dock>
       </div>
+
+      {/* Interactive PDF Flipbook Modal */}
+      <FlipbookModal
+        isOpen={isFlipbookOpen}
+        onClose={() => setIsFlipbookOpen(false)}
+        pdfUrl="/portfolio.pdf"
+        title="Selected Works & Archive"
+      />
     </div>
   );
 }

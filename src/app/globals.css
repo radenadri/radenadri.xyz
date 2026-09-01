@@ -1,4 +1,4 @@
-@import 'tailwindcss';
+@import "tailwindcss";
 @import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
@@ -68,48 +68,48 @@
 
 :root {
   --radius: 0.625rem;
-  --background: #FFFDF9;
+  --background: #fffdf9;
   --foreground: #1a1a1a;
   --card: #ffffff;
   --card-foreground: #1a1a1a;
   --popover: #ffffff;
   --popover-foreground: #1a1a1a;
   --primary: #1a1a1a;
-  --primary-foreground: #FFFDF9;
+  --primary-foreground: #fffdf9;
   --secondary: #f5f5f0;
   --secondary-foreground: #1a1a1a;
   --muted: #f5f5f0;
   --muted-foreground: #666666;
-  --accent: #4A7C59;
+  --accent: #4a7c59;
   --accent-foreground: #ffffff;
   --destructive: #dc2626;
   --border: #e5e5e0;
   --input: #e5e5e0;
-  --ring: #4A7C59;
+  --ring: #4a7c59;
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
   --chart-4: oklch(0.828 0.189 84.429);
   --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: #FFFDF9;
+  --sidebar: #fffdf9;
   --sidebar-foreground: #1a1a1a;
   --sidebar-primary: #1a1a1a;
-  --sidebar-primary-foreground: #FFFDF9;
+  --sidebar-primary-foreground: #fffdf9;
   --sidebar-accent: #f5f5f0;
   --sidebar-accent-foreground: #1a1a1a;
   --sidebar-border: #e5e5e0;
-  --sidebar-ring: #4A7C59;
+  --sidebar-ring: #4a7c59;
 
   /* New color palette based on Voicenotes */
-  --cream: #FFFDF9;
-  --cream-dark: #FAF8F3;
+  --cream: #fffdf9;
+  --cream-dark: #faf8f3;
   --text-primary: #1a1a1a;
   --text-secondary: #666666;
   --text-muted: #999999;
-  --green-primary: #4A7C59;
-  --green-light: #E8F5E9;
-  --green-dark: #2E5339;
-  --yellow-highlight: #FEF7CD;
+  --green-primary: #4a7c59;
+  --green-light: #e8f5e9;
+  --green-dark: #2e5339;
+  --yellow-highlight: #fef7cd;
   --border-light: #e5e5e0;
   --border-medium: #d4d4cf;
 }
@@ -149,11 +149,11 @@
 
 /* Typography */
 .font-heading {
-  font-family: var(--font-instrument-serif), 'Instrument Serif', serif;
+  font-family: var(--font-instrument-serif), "Instrument Serif", serif;
 }
 
 .font-body {
-  font-family: var(--font-inter), 'Inter', sans-serif;
+  font-family: var(--font-inter), "Inter", sans-serif;
 }
 
 /* Highlight text with yellow background like Voicenotes */
@@ -303,7 +303,6 @@
 
 /* Floating animation for decorative elements */
 @keyframes float {
-
   0%,
   100% {
     transform: translateY(0px) rotate(0deg);
@@ -328,7 +327,6 @@
 
 /* Gentle pulse for CTA elements */
 @keyframes gentle-pulse {
-
   0%,
   100% {
     box-shadow: 0 0 0 0 rgba(74, 124, 89, 0.4);
@@ -375,10 +373,12 @@
 }
 
 .animate-shimmer {
-  background: linear-gradient(90deg,
-      transparent 0%,
-      rgba(74, 124, 89, 0.1) 50%,
-      transparent 100%);
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(74, 124, 89, 0.1) 50%,
+    transparent 100%
+  );
   background-size: 200% 100%;
   animation: shimmer 3s ease-in-out infinite;
 }
@@ -404,7 +404,6 @@
 
 /* Blob animation for decorative backgrounds */
 @keyframes blob {
-
   0%,
   100% {
     border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
@@ -429,7 +428,6 @@
 
 /* Text gradient animation */
 @keyframes text-gradient {
-
   0%,
   100% {
     background-position: 0% center;
@@ -441,12 +439,14 @@
 }
 
 .animate-text-gradient {
-  background: linear-gradient(90deg,
-      var(--green-dark) 0%,
-      var(--green-primary) 25%,
-      var(--green-dark) 50%,
-      var(--green-primary) 75%,
-      var(--green-dark) 100%);
+  background: linear-gradient(
+    90deg,
+    var(--green-dark) 0%,
+    var(--green-primary) 25%,
+    var(--green-dark) 50%,
+    var(--green-primary) 75%,
+    var(--green-dark) 100%
+  );
   background-size: 200% auto;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -455,38 +455,38 @@
 }
 
 /* Staggered reveal for list items */
-.stagger-reveal>* {
+.stagger-reveal > * {
   opacity: 0;
   transform: translateY(20px);
 }
 
-.stagger-reveal.active>* {
+.stagger-reveal.active > * {
   opacity: 1;
   transform: translateY(0);
   transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1);
 }
 
-.stagger-reveal.active>*:nth-child(1) {
+.stagger-reveal.active > *:nth-child(1) {
   transition-delay: 0s;
 }
 
-.stagger-reveal.active>*:nth-child(2) {
+.stagger-reveal.active > *:nth-child(2) {
   transition-delay: 0.1s;
 }
 
-.stagger-reveal.active>*:nth-child(3) {
+.stagger-reveal.active > *:nth-child(3) {
   transition-delay: 0.2s;
 }
 
-.stagger-reveal.active>*:nth-child(4) {
+.stagger-reveal.active > *:nth-child(4) {
   transition-delay: 0.3s;
 }
 
-.stagger-reveal.active>*:nth-child(5) {
+.stagger-reveal.active > *:nth-child(5) {
   transition-delay: 0.4s;
 }
 
-.stagger-reveal.active>*:nth-child(6) {
+.stagger-reveal.active > *:nth-child(6) {
   transition-delay: 0.5s;
 }
 
@@ -496,7 +496,7 @@
 }
 
 .underline-reveal::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: -2px;
   left: 0;
@@ -610,6 +610,47 @@
 /* Remove green from prose background */
 .experience-themed [class*="bg-muted/50"] {
   background: transparent;
+}
+
+/* Flipbook 3D Page Turn Keyframes */
+@keyframes page-flip-right {
+  0% {
+    transform: rotateY(0deg) scale(1);
+    opacity: 1;
+  }
+  40% {
+    transform: rotateY(-35deg) skewY(-1deg) scale(0.96);
+    box-shadow: -15px 15px 35px rgba(0, 0, 0, 0.25);
+    opacity: 0.85;
+  }
+  100% {
+    transform: rotateY(0deg) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes page-flip-left {
+  0% {
+    transform: rotateY(0deg) scale(1);
+    opacity: 1;
+  }
+  40% {
+    transform: rotateY(35deg) skewY(1deg) scale(0.96);
+    box-shadow: 15px 15px 35px rgba(0, 0, 0, 0.25);
+    opacity: 0.85;
+  }
+  100% {
+    transform: rotateY(0deg) scale(1);
+    opacity: 1;
+  }
+}
+
+.animate-page-flip-right {
+  animation: page-flip-right 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.animate-page-flip-left {
+  animation: page-flip-left 0.35s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 @layer base {
