@@ -364,17 +364,16 @@ export default function Home() {
                       href={work.direct ? work.url : `/work/${work.slug}`}
                       target={work.direct ? "_blank" : "_self"}
                       className={cn(
-                        "flex items-center gap-3 px-5 py-4 hover:bg-[var(--cream-dark)] transition-colors group",
+                        "flex items-start gap-3 px-5 py-4 hover:bg-[var(--cream-dark)] transition-all duration-300 group",
                         index % 2 === 1 &&
                           index === arr.length - 1 &&
                           arr.length % 2 === 0
                           ? ""
                           : "",
-                        // index >= 2 ? 'md:border-t md:border-[var(--border-light)]' : ''
                       )}
                     >
                       <svg
-                        className="w-4 h-4 text-[var(--text-muted)] group-hover:text-[var(--green-primary)] transition-colors flex-shrink-0"
+                        className="w-4 h-4 text-[var(--text-muted)] group-hover:text-[var(--green-primary)] transition-all duration-300 flex-shrink-0 mt-1 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="currentColor"
@@ -387,9 +386,20 @@ export default function Home() {
                           d="M7 17L17 7M17 7H7M17 7V17"
                         />
                       </svg>
-                      <span className="font-heading text-lg group-hover:text-[var(--green-primary)] transition-colors">
-                        {work.title}
-                      </span>
+                      <div className="flex-1 min-w-0">
+                        <span className="font-heading text-lg group-hover:text-[var(--green-primary)] transition-colors block">
+                          {work.title}
+                        </span>
+                        {work.description ? (
+                          <div className="md:grid md:grid-rows-[0fr] md:group-hover:grid-rows-[1fr] transition-[grid-template-rows] duration-300 ease-out">
+                            <div className="overflow-hidden opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300 ease-out">
+                              <p className="text-xs text-[var(--text-secondary)] leading-relaxed pt-1 line-clamp-2 md:line-clamp-none">
+                                {work.description}
+                              </p>
+                            </div>
+                          </div>
+                        ) : null}
+                      </div>
                     </Link>
                   ))}
                   <button
