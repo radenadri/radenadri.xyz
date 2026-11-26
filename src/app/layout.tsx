@@ -1,29 +1,30 @@
-import type { Metadata } from "next";
-import { Space_Mono, Syncopate } from "next/font/google";
-import { Layout } from "@/components/ds";
-import { ThemeProvider } from "@/components/theme-provider";
-import { PreloaderProvider } from "@/components/preloader-provider";
-import Script from "next/script";
 import Clarity from "@microsoft/clarity";
+import type { Metadata } from "next";
+import { JetBrains_Mono, Urbanist } from "next/font/google";
+import Script from "next/script";
+import { Layout } from "@/components/ds";
+import { PreloaderProvider } from "@/components/preloader-provider";
+import { SmoothScrollProvider } from "@/components/smooth-scroll-provider";
+import { ThemeProvider } from "@/components/theme-provider";
 
 import "./globals.css";
 
-const spaceMono = Space_Mono({
+const urbanist = Urbanist({
   subsets: ["latin"],
-  weight: ["400", "700"],
-  variable: "--font-space-mono",
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-urbanist",
 });
 
-const syncopate = Syncopate({
+const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
-  weight: ["400", "700"],
-  variable: "--font-syncopate",
+  weight: ["400", "500"],
+  variable: "--font-jetbrains-mono",
 });
 
 export const metadata: Metadata = {
-  title: "Adriana Eka Prayudha - Fullstack Developer",
+  title: "Adriana Eka Prayudha — Artistry and Engineering",
   description:
-    "Fullstack Developer specializing in modern web and mobile technologies. Building usable, beautiful apps with clean code & minimal design.",
+    "Fullstack Developer based in Bandung, Indonesia. Building modern web and mobile systems with minimal design.",
   keywords: [
     "Fullstack Developer",
     "Web Developer",
@@ -38,15 +39,15 @@ export const metadata: Metadata = {
   authors: [{ name: "Adriana Eka Prayudha" }],
   creator: "Adriana Eka Prayudha",
   openGraph: {
-    title: "Adriana Eka Prayudha - Fullstack Developer",
+    title: "Adriana Eka Prayudha — Artistry and Engineering",
     description:
-      "Fullstack Developer specializing in modern web and mobile technologies. Building usable, beautiful web apps with clean code & minimal design.",
+      "Fullstack Developer based in Bandung, Indonesia. Building modern web and mobile systems with clean code & minimal design.",
     type: "website",
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Adriana Eka Prayudha - Fullstack Developer",
+    title: "Adriana Eka Prayudha — Artistry and Engineering",
     description:
       "Fullstack Developer specializing in modern web and mobile technologies.",
   },
@@ -56,6 +57,10 @@ export const metadata: Metadata = {
   },
 };
 
+/**
+ * Root layout configuring Soren-style Urbanist + JetBrains Mono typography,
+ * Lenis smooth scrolling, and dark theme polarity.
+ */
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -65,15 +70,18 @@ export default function RootLayout({
   Clarity.init(projectId);
 
   return (
-    <Layout className={`${spaceMono.variable} ${syncopate.variable}`}>
-      <body className="antialiased overflow-x-hidden">
-        <ThemeProvider defaultTheme="system" storageKey="portfolio-theme">
-          <PreloaderProvider>{children}</PreloaderProvider>
+    <Layout className={`dark ${urbanist.variable} ${jetbrainsMono.variable}`}>
+      <body className="antialiased bg-[hsl(0_0%_7.5%)] text-[hsl(0_0%_90%)] selection:bg-[hsl(0_0%_90%)] selection:text-[hsl(0_0%_7.5%)]">
+        <ThemeProvider defaultTheme="dark" storageKey="portfolio-theme">
+          <SmoothScrollProvider>
+            <PreloaderProvider>{children}</PreloaderProvider>
+          </SmoothScrollProvider>
         </ThemeProvider>
       </body>
       <Script
         id="microsoft-clarity-init"
         strategy="afterInteractive"
+        // biome-ignore lint/security/noDangerouslySetInnerHtml: Microsoft Clarity initialization snippet
         dangerouslySetInnerHTML={{
           __html: `(function(c,l,a,r,i,t,y){
                       c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};

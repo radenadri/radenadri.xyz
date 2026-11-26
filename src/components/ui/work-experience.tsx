@@ -7,7 +7,7 @@ import {
   GraduationCapIcon,
 } from "lucide-react";
 import Image from "next/image";
-import React from "react";
+import type React from "react";
 import ReactMarkdown from "react-markdown";
 
 import {
@@ -102,7 +102,7 @@ export function ExperienceItem({
               unoptimized
             />
           ) : (
-            <span className="flex size-2 rounded-full bg-zinc-300 dark:bg-zinc-600" />
+            <span className="flex size-2 bg-[#e4e3db]/50" />
           )}
         </div>
 
@@ -111,10 +111,9 @@ export function ExperienceItem({
         </h3>
 
         {experience.isCurrentEmployer && (
-          <span className="relative flex items-center justify-center">
-            <span className="absolute inline-flex size-3 animate-ping rounded-full bg-info opacity-50" />
-            <span className="relative inline-flex size-2 rounded-full bg-info" />
-            <span className="sr-only">Current Employer</span>
+          <span className="inline-flex items-center gap-1.5 border border-[#e4e3db]/25 px-2 py-0.5 font-mono text-[10px] uppercase tracking-[0.1em] text-[#e4e3db]">
+            <span className="inline-block size-1.5 bg-[#e4e3db]" />
+            <span>Current</span>
           </span>
         )}
       </div>
@@ -191,8 +190,8 @@ export function ExperiencePositionItem({
 
           {Array.isArray(position.skills) && position.skills.length > 0 && (
             <ul className="flex flex-wrap gap-1.5 pt-2 pl-9">
-              {position.skills.map((skill, index) => (
-                <li key={index} className="flex">
+              {position.skills.map((skill) => (
+                <li key={skill} className="flex">
                   <Skill>{skill}</Skill>
                 </li>
               ))}
@@ -211,7 +210,7 @@ function Prose({ className, ...props }: React.ComponentProps<"div">) {
         "prose prose-sm max-w-none font-mono text-foreground prose-zinc dark:prose-invert",
         "prose-a:font-medium prose-a:break-words prose-a:text-foreground prose-a:underline prose-a:underline-offset-4",
         "prose-code:rounded-md prose-code:border prose-code:bg-muted/50 prose-code:px-[0.3rem] prose-code:py-[0.2rem] prose-code:text-sm prose-code:font-normal prose-code:before:content-none prose-code:after:content-none",
-        className
+        className,
       )}
       {...props}
     />
@@ -223,7 +222,7 @@ function Skill({ className, ...props }: React.ComponentProps<"span">) {
     <span
       className={cn(
         "inline-flex items-center rounded-lg border bg-muted/50 px-1.5 py-0.5 font-mono text-xs text-muted-foreground",
-        className
+        className,
       )}
       {...props}
     />

@@ -1,74 +1,53 @@
-import Link from 'next/link';
-import type { Metadata } from 'next';
-import { Inter, Instrument_Serif } from 'next/font/google';
-import { cn } from '@/lib/utils';
-
-const inter = Inter({
-  subsets: ['latin'],
-  variable: '--font-inter',
-});
-
-const instrumentSerif = Instrument_Serif({
-  subsets: ['latin'],
-  weight: ['400'],
-  variable: '--font-instrument-serif',
-});
+import type { Metadata } from "next";
+import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: 'Work — Adriana Eka Prayudha',
-  description: 'Case studies and detailed write-ups of selected work.',
+  title: "Work — Adriana Eka Prayudha",
+  description: "Case studies and detailed write-ups of selected work.",
 };
 
+/**
+ * Shared 2024-04-CGMWT (Soren) page-post shell for MDX case studies under /work/*.
+ */
 export default function WorkLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <div
-      className={cn(
-        inter.variable,
-        instrumentSerif.variable,
-        'font-body relative min-h-screen w-full overflow-x-hidden bg-[var(--cream)] text-[var(--text-primary)]'
-      )}
-    >
-      {/* Subtle background pattern */}
-      <div className="pointer-events-none fixed inset-0 opacity-30">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_var(--green-light),_transparent_50%)]" />
-      </div>
-
+    <div className="work-soren relative min-h-screen w-full overflow-x-clip bg-[hsl(0_0%_7.5%)] text-[hsl(0_0%_90%)]">
       <div className="relative z-10 flex min-h-screen w-full flex-col">
         {/* Header */}
-        <header className="sticky top-0 w-full border-b border-[var(--border-light)] bg-[var(--cream)]/80 backdrop-blur-md z-50">
-          <div className="mx-auto flex w-full max-w-4xl items-center justify-between px-4 py-4 sm:px-8">
+        <header className="sticky top-0 z-50 w-full border-b border-[hsl(0_0%_15%)] bg-[hsl(0_0%_7.5%)]/90 backdrop-blur-md">
+          <div className="mx-auto flex w-full lg:w-[50%] items-center justify-between px-4 py-4">
             <Link
               href="/"
-              className="flex items-center gap-2 text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"
+              className="inline-flex items-center gap-2 text-[14px] font-medium text-[hsl(0_0%_60%)] hover:text-[hsl(0_0%_90%)] transition-colors"
             >
-              <span>←</span>
+              <span aria-hidden="true">←</span>
               <span>Back to home</span>
             </Link>
-            <span className="text-xs font-medium text-[var(--green-primary)] uppercase tracking-wider">
+            <span className="font-mono text-[12px] text-[hsl(0_0%_40%)]">
               Case Study
             </span>
           </div>
         </header>
 
-        {/* Main Content */}
-        <main className="mx-auto w-full max-w-4xl grow px-4 py-12 sm:px-8 lg:px-0">
-          <article className="flex w-full flex-col gap-12">{children}</article>
+        {/* Main Content — Soren 50% centered page-post */}
+        <main className="mx-auto w-full lg:w-[50%] grow px-4 py-12">
+          <article className="flex w-full flex-col gap-10">{children}</article>
         </main>
 
         {/* Footer */}
-        <footer className="border-t border-[var(--border-light)] py-8">
-          <div className="mx-auto max-w-4xl px-4 sm:px-8 flex items-center justify-between">
+        <footer className="border-t border-[hsl(0_0%_15%)] py-6">
+          <div className="mx-auto flex w-full lg:w-[50%] items-center justify-between px-4">
             <Link
               href="/#works"
-              className="text-sm text-[var(--text-secondary)] hover:text-[var(--green-primary)] transition-colors"
+              className="text-[14px] text-[hsl(0_0%_60%)] hover:text-[hsl(0_0%_90%)] transition-colors"
             >
               ← View all works
             </Link>
-            <p className="text-xs text-[var(--text-muted)]">
+            <p className="font-mono text-[12px] text-[hsl(0_0%_40%)]">
               radenadri.xyz
             </p>
           </div>

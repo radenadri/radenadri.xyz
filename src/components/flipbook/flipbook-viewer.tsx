@@ -1,6 +1,6 @@
 "use client";
 
-import { BookOpen, ChevronLeft, ChevronRight, Loader2 } from "lucide-react";
+import { ChevronLeft, ChevronRight, Loader2 } from "lucide-react";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 import { getCachedPdf, loadOrPreloadPdf, type PageData } from "./pdf-loader";
@@ -173,7 +173,7 @@ export function FlipbookViewer({
           type="button"
           onClick={handlePrevPage}
           aria-label="Previous Slide"
-          className="absolute left-2 md:left-6 top-1/2 -translate-y-1/2 z-30 w-11 h-11 rounded-full bg-white/90 hover:bg-white text-[var(--text-primary)] hover:text-[var(--green-primary)] border border-[var(--border-light)] shadow-lg backdrop-blur-md flex items-center justify-center transition-all duration-200 hover:scale-105 active:scale-95 cursor-pointer"
+          className="absolute left-2 md:left-6 top-1/2 -translate-y-1/2 z-30 w-11 h-11 rounded-[40px] bg-[hsl(0_0%_12.5%)] hover:bg-[hsl(0_0%_90%)] text-[hsl(0_0%_90%)] hover:text-[hsl(0_0%_7.5%)] border border-[hsl(0_0%_15%)] backdrop-blur-md flex items-center justify-center transition-all duration-200 hover:scale-105 active:scale-95 cursor-pointer"
         >
           <ChevronLeft className="w-6 h-6" />
         </button>
@@ -185,7 +185,7 @@ export function FlipbookViewer({
           type="button"
           onClick={handleNextPage}
           aria-label="Next Slide"
-          className="absolute right-2 md:right-6 top-1/2 -translate-y-1/2 z-30 w-11 h-11 rounded-full bg-white/90 hover:bg-white text-[var(--text-primary)] hover:text-[var(--green-primary)] border border-[var(--border-light)] shadow-lg backdrop-blur-md flex items-center justify-center transition-all duration-200 hover:scale-105 active:scale-95 cursor-pointer"
+          className="absolute right-2 md:right-6 top-1/2 -translate-y-1/2 z-30 w-11 h-11 rounded-[40px] bg-[hsl(0_0%_12.5%)] hover:bg-[hsl(0_0%_90%)] text-[hsl(0_0%_90%)] hover:text-[hsl(0_0%_7.5%)] border border-[hsl(0_0%_15%)] backdrop-blur-md flex items-center justify-center transition-all duration-200 hover:scale-105 active:scale-95 cursor-pointer"
         >
           <ChevronRight className="w-6 h-6" />
         </button>
@@ -203,7 +203,7 @@ export function FlipbookViewer({
           <div
             style={{ aspectRatio: `${aspectRatio}` }}
             className={cn(
-              "relative w-full max-h-[62vh] bg-black/95 rounded-xl overflow-hidden border border-[var(--border-light)] shadow-2xl transition-all duration-300 flex items-center justify-center",
+              "relative w-full max-h-[72vh] rounded-[8px] bg-[hsl(0_0%_5%)] overflow-hidden border border-[hsl(0_0%_15%)] transition-all duration-300 flex items-center justify-center",
               !isLoading && isFlipping && flipDirection === "next"
                 ? "animate-page-flip-right"
                 : !isLoading && isFlipping && flipDirection === "prev"
@@ -212,18 +212,14 @@ export function FlipbookViewer({
             )}
           >
             {isLoading ? (
-              /* Subtle Inline Slide Loader during first-time preloading */
               <div className="flex flex-col items-center justify-center p-8 text-center">
-                <div className="w-12 h-12 rounded-xl bg-[var(--green-light)] flex items-center justify-center text-[var(--green-primary)] mb-3 shadow-xs animate-pulse">
-                  <BookOpen className="w-6 h-6" />
+                <div className="flex items-center gap-2 font-mono text-xs text-[hsl(0_0%_60%)] mb-3">
+                  <Loader2 className="w-4 h-4 animate-spin text-[hsl(0_0%_90%)]" />
+                  <span>Loading {loadingProgress}%</span>
                 </div>
-                <div className="flex items-center gap-2 text-sm text-[var(--text-secondary)] font-medium mb-3">
-                  <Loader2 className="w-4 h-4 animate-spin text-[var(--green-primary)]" />
-                  <span>Memuat Slide Presentasi...</span>
-                </div>
-                <div className="w-36 h-1.5 bg-[var(--cream-dark)] rounded-full overflow-hidden border border-[var(--border-light)]">
+                <div className="w-32 h-[2px] bg-[hsl(0_0%_15%)] overflow-hidden rounded-full">
                   <div
-                    className="h-full bg-[var(--green-primary)] transition-all duration-200 rounded-full"
+                    className="h-full bg-[hsl(0_0%_90%)] transition-all duration-200"
                     style={{ width: `${loadingProgress}%` }}
                   />
                 </div>
@@ -236,16 +232,9 @@ export function FlipbookViewer({
                 className="w-full h-full object-contain pointer-events-none select-none"
               />
             ) : (
-              <div className="w-full h-full bg-[var(--cream-dark)] flex items-center justify-center text-[var(--text-secondary)] text-sm">
-                Slide tidak ditemukan
+              <div className="w-full h-full bg-[hsl(0_0%_10%)] flex items-center justify-center text-[hsl(0_0%_60%)] text-sm">
+                Slide not found
               </div>
-            )}
-
-            {/* Slide Index Badge */}
-            {!isLoading && (
-              <span className="absolute bottom-2.5 right-3 px-2 py-0.5 rounded text-[10px] font-mono font-medium bg-black/40 text-white/80 backdrop-blur-xs">
-                {currentPage} / {totalPages}
-              </span>
             )}
           </div>
         </div>
